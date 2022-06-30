@@ -1,0 +1,41 @@
+/*~~~~~~~  Reset  ~~~~~~~*/
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset*/
+
+
+
+*, *::before, *::after
+	box-sizing: inherit
+	text-decoration: none
+	padding: 0
+	margin: 0
+
+/* The height of an element is calculated based on its CHILDREN. 
+    So setting height: 100% on an element will cause it to be 100% of the child's height.
+    This setting causes the height to be calculated from the parent*/
+html, body
+	height: 100%
+
+body
+	/* MacOS browsers like Chrome and Safari still use subpixel antialiasing by default.*/
+	/* We need to explicitly turn it off.*/
+	-webkit-font-smoothing: antialiased
+
+img, picture, video, canvas, svg
+	/*display: block*/      /* Will remove extra space from under an image - Use flexbox on its parent instead*/
+	/* Keep large images from overflowing, if theyre placed in a container that isnt wide enough to contain them. */
+	max-width: 100%
+
+/* by default, buttons and inputs don't inherit typographical styles from their parents. */
+/* Instead, they have their own weird styles. */
+/* Form inputs shouldn't have their own typographical styles! */
+input, button, textarea, select
+	font: inherit
+
+/* The overflow-wrap property lets us tweak the line-wrapping algorithm, */
+/* and give it permission to use hard wraps when no soft wrap opportunties can be found */
+p, h1, h2, h3, h4, h5, h6
+	overflow-wrap: break-word
+
+/*===== END  Reset  =====*/

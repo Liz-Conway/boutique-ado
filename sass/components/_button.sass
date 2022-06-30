@@ -1,0 +1,47 @@
+/*~~~~~~~  Button  ~~~~~~~*/
+.btn
+	text-transform: uppercase
+	display: inline-block
+	padding: 1.5rem 4rem
+	border-radius: 10rem
+	font-size: $baseFontSize
+	background-color: $highlight
+	color: $shadow
+	border: 3px solid $shadow
+	text-align: center
+	transition: all .2s
+
+	&:hover
+		/* Make the button pop up => 3D effect */
+		transform: translateY(-.5rem)
+		/* Box Shadow X Y Blur Colour*/
+		box-shadow: 0 1rem 2rem rgba($black, .2)
+
+	&:active
+		color: $accentDark
+		background-color: $shadow
+		/* Make the button appear to be pressed => 3D effect */
+		transform: translateY(-.1rem)
+		/* Box Shadow X Y Blur Colour*/
+		box-shadow: 0 1rem 2rem rgba($black, .2)
+
+	&:not(:last-child)
+		margin-right: 1.5rem
+
+	&CTA
+		background-color: $accentDark
+
+	&Ghost
+		background-color: $white
+		&:hover
+			color: $black
+		&:active
+			color: $white
+
+	&TextOnly
+		border: none
+		background-color: transparent
+		&:hover, &:active
+			background-color: transparent
+			color: $midtone
+/*===== END  Button  =====*/

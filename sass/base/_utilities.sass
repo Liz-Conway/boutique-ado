@@ -1,0 +1,30 @@
+/*~~~~~~~  Utilities  ~~~~~~~*/
+.centreText
+	text-align: center
+
+.marginBottom
+	&Small
+		margin-bottom: 1.5rem
+	&Medium
+		/* Mobile first - so smaller values first */
+		margin-bottom: 3rem
+		@include respond(tabletLandscape)
+			margin-bottom: 4rem
+	&Big
+		margin-bottom: 5rem
+		@include respond(tabletLandscape)
+			margin-bottom: 8rem
+
+.marginTop
+	&Small
+		margin-top: 1.5rem
+	&Medium
+			margin-top: 4rem
+	&Big
+		margin-top: 8rem
+	&Huge
+			margin-top: 10rem
+
+.invisible
+	display: none
+/*===== END  Utilities  =====*/

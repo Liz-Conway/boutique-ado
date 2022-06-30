@@ -1,0 +1,40 @@
+// Media Query Manager
+
+//									Pixels				$breakpoint argument choices
+// Phone						320 - 600		[phone]
+// Tablet Portrait			601 - 800		tabletPortrait
+// Tablet Landscape		801 - 950		tabletLandscape
+// Desktop					951 - 1200		desktop
+// XL Desktop				1200+				XL
+
+// Phone is the default in Mobile 1st approach
+// So we do not need to specify any $breakpoint for the phone size
+
+//1em = 16px
+
+$breakpoints:(tabletPortrait: (min-width: 37.5em), tabletLandscape: (min-width: 50em), desktop: (min-width: 59.375em), XL: (min-width: 75em)) !default
+//$breakpoints: (
+//	"tabletPortrait":  only screen and (min-width:  600px),					//37.5em			// 600px / 16px = 37.5em
+//	"tabletLandscape": only screen and (min-width:  800px),				//50em			// 800px / 16px = 50em
+//	"desktop":  only screen and (min-width:  950px),							//59.375em		// 950px / 16px = 59.375em
+//	"XL":  only screen and (min-width: 1200px)									//75em				// 1200px / 16px = 75em
+//) !default
+
+
+/// Mixin to manage responsive breakpoints
+/// @author Kitty Giraudel wrote the original version
+/// @param {String}  - Breakpoint name
+/// @require 
+@mixin respond($breakpoint)
+	// If the key exists in the map
+	@if map-has-key($breakpoints, $breakpoint)
+		// Prints a media query based on the value
+		@media only screen and #{inspect(map-get($breakpoints, $breakpoint))}
+			@content
+	@else if type-of($breakpoint) == number
+		@media only screen and (min-width: #{pixelToEm($breakpoint)})
+			@content
+	@else
+	// If the key doesn't exist in the map
+		@warn "Unfortunately, no value could be retrieved from `#{$breakpoint}`. "
+				+ "Available breakpoints are: #{map-keys($breakpoints)}."

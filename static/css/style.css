@@ -1,0 +1,177 @@
+/*~~~~~~~  Typography  ~~~~~~~ */
+@import url("https://fonts.googleapis.com/css2?family=Gabriela&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/* line 4, ../../sass/base/_typography.sass */
+body {
+  font-family: Gabriela;
+  font-weight: 400;
+  /* For accessibility - The WCAG criteria states that line-height should be at least 1.5 */
+  /* The WCAG criteria is meant for "body" text, not headings. */
+  /* So we can calculate the proper line height for all elements : */
+  /* Instead of calculating the line height by multiplying the font-size with a number like 1.5, */
+  /* this alternative uses the font-size as a base, and adds a fixed amount of space to each line. */
+  line-height: calc(1em + 0.7rem);
+  color: #000000;
+}
+
+/*===== END  Typography  ===== */
+/*~~~~~~~  Reset  ~~~~~~~ */
+/* Josh's Custom CSS Reset
+ * https://www.joshwcomeau.com/css/custom-css-reset */
+/* line 8, ../../sass/base/_reset.sass */
+*, *::before, *::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* The height of an element is calculated based on its CHILDREN.
+ * So setting height: 100% on an element will cause it to be 100% of the child's height.
+ * This setting causes the height to be calculated from the parent */
+/* line 17, ../../sass/base/_reset.sass */
+html, body {
+  height: 100%;
+}
+
+/* line 20, ../../sass/base/_reset.sass */
+body {
+  /* MacOS browsers like Chrome and Safari still use subpixel antialiasing by default. */
+  /* We need to explicitly turn it off. */
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 25, ../../sass/base/_reset.sass */
+img, picture, video, canvas, svg {
+  /*display: block*/      /* Will remove extra space from under an image - Use flexbox on its parent instead */
+  /* Keep large images from overflowing, if theyre placed in a container that isnt wide enough to contain them. */
+  max-width: 100%;
+}
+
+/* by default, buttons and inputs don't inherit typographical styles from their parents. */
+/* Instead, they have their own weird styles. */
+/* Form inputs shouldn't have their own typographical styles! */
+/* line 33, ../../sass/base/_reset.sass */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* The overflow-wrap property lets us tweak the line-wrapping algorithm, */
+/* and give it permission to use hard wraps when no soft wrap opportunties can be found */
+/* line 38, ../../sass/base/_reset.sass */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/*===== END  Reset  ===== */
+/* line 2, ../../sass/base/_base.sass */
+html {
+  /* Since browser default font-size is 16px */
+  /* Set it to 10px (on a desktop) to make converting px to rem easier. */
+  /* Use a percentage so that if a user changes the font size */
+  /* on their browser or zooms the font sizes,  */
+  /* paddings and margins adjust accordingly. */
+  /* This defines what 1rem is */
+  /* For mobile 1st design we will use 8px for the mobile device */
+  font-size: 50%;
+}
+@media only screen and (min-width: 50em) {
+  /* line 2, ../../sass/base/_base.sass */
+  html {
+    font-size: 56.25%;
+  }
+}
+@media only screen and (min-width: 59.375em) {
+  /* line 2, ../../sass/base/_base.sass */
+  html {
+    font-size: 62.5%;
+  }
+}
+@media only screen and (min-width: 75em) {
+  /* line 2, ../../sass/base/_base.sass */
+  html {
+    font-size: 75%;
+  }
+}
+
+/* line 19, ../../sass/base/_base.sass */
+body {
+  /* Inheritable properties */
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  /* Set up page for sticky footer */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  min-height: 100vh;
+  /* Non-inheritable properties */
+  padding: 0;
+}
+@media only screen and (min-width: 37.5em) {
+  /* line 19, ../../sass/base/_base.sass */
+  body {
+    padding: 3rem;
+  }
+}
+
+/*~~~~~~~  Utilities  ~~~~~~~ */
+/* line 2, ../../sass/base/_utilities.sass */
+.centreText {
+  text-align: center;
+}
+
+/* line 6, ../../sass/base/_utilities.sass */
+.marginBottomSmall {
+  margin-bottom: 1.5rem;
+}
+/* line 8, ../../sass/base/_utilities.sass */
+.marginBottomMedium {
+  /* Mobile first - so smaller values first */
+  margin-bottom: 3rem;
+}
+@media only screen and (min-width: 50em) {
+  /* line 8, ../../sass/base/_utilities.sass */
+  .marginBottomMedium {
+    margin-bottom: 4rem;
+  }
+}
+/* line 13, ../../sass/base/_utilities.sass */
+.marginBottomBig {
+  margin-bottom: 5rem;
+}
+@media only screen and (min-width: 50em) {
+  /* line 13, ../../sass/base/_utilities.sass */
+  .marginBottomBig {
+    margin-bottom: 8rem;
+  }
+}
+
+/* line 19, ../../sass/base/_utilities.sass */
+.marginTopSmall {
+  margin-top: 1.5rem;
+}
+/* line 21, ../../sass/base/_utilities.sass */
+.marginTopMedium {
+  margin-top: 4rem;
+}
+/* line 23, ../../sass/base/_utilities.sass */
+.marginTopBig {
+  margin-top: 8rem;
+}
+/* line 25, ../../sass/base/_utilities.sass */
+.marginTopHuge {
+  margin-top: 10rem;
+}
+
+/* line 28, ../../sass/base/_utilities.sass */
+.invisible {
+  display: none;
+}
+
+/*===== END  Utilities  ===== */
+
+/*# sourceMappingURL=style.css.map */

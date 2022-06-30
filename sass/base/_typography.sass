@@ -1,0 +1,19 @@
+/*~~~~~~~  Typography  ~~~~~~~*/
+@import url('https://fonts.googleapis.com/css2?family=Gabriela&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap')
+
+body
+	font:
+		family: $baseFontFamily
+		weight: $normalWt
+		//size: $baseFontSize
+	/* For accessibility - The WCAG criteria states that line-height should be at least 1.5*/
+	/* The WCAG criteria is meant for "body" text, not headings.*/
+	/* So we can calculate the proper line height for all elements :*/
+	/* Instead of calculating the line height by multiplying the font-size with a number like 1.5, */
+	/* this alternative uses the font-size as a base, and adds a fixed amount of space to each line. */
+	line-height: $baseLineHeight
+	color: $shadow
+
+
+
+/*===== END  Typography  =====*/

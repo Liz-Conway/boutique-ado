@@ -1,0 +1,31 @@
+
+html
+	/* Since browser default font-size is 16px*/
+	/* Set it to 10px (on a desktop) to make converting px to rem easier. */
+	/* Use a percentage so that if a user changes the font size */
+	/* on their browser or zooms the font sizes,  */
+	/* paddings and margins adjust accordingly. */
+	/* This defines what 1rem is */
+	/* For mobile 1st design we will use 8px for the mobile device */
+	font-size: 50%    /*1rem = 8px  8px/16px= 50%*/
+
+	@include respond(tabletLandscape)
+		font-size: 56.25%    /*1rem = 9px  9px/16px= 56.25%*/
+	@include respond(desktop)
+		font-size: 62.5%    /*1rem = 10px  10px/16px= 62.5%*/
+	@include respond(XL)
+		font-size: 75%    /*1rem = 12px  12px/16px= 75%*/
+
+body
+	/* Inheritable properties*/
+	box-sizing: border-box
+	/* Set up page for sticky footer*/
+	display: flex
+	flex-direction: column
+
+	min-height: 100vh
+
+	/* Non-inheritable properties */
+	padding: 0
+	@include respond(tabletPortrait)
+		padding: $bodyPadding
