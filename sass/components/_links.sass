@@ -1,0 +1,43 @@
+/*~~~~~~~  Links  ~~~~~~~*/
+.link
+	&Wrapper
+		flex-direction: column
+		margin-right: auto
+		margin-left: auto
+		text-align: center
+		display: none
+		@include respond(desktop)
+			display: flex
+			flex-direction: row
+			justify-content: space-between
+			align-items: center
+			text-align: left
+			background-color: $white
+			padding-top: 1rem
+			padding-bottom: 1rem
+
+	&Accounts
+		display: flex
+		flex-direction: row
+		list-style: none
+		//? list-inline
+		text-align: center
+		// margin-right: 1rem
+		// margin-left: auto
+		// font-size: 1rem
+		@include respond(desktop)
+			text-align: right
+
+		&Dropdown
+			margin-right: 3rem
+			display: flex
+			flex-direction: column
+			align-items: center
+
+		li
+			display: inline
+
+	#userOptions
+		margin-top: 1.4rem
+
+/*===== END  Links  =====*/

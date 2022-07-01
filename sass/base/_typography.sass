@@ -5,7 +5,7 @@ body
 	font:
 		family: $baseFontFamily
 		weight: $normalWt
-		//size: $baseFontSize
+		size: $baseFontSize
 	/* For accessibility - The WCAG criteria states that line-height should be at least 1.5*/
 	/* The WCAG criteria is meant for "body" text, not headings.*/
 	/* So we can calculate the proper line height for all elements :*/
@@ -14,6 +14,29 @@ body
 	line-height: $baseLineHeight
 	color: $shadow
 
+.textBlack
+	color: $black
+
+.titleWrapper
+	width: 60%
+	height: 100%
+	max-width: 1140px
+	@include respond(desktop)
+		width: 50%
+
+.heading
+	&Title
+		width: 50%
+		margin-right: auto
+		margin-left: auto
+	&Collection
+		font:
+			size: 3.5rem
+			weight: $thinWt
+		line-height: 1.5
+		color: $black
+		text-transform: uppercase
+		margin-bottom: .5rem
 
 
 /*===== END  Typography  =====*/

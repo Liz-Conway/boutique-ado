@@ -2,13 +2,14 @@
 .btn
 	text-transform: uppercase
 	display: inline-block
-	padding: 1.5rem 4rem
-	border-radius: 10rem
+	padding: 1rem
+	border-radius: 5%
 	font-size: $baseFontSize
 	background-color: $highlight
 	color: $shadow
-	border: 3px solid $shadow
+	border: 1px solid $shadow
 	text-align: center
+	cursor: pointer
 	transition: all .2s
 
 	&:hover
@@ -44,4 +45,26 @@
 		&:hover, &:active
 			background-color: transparent
 			color: $midtone
+
+	&Black
+		background-color: $black
+		color: $white
+
+.shopNowButton
+	background-color: $black
+	color: $white
+	min-width: 260px
+	border-radius: 0
+
+	&:hover, &:active, &:focus, .btnBlack:hover, .btnBlack:active, .btnBlack:focus
+		background-color: $grey
+
+.buttonWrapper
+	margin-top: 3rem
+	margin-bottom: 3.5rem
+
+.searchLink
+	flex: 3
+
+
 /*===== END  Button  =====*/

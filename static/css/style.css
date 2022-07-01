@@ -1,23 +1,51 @@
 /*~~~~~~~  Typography  ~~~~~~~ */
 @import url("https://fonts.googleapis.com/css2?family=Gabriela&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
-/* line 4, ../../sass/base/_typography.sass */
 body {
   font-family: Gabriela;
   font-weight: 400;
+  font-size: 1.6rem;
   /* For accessibility - The WCAG criteria states that line-height should be at least 1.5 */
   /* The WCAG criteria is meant for "body" text, not headings. */
   /* So we can calculate the proper line height for all elements : */
   /* Instead of calculating the line height by multiplying the font-size with a number like 1.5, */
   /* this alternative uses the font-size as a base, and adds a fixed amount of space to each line. */
   line-height: calc(1em + 0.7rem);
+  color: #555;
+}
+
+.textBlack {
   color: #000000;
+}
+
+.titleWrapper {
+  width: 60%;
+  height: 100%;
+  max-width: 1140px;
+}
+@media only screen and (min-width: 59.375em) {
+  .titleWrapper {
+    width: 50%;
+  }
+}
+
+.headingTitle {
+  width: 50%;
+  margin-right: auto;
+  margin-left: auto;
+}
+.headingCollection {
+  font-size: 3.5rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
 }
 
 /*===== END  Typography  ===== */
 /*~~~~~~~  Reset  ~~~~~~~ */
 /* Josh's Custom CSS Reset
  * https://www.joshwcomeau.com/css/custom-css-reset */
-/* line 8, ../../sass/base/_reset.sass */
 *, *::before, *::after {
   -webkit-box-sizing: inherit;
           box-sizing: inherit;
@@ -29,19 +57,16 @@ body {
 /* The height of an element is calculated based on its CHILDREN.
  * So setting height: 100% on an element will cause it to be 100% of the child's height.
  * This setting causes the height to be calculated from the parent */
-/* line 17, ../../sass/base/_reset.sass */
 html, body {
   height: 100%;
 }
 
-/* line 20, ../../sass/base/_reset.sass */
 body {
   /* MacOS browsers like Chrome and Safari still use subpixel antialiasing by default. */
   /* We need to explicitly turn it off. */
   -webkit-font-smoothing: antialiased;
 }
 
-/* line 25, ../../sass/base/_reset.sass */
 img, picture, video, canvas, svg {
   /*display: block*/      /* Will remove extra space from under an image - Use flexbox on its parent instead */
   /* Keep large images from overflowing, if theyre placed in a container that isnt wide enough to contain them. */
@@ -51,20 +76,17 @@ img, picture, video, canvas, svg {
 /* by default, buttons and inputs don't inherit typographical styles from their parents. */
 /* Instead, they have their own weird styles. */
 /* Form inputs shouldn't have their own typographical styles! */
-/* line 33, ../../sass/base/_reset.sass */
 input, button, textarea, select {
   font: inherit;
 }
 
 /* The overflow-wrap property lets us tweak the line-wrapping algorithm, */
 /* and give it permission to use hard wraps when no soft wrap opportunties can be found */
-/* line 38, ../../sass/base/_reset.sass */
 p, h1, h2, h3, h4, h5, h6 {
   overflow-wrap: break-word;
 }
 
 /*===== END  Reset  ===== */
-/* line 2, ../../sass/base/_base.sass */
 html {
   /* Since browser default font-size is 16px */
   /* Set it to 10px (on a desktop) to make converting px to rem easier. */
@@ -74,27 +96,24 @@ html {
   /* This defines what 1rem is */
   /* For mobile 1st design we will use 8px for the mobile device */
   font-size: 50%;
+  height: 100%;
 }
 @media only screen and (min-width: 50em) {
-  /* line 2, ../../sass/base/_base.sass */
   html {
     font-size: 56.25%;
   }
 }
 @media only screen and (min-width: 59.375em) {
-  /* line 2, ../../sass/base/_base.sass */
   html {
     font-size: 62.5%;
   }
 }
 @media only screen and (min-width: 75em) {
-  /* line 2, ../../sass/base/_base.sass */
   html {
     font-size: 75%;
   }
 }
 
-/* line 19, ../../sass/base/_base.sass */
 body {
   /* Inheritable properties */
   -webkit-box-sizing: border-box;
@@ -110,68 +129,478 @@ body {
   min-height: 100vh;
   /* Non-inheritable properties */
   padding: 0;
+  /*size of cover and options of no-repeat center centre and fixed. */
+  /*which will ensure that the image stays put in the centre of the page. */
+  background: url("/media/homepage-background-cropped.jpg") no-repeat center center fixed;
+  background-size: cover;
+  /*164 pixels the eventual height of our top header */
+  height: calc(100vh - 164px);
 }
 @media only screen and (min-width: 37.5em) {
-  /* line 19, ../../sass/base/_base.sass */
   body {
     padding: 3rem;
   }
 }
 
 /*~~~~~~~  Utilities  ~~~~~~~ */
-/* line 2, ../../sass/base/_utilities.sass */
 .centreText {
   text-align: center;
 }
 
-/* line 6, ../../sass/base/_utilities.sass */
 .marginBottomSmall {
   margin-bottom: 1.5rem;
 }
-/* line 8, ../../sass/base/_utilities.sass */
 .marginBottomMedium {
   /* Mobile first - so smaller values first */
   margin-bottom: 3rem;
 }
 @media only screen and (min-width: 50em) {
-  /* line 8, ../../sass/base/_utilities.sass */
   .marginBottomMedium {
     margin-bottom: 4rem;
   }
 }
-/* line 13, ../../sass/base/_utilities.sass */
 .marginBottomBig {
   margin-bottom: 5rem;
 }
 @media only screen and (min-width: 50em) {
-  /* line 13, ../../sass/base/_utilities.sass */
   .marginBottomBig {
     margin-bottom: 8rem;
   }
 }
 
-/* line 19, ../../sass/base/_utilities.sass */
 .marginTopSmall {
   margin-top: 1.5rem;
 }
-/* line 21, ../../sass/base/_utilities.sass */
 .marginTopMedium {
   margin-top: 4rem;
 }
-/* line 23, ../../sass/base/_utilities.sass */
 .marginTopBig {
   margin-top: 8rem;
 }
-/* line 25, ../../sass/base/_utilities.sass */
 .marginTopHuge {
   margin-top: 10rem;
 }
 
-/* line 28, ../../sass/base/_utilities.sass */
 .invisible {
   display: none;
 }
 
 /*===== END  Utilities  ===== */
+/*~~~~~~~  Header  ~~~~~~~ */
+.container {
+  padding: 0;
+}
+@media only screen and (min-width: 75em) {
+  .container {
+    width: 80%;
+  }
+}
+
+@media only screen and (min-width: 59.375em) {
+  .headerContainer {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 59.375em) {
+  #topNav {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media only screen and (min-width: 59.375em) {
+  .titleWrapper {
+    padding-top: 164px;
+  }
+}
+
+@media only screen and (min-width: 59.375em) {
+  .fixedTop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030;
+  }
+}
+
+/*===== END  Header  ===== */
+/*~~~~~~~  Links  ~~~~~~~ */
+.linkWrapper {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  display: none;
+}
+@media only screen and (min-width: 59.375em) {
+  .linkWrapper {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    text-align: left;
+    background-color: #FFFFFF;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+}
+.linkAccounts {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  list-style: none;
+  text-align: center;
+}
+@media only screen and (min-width: 59.375em) {
+  .linkAccounts {
+    text-align: right;
+  }
+}
+.linkAccountsDropdown {
+  margin-right: 3rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+.linkAccounts li {
+  display: inline;
+}
+.link #userOptions {
+  margin-top: 1.4rem;
+}
+
+/*===== END  Links  ===== */
+/*~~~~~~~  Icons & Logos  ~~~~~~~ */
+/* from Bulma */
+/*Ensure that whenever we use font awesome icons. */
+/*They will always stay perfectly centred and have a consistent size */
+/*unless we manually change it */
+.icon {
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: -webkit-inline-box;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+}
+
+.accountIcon {
+  margin-bottom: -0.5rem;
+  margin-top: 0.9rem;
+  font-size: 2rem !important;
+  color: #000000;
+}
+
+.bagSection {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.logoFont {
+  text-transform: uppercase;
+  color: #000000;
+  font-size: 2rem;
+}
+
+.mainLogoLink {
+  /*logo only takes up as much space as the text requires and no more */
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+}
+
+/*===== END  Icons & Logos  ===== */
+/*~~~~~~~  Button  ~~~~~~~ */
+.btn {
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 5%;
+  font-size: 1.6rem;
+  background-color: #FFFFFF;
+  color: #555;
+  border: 1px solid #555;
+  text-align: center;
+  cursor: pointer;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.btn:hover {
+  /* Make the button pop up => 3D effect */
+  -webkit-transform: translateY(-0.5rem);
+          transform: translateY(-0.5rem);
+  /* Box Shadow X Y Blur Colour */
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.btn:active {
+  color: #191970;
+  background-color: #555;
+  /* Make the button appear to be pressed => 3D effect */
+  -webkit-transform: translateY(-0.1rem);
+          transform: translateY(-0.1rem);
+  /* Box Shadow X Y Blur Colour */
+  -webkit-box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+          box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+}
+.btn:not(:last-child) {
+  margin-right: 1.5rem;
+}
+.btnCTA {
+  background-color: #191970;
+}
+.btnGhost {
+  background-color: #FFFFFF;
+}
+.btnGhost:hover {
+  color: #000000;
+}
+.btnGhost:active {
+  color: #FFFFFF;
+}
+.btnTextOnly {
+  border: none;
+  background-color: transparent;
+}
+.btnTextOnly:hover, .btnTextOnly:active {
+  background-color: transparent;
+  color: #777777;
+}
+.btnBlack {
+  background-color: #000000;
+  color: #FFFFFF;
+}
+
+.shopNowButton {
+  background-color: #000000;
+  color: #FFFFFF;
+  min-width: 260px;
+  border-radius: 0;
+}
+.shopNowButton:hover, .shopNowButton:active, .shopNowButton:focus, .shopNowButton .btnBlack:hover, .shopNowButton .btnBlack:active, .shopNowButton .btnBlack:focus {
+  background-color: #999999;
+}
+
+.buttonWrapper {
+  margin-top: 3rem;
+  margin-bottom: 3.5rem;
+}
+
+.searchLink {
+  -webkit-box-flex: 3;
+      -ms-flex: 3;
+          flex: 3;
+}
+
+/*===== END  Button  ===== */
+/*~~~~~~~  Search  ~~~~~~~ */
+.linkSearch {
+  width: 40%;
+}
+
+.searchBox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 100%;
+}
+.searchInput {
+  border: 1px solid #333333;
+  border-radius: 0;
+  width: 100%;
+}
+.searchButton {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 0;
+}
+
+/*===== END  Search  ===== */
+/*~~~~~~~  Dropdown Menu  ~~~~~~~ */
+/* HTML Nav Styles */
+/* HTML Nav Styles */
+/* HTML Nav Styles */
+menuitem {
+  position: relative;
+  display: block;
+  opacity: 0;
+  cursor: pointer;
+}
+menuitem > menu {
+  position: absolute;
+  pointer-events: none;
+}
+
+menu {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+menu.topMenu {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+menu.topMenu > menuitem > a {
+  padding-left: 0;
+}
+menu > menuitem {
+  pointer-events: all;
+  opacity: 1;
+}
+menu menuitem a {
+  white-space: nowrap;
+  display: block;
+}
+
+menuitem:hover > menu {
+  pointer-events: initial;
+}
+menuitem:hover > menu > menuitem, menuitem:hover > menu menu:hover > menuitem {
+  opacity: 1;
+}
+
+menu > menuitem menuitem menu {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+  top: 0;
+  right: 0;
+}
+
+/* User Styles Below Not Required */
+/* User Styles Below Not Required */
+/* User Styles Below Not Required */
+menu a {
+  background: #FFFFFF;
+  color: #000000;
+  min-width: 9rem;
+  -webkit-transition: background 0.5s, color 0.5s, -webkit-transform 0.5s;
+  transition: background 0.5s, color 0.5s, -webkit-transform 0.5s;
+  transition: background 0.5s, color 0.5s, transform 0.5s;
+  transition: background 0.5s, color 0.5s, transform 0.5s, -webkit-transform 0.5s;
+  margin: 0;
+  text-align: left;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  border-radius: 3px;
+  position: relative;
+}
+
+menu a:hover:before {
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%;
+}
+
+menu > menuitem > a + menu:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+  border-top: 10px solid white;
+  left: 12px;
+  top: -40px;
+}
+
+menuitem > menu > menuitem > a + menu:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+  border-left: 10px solid white;
+  top: 20px;
+  left: -180px;
+  -webkit-transition: opacity 0.6, -webkit-transform 0s;
+  transition: opacity 0.6, -webkit-transform 0s;
+  transition: opacity 0.6, transform 0s;
+  transition: opacity 0.6, transform 0s, -webkit-transform 0s;
+}
+
+menu > menuitem > menu > menuitem {
+  -webkit-transition: opacity 0.6s, -webkit-transform 0.6s;
+  transition: opacity 0.6s, -webkit-transform 0.6s;
+  transition: transform 0.6s, opacity 0.6s;
+  transition: transform 0.6s, opacity 0.6s, -webkit-transform 0.6s;
+  -webkit-transform: translateY(150%);
+          transform: translateY(150%);
+  opacity: 0;
+}
+
+menu > menuitem:hover > menu > menuitem,
+menu > menuitem.hover > menu > menuitem {
+  -webkit-transform: translateY(0%);
+          transform: translateY(0%);
+  opacity: 1;
+}
+
+menuitem > menu > menuitem > menu > menuitem {
+  -webkit-transition: opacity 0.6s, -webkit-transform 0.6s;
+  transition: opacity 0.6s, -webkit-transform 0.6s;
+  transition: transform 0.6s, opacity 0.6s;
+  transition: transform 0.6s, opacity 0.6s, -webkit-transform 0.6s;
+  -webkit-transform: translateX(195px) translateY(0%);
+          transform: translateX(195px) translateY(0%);
+  opacity: 0;
+}
+
+menuitem > menu > menuitem:hover > menu > menuitem,
+menuitem > menu > menuitem.hover > menu > menuitem {
+  -webkit-transform: translateX(0) translateY(0%);
+          transform: translateX(0) translateY(0%);
+  opacity: 1;
+}
+
+/*===== END Dropdown Menu   ===== */
 
 /*# sourceMappingURL=style.css.map */

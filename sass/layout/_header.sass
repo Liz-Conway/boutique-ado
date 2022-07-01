@@ -1,10 +1,29 @@
 /*~~~~~~~  Header  ~~~~~~~*/
 .container
 	padding: 0
-	@include respond(tabletLandscape)
+	@include respond(XL)
+		width: 80%
 
-.fixed-top
-	position: fixed
-	top: 0
+.headerContainer
+	@include respond(desktop)
+		width: 100%
+
+#topNav
+	@include respond(desktop)
+		padding:
+			left: 2rem
+			right: 2rem
+
+.titleWrapper
+	@include respond(desktop)
+		padding-top: 164px
+
+.fixedTop
+	@include respond(desktop)
+		position: fixed
+		top: 0
+		right: 0
+		left: 0
+		z-index: 1030
 
 /*===== END  Header  =====*/
