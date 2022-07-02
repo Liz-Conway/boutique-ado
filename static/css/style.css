@@ -819,6 +819,7 @@ menuitem {
   display: block;
   opacity: 0;
   cursor: pointer;
+  z-index: 4000;
 }
 menuitem > menu {
   position: absolute;
