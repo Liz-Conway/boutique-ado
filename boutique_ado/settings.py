@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     #  handles logging in via social media providers like Facebook and Google
     'allauth.socialaccount',
     'home',
+    'products',
 ]
 
 
