@@ -56,6 +56,7 @@ menu a
 	padding-left: 1.5rem
 	padding-top: .5rem
 	padding-bottom: .5rem
+	padding-right: 1rem
 	border-radius: 3px
 	position: relative
 
@@ -76,7 +77,14 @@ menu > menuitem > a + menu:after
 	border: 10px solid transparent
 	border-top: 10px solid white
 	left: 12px
-	top: -40px  
+	top: -27px
+	@include respond(desktop)
+		top: -40px
+
+.navigationList menu > menuitem > a + menu:after
+	top: 6px
+	@include respond(desktop)
+		top: -40px
 
 menuitem > menu > menuitem > a + menu:after 
 	content:  ''
@@ -87,6 +95,10 @@ menuitem > menu > menuitem > a + menu:after
 	left: -180px
 	transition: opacity 0.6, transform 0s
 
+.navigationList menu > menuitem > menu
+	margin-top: -4rem
+	@include respond(desktop)
+		margin-top: 0
 
 menu > menuitem > menu > menuitem
 	transition: transform 0.6s, opacity 0.6s
@@ -97,6 +109,14 @@ menu > menuitem:hover > menu > menuitem,
 menu > menuitem.hover > menu > menuitem
 	transform: translateY(0%)
 	opacity:  1
+
+.navigationList menu > menuitem:hover > menu > menuitem,
+.navigationList menu > menuitem.hover > menu > menuitem
+	/*For a vertical menu (mobile) - move to the right of the menu list*/
+	transform: translateX(12.5rem)
+	@include respond(desktop)
+		/*Desktop is a horizontal menu - so do not shift to the right*/
+		transform: translateX(0%)
 
 
 menuitem > menu > menuitem > menu > menuitem

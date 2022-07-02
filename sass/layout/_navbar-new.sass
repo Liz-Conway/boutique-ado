@@ -20,8 +20,23 @@
 		position: relative
 		top: 0
 
+
+	.navigationLink
+		/*Hide the navigation initially*/
+		width: 0
+		/*Centre the account links*/
+		text-align: center
+		margin-left: 8rem
+		@include respond(desktop)
+			margin-left: 0
+			width: initial
+
+
 #naviToggle
-	display: none
+	display: initial
+	@include respond(desktop)
+		display: none
+
 
 .navigation
 	&Button
@@ -55,28 +70,24 @@
 		position: fixed
 		top: 1.5rem
 		right: 1.5rem
-		background-image: radial-gradient(whitesmoke, ghostwhite)
+		background-image: radial-gradient($white, whitesmoke)
 		z-index: 1000
 
 		/*Custom transition function, uses a cubic bezier curve for ease-in and ease-out*/
 		/*See easings.net & cubic-bezier.com*/
 		transition: transform .8s cubic-bezier(0.86, 0, 0.07, 1)
-		@include respond(desktop)
+		@include respond(tabletLandscape)
 			display: none
 
 	&List
 		list-style: none
 		text-align: center
 		display: flex
-		flex-direction: row
-		margin-top: 10rem
-		margin-right: 22rem
-		// background-color: #bada55
+		flex-direction: column
+		background-color: $white
 		@include flexCentre(column)
 
 		@include respond(desktop)
-			background-color: $white
-			margin: 0
 			flex-direction: row
 
 	&Link
@@ -116,9 +127,13 @@
 	&Checkbox:checked ~ &Background
 		transform: scale(80)
 
-	&Checkbox:checked ~ #navigationNav
+	&Checkbox:checked ~ #navigationNav, &Checkbox:checked ~ #accountLinks
 		opacity: 1
 		width: 100%
+	&Checkbox:checked ~ #navigationNav &Item, &Checkbox:checked ~ #accountLinks &Link
+		width: 100%
+	&Checkbox:checked ~ #accountLinks &Link, &Checkbox:checked ~ #navigationNav &Link
+		transform: none
 
 	// Icon
 	&Icon
@@ -182,8 +197,24 @@
 	&Active
 		background-color: $accentLight
 
-	&.navigationActive
-		background-color: $accentLight
+//Reset links to 'normal' for non-mobile screens
+.accountLink
+	@include respond(desktop)
+		&:link, &:visited
+			display: inline
+			font:
+				size: 1.6rem
+				weight: $normalWt
+			padding: 0
+			color: $accentDark
+			text:
+				decoration: none
+				transform: capitalize
+			background: none
+		&:hover, &:active
+			background-position: initial
+			color: $midtone
+			transform: none			
 
 .nonMobile
 	display: none
@@ -194,20 +225,5 @@
 	@include respond(desktop)
 		display: none
 
-.nav
-	&List
-		list-style: none
-		text-align: center
-		display: flex
-		flex-direction: row
-		justify-content: space-around
-		margin-right: 8rem
-		padding-top: 1rem
-		@include respond(desktop)
-			margin-right: 0
-		//@include flexCentre(column)
-
-
-
-
 /*===== END  Navbar  =====*/
+

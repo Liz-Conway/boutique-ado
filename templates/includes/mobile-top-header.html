@@ -1,0 +1,78 @@
+<div class="mainNav mobileOnly">
+	<!-- Site navbar -->
+	<ul class="navList">
+		<li class="mobileOnly">
+		    <menu>
+			    <menuitem>
+				    <a class="navLink mobileOnly mobileHead" href="#" id="mobileSearch" aria-haspopup="true" aria-expanded="false">
+			            <div><i class="fas fa-search fa-lg"></i></div>
+			            <p class="my-0">Search</p>
+				    </a>
+				    <menu>
+				    	<menuitem class="mobileSearchWrapper" aria-labelledby="mobileSearch">
+						        <form class="form" method="GET" action="">
+						            <div class="mobileSearchGroup">
+						                <input class="mobileSearchBox" type="text" name="q" placeholder="Search our site">
+						                <div class="input-group-append">
+						                    <button class="btn searchButton" type="submit">
+						                        <span class="icon">
+						                            <i class="fas fa-search"></i>
+						                        </span>
+						                    </button>
+						                </div>
+						            </div>
+						        </form>
+			    		</menuitem>
+			    	</menu>
+			    </menuitem>
+		    </menu>
+		</li>
+		<li>
+		    <menu class="topMenu">
+			    <menuitem>
+				    <a class="navLink mobileOnly mobileHead" href="#" id="userOptions" aria-haspopup="true" aria-expanded="false">
+			            <div><i class="fas fa-user fa-lg"></i></div>
+			            <p>My Account</p>
+				    </a>
+				    <menu aria-labelledby="user-options">
+				        {% if request.user.is_authenticated %}
+				            {% if request.user.is_superuser %}
+						    	<menuitem>
+					                <a href="{% url 'account_logout' %}">Product Management</a>
+					    		</menuitem>
+				            {% endif %}
+						    	<menuitem>
+						            <a href="{% url '' %}">My Profile</a>
+					    		</menuitem>
+						    	<menuitem>
+						            <a href="{% url 'account_logout' %}">Logout</a>
+					    		</menuitem>
+				        {% else %}
+						    	<menuitem>
+				        		    <a href="{% url 'account_signup' %}">Register</a>
+					    		</menuitem>
+						    	<menuitem>
+				     		       <a href="{% url 'account_login' %}">Login</a>
+					    		</menuitem>
+				        {% endif %}
+			    	</menu>
+			    </menuitem>
+		    </menu>
+		
+		</li>
+		<li>
+		    <a class="{% if grand_total %}grandTotal{% endif %} navLink mobileOnly" href="">
+		        <div class="bagSection mobileHead">
+		            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
+		            <p class="my-0">
+		                {% if grand_total %}
+		                    ${{ grand_total|floatformat:2 }}
+		                {% else %}
+		                    $0.00
+		                {% endif %}
+		            </p>
+		        </div>
+		    </a>
+		</li>
+	</ul>
+</div>

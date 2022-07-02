@@ -21,6 +21,7 @@ body {
   width: 60%;
   height: 100%;
   max-width: 1140px;
+  padding-left: 2rem;
 }
 @media only screen and (min-width: 59.375em) {
   .titleWrapper {
@@ -29,17 +30,66 @@ body {
 }
 
 .headingTitle {
-  width: 50%;
+  max-width: 100%;
   margin-right: auto;
   margin-left: auto;
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+@media only screen and (min-width: 59.375em) {
+  .headingTitle {
+    max-width: 50%;
+  }
 }
 .headingCollection {
-  font-size: 3.5rem;
+  font-size: 3.2rem;
   font-weight: 300;
   line-height: 1.5;
   color: #000000;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
+}
+@media only screen and (min-width: 28em) {
+  .headingCollection {
+    font-size: 3.5rem;
+  }
+}
+@media only screen and (min-width: 59.375em) {
+  .headingCollection {
+    font-size: 3.1rem;
+  }
+}
+@media only screen and (min-width: 65.625em) {
+  .headingCollection {
+    font-size: 3.5rem;
+  }
+}
+@media only screen and (min-width: 75em) {
+  .headingCollection {
+    font-size: 3.3rem;
+  }
+}
+@media only screen and (min-width: 78.125em) {
+  .headingCollection {
+    font-size: 3.5rem;
+  }
+}
+
+#deliveryBanner {
+  background-color: #000000;
+  color: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem;
 }
 
 /*===== END  Typography  ===== */
@@ -136,7 +186,7 @@ body {
   /*164 pixels the eventual height of our top header */
   height: calc(100vh - 164px);
 }
-@media only screen and (min-width: 37.5em) {
+@media only screen and (min-width: 59.375em) {
   body {
     padding: 3rem;
   }
@@ -225,7 +275,304 @@ body {
   }
 }
 
+.mobile {
+  position: relative;
+  z-index: 2000;
+}
+.mobileHead {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse;
+}
+.mobileSearchGroup {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.mobileSearchWrapper {
+  position: relative;
+  z-index: 1000;
+}
+
+.siteNav {
+  background-color: ghostwhite;
+}
+
 /*===== END  Header  ===== */
+/*~~~~~~~  Navbar  ~~~~~~~ */
+#navigationNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  /*Hide the navigation initially */
+  opacity: 0;
+  /*It is not enough to have an opacity of zero */
+  /*The elements are still there and are clickable, so we need to set the width to zero as well */
+  width: 0;
+  -webkit-transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+@media only screen and (min-width: 59.375em) {
+  #navigationNav {
+    background-color: #777777;
+    width: 100%;
+    height: auto;
+    opacity: 1;
+    position: relative;
+    top: 0;
+  }
+}
+
+#naviToggle {
+  display: none;
+}
+
+.navigationButton {
+  display: inline;
+  background-color: #FFFFFF;
+  /*Make this slightly larger than the navigationBackground, to be sure to cover it */
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2000;
+  -webkit-box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+          box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer;
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationButton {
+    display: none;
+  }
+}
+.navigationBackground {
+  /*Coloured background for the navigation */
+  /*It will start as a small circle behind the white circle containing the "hamburger" icon */
+  /*It will expand to fill the screen when the "hamburger" icon is clicked */
+  display: block;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  /*Stays in the same position even if we scroll down the page */
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-image: radial-gradient(whitesmoke, ghostwhite);
+  z-index: 1000;
+  /*Custom transition function, uses a cubic bezier curve for ease-in and ease-out */
+  /*See easings.net & cubic-bezier.com */
+  -webkit-transition: -webkit-transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: -webkit-transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1), -webkit-transform 0.8s cubic-bezier(0.86, 0, 0.07, 1);
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationBackground {
+    display: none;
+  }
+}
+.navigationList {
+  list-style: none;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  margin-top: 10rem;
+  margin-right: 22rem;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationList {
+    background-color: #FFFFFF;
+    margin: 0;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+.navigationLink {
+  -webkit-transform: translateX(-200px);
+          transform: translateX(-200px);
+}
+.navigationLink:link, .navigationLink:visited {
+  display: inline-block;
+  font-size: 3rem;
+  font-weight: 300;
+  padding: 1rem 2rem;
+  color: #191970;
+  text-decoration: none;
+  text-transform: uppercase;
+  background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #FFFFFF 50%);
+  /*Increasing the background shoves the RHS of the linear gradient off the element, so it is invisible */
+  background-size: 235%;
+  -webkit-transition: all 0.4s;
+  transition: all 0.4s;
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationLink:link, .navigationLink:visited {
+    font-size: 1.8rem;
+    -webkit-transform: none;
+            transform: none;
+  }
+}
+.navigationLink:hover, .navigationLink:active {
+  background-position: 100%;
+  color: #777777;
+  -webkit-transform: translateX(1rem);
+          transform: translateX(1rem);
+}
+.navigationItem {
+  margin: 1rem;
+  /*Hide the navigation list item initially */
+  width: 0;
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationItem {
+    width: initial;
+  }
+}
+.navigationCheckbox:checked ~ .navigationBackground {
+  -webkit-transform: scale(80);
+          transform: scale(80);
+}
+.navigationCheckbox:checked ~ #navigationNav {
+  opacity: 1;
+  width: 100%;
+}
+.navigationIcon {
+  display: inline-block;
+  position: relative;
+  margin-top: 3.5rem;
+  color: #FFFFFF;
+  /*A bar before the span, the span is a bar, a bar after the span */
+  /*Each bar is 3rem x 2px and is coloured dark grey */
+  /*For ::before and ::after to show they need content and display properties to be set */
+}
+.navigationIcon, .navigationIcon::before, .navigationIcon::after {
+  width: 3rem;
+  /*Always stays the same height, no matter what the base font size is */
+  height: 2px;
+  background-color: #333333;
+  display: inline-block;
+}
+.navigationIcon::before, .navigationIcon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  -webkit-transition: all 0.2s;
+  transition: all 0.2s;
+}
+.navigationIcon::before {
+  top: -0.8rem;
+  /*By default elements will rotate around the centre. */
+  /*If you want to rotate around the edge you can set the transform-origin */
+  /*transform-origin: right */
+}
+.navigationIcon::after {
+  top: 0.8rem;
+  /*transform-origin: left */
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationIcon {
+    display: none;
+  }
+}
+.navigationButton:hover .navigationIcon::before {
+  top: -1rem;
+}
+.navigationButton:hover .navigationIcon::after {
+  top: 1rem;
+}
+.navigationCheckbox:checked + .navigationButton > .navigationIcon {
+  /*When the button is clicked change the "hamburger" to a cross */
+  /*When the checkbox is selected - get its adjacent sibling and */
+  /*select the child element of the adjacent sibling */
+  /*Step 1 make the middle bar invisible (this is the span in the navigationIcon) */
+  background-color: transparent;
+}
+.navigationCheckbox:checked + .navigationButton > .navigationIcon::before {
+  /*Step 2 make the top bar rotate (this is the navigationIcon::before) */
+  /*Rotate 180 degrees - 45 degrees : Takes longer, so looks better */
+  -webkit-transform: rotate(135deg);
+          transform: rotate(135deg);
+  top: 0;
+}
+.navigationCheckbox:checked + .navigationButton > .navigationIcon::after {
+  /*Step 3 make the bottom bar rotate (this is the navigationIcon::after) */
+  /*Rotate 180 degrees - 45 degrees : Takes longer, so looks better */
+  -webkit-transform: rotate(-135deg);
+          transform: rotate(-135deg);
+  top: 0;
+}
+.navigationActive {
+  background-color: #FFC14B;
+}
+.navigation.navigationActive {
+  background-color: #FFC14B;
+}
+
+.nonMobile {
+  display: none;
+}
+@media only screen and (min-width: 59.375em) {
+  .nonMobile {
+    display: initial;
+  }
+}
+
+@media only screen and (min-width: 59.375em) {
+  .mobileOnly {
+    display: none;
+  }
+}
+
+.navList {
+  list-style: none;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  margin-right: 8rem;
+  padding-top: 1rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .navList {
+    margin-right: 0;
+  }
+}
+
+/*===== END  Navbar  ===== */
 /*~~~~~~~  Links  ~~~~~~~ */
 .linkWrapper {
   -webkit-box-orient: vertical;
@@ -412,8 +759,12 @@ body {
 .shopNowButton {
   background-color: #000000;
   color: #FFFFFF;
-  min-width: 260px;
   border-radius: 0;
+  margin-left: 2rem;
+  padding: 1rem 3rem;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
 }
 .shopNowButton:hover, .shopNowButton:active, .shopNowButton:focus, .shopNowButton .btnBlack:hover, .shopNowButton .btnBlack:active, .shopNowButton .btnBlack:focus {
   background-color: #999999;
@@ -531,6 +882,7 @@ menu a {
   padding-left: 1.5rem;
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
+  padding-right: 1rem;
   border-radius: 3px;
   position: relative;
 }
@@ -551,7 +903,21 @@ menu > menuitem > a + menu:after {
   border: 10px solid transparent;
   border-top: 10px solid white;
   left: 12px;
-  top: -40px;
+  top: -27px;
+}
+@media only screen and (min-width: 59.375em) {
+  menu > menuitem > a + menu:after {
+    top: -40px;
+  }
+}
+
+.navigationList menu > menuitem > a + menu:after {
+  top: 6px;
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationList menu > menuitem > a + menu:after {
+    top: -40px;
+  }
 }
 
 menuitem > menu > menuitem > a + menu:after {
@@ -565,6 +931,15 @@ menuitem > menu > menuitem > a + menu:after {
   transition: opacity 0.6, -webkit-transform 0s;
   transition: opacity 0.6, transform 0s;
   transition: opacity 0.6, transform 0s, -webkit-transform 0s;
+}
+
+.navigationList menu > menuitem > menu {
+  margin-top: -4rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationList menu > menuitem > menu {
+    margin-top: 0;
+  }
 }
 
 menu > menuitem > menu > menuitem {
@@ -582,6 +957,21 @@ menu > menuitem.hover > menu > menuitem {
   -webkit-transform: translateY(0%);
           transform: translateY(0%);
   opacity: 1;
+}
+
+.navigationList menu > menuitem:hover > menu > menuitem,
+.navigationList menu > menuitem.hover > menu > menuitem {
+  /*For a vertical menu (mobile) - move to the right of the menu list */
+  -webkit-transform: translateX(12.5rem);
+          transform: translateX(12.5rem);
+}
+@media only screen and (min-width: 59.375em) {
+  .navigationList menu > menuitem:hover > menu > menuitem,
+  .navigationList menu > menuitem.hover > menu > menuitem {
+    /*Desktop is a horizontal menu - so do not shift to the right */
+    -webkit-transform: translateX(0%);
+            transform: translateX(0%);
+  }
 }
 
 menuitem > menu > menuitem > menu > menuitem {
