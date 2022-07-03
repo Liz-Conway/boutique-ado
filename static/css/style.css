@@ -573,6 +573,46 @@ body {
 }
 
 /*===== END  Navbar  ===== */
+/*~~~~~~~  Grid  ~~~~~~~ */
+.overlay {
+  /*Full-page overlay in order to cover up the body's background image */
+  /*and give this page a white background. */
+  /*100% height and width div. */
+  height: 100%;
+  width: 100%;
+  /*Fixed at the top left of the screen. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /*With the white background */
+  background-color: #FFFFFF;
+  /*z-index of minus 1 to make sure that it sits behind all the content. */
+  z-index: -1;
+}
+
+/*===== END  Grid  ===== */
+/*~~~~~~~  Products Page  ~~~~~~~ */
+.productTitle {
+  text-align: center;
+  margin-top: 164px;
+}
+.productContainer {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.productList {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+/*===== END  Products Page  ===== */
 /*~~~~~~~  Links  ~~~~~~~ */
 .linkWrapper {
   -webkit-box-orient: vertical;
@@ -993,5 +1033,85 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 }
 
 /*===== END Dropdown Menu   ===== */
+/*~~~~~~~  Card  ~~~~~~~ */
+.productCard {
+  /*2 cards per row = 50% */
+  width: calc(50% - 20px);
+  height: 100%;
+}
+@media only screen and (min-width: 59.375em) {
+  .productCard {
+    /*3 cards per row = 33% */
+    width: calc(33% - 20px);
+  }
+}
+@media only screen and (min-width: 75em) {
+  .productCard {
+    /*4 cards per row = 25% */
+    width: calc(25% - 20px);
+  }
+  .productCardBody p {
+    margin-bottom: 0;
+  }
+  .productCardFooter {
+    background-color: #FFFFFF;
+    padding-top: 0;
+    text-align: left;
+  }
+  .productCardFooter p {
+    margin-bottom: 0;
+    font-weight: 700;
+    font-size: 1.3rem;
+    opacity: 0.7;
+  }
+  .productCardFooter small {
+    color: #999999;
+  }
+}
+
+/*Added a <hr> after every 'card' */
+/*Shows as a vertical line between the cards */
+/*use this to set every nth hr to be horizontal */
+.breaker {
+  display: none;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+.breaker:nth-child(4n) {
+  /* On mobile 2 cards per row then show the hr */
+  display: block;
+  width: 100%;
+}
+@media only screen and (min-width: 59.375em) {
+  .breaker:nth-child(4n) {
+    /* First hide the hrs for the mobile screen size */
+    display: none;
+    width: initial;
+  }
+  .breaker:nth-child(6n) {
+    /* On desktop 3 cards per row then show the hr */
+    display: block;
+    width: 100%;
+  }
+}
+@media only screen and (min-width: 75em) {
+  .breaker:nth-child(4n) {
+    /* First hide the hrs for the mobile screen size */
+    display: none;
+    width: initial;
+  }
+  .breaker:nth-child(6n) {
+    /* then hide the hrs for the desktop screen size */
+    display: none;
+    width: initial;
+  }
+  .breaker:nth-child(8n) {
+    /* On large screen 4 cards per row then show the hr */
+    width: 100%;
+    display: block;
+  }
+}
+
+/*===== END  Card  ===== */
 
 /*# sourceMappingURL=style.css.map */

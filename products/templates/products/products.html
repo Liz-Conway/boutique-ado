@@ -8,7 +8,41 @@
 {% endblock %}
 
 {% block content %}
-	<div class="productsContainer">
-		{{ products }}
+	<div class="overlay"></div>
+	<div class="containerFluid">
+		<div class="productTitle">
+			<h2>Products</h2>
+			<hr>
+		</div>
+		<div class="productContainer">
+			<div class=""></div>
+			<div class="productList">
+				{% for product in products %}
+					<div class="productCard">
+						{% if product.image %}
+							<a href="">
+								<img  class="" src="{{ product.image_url }}" alt="{{ product.name }}">
+							</a>
+						{% else %}
+							<a href="">
+								<img  class="" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
+							</a>
+						{% endif %}
+						<div class="productCardBody">
+							<p>{{ product.name }}</p>
+						</div>
+						<div class="productCardFooter">
+							<p>€{{ product.price }}</p>
+							{% if product.rating %}
+								<small><i class="fas fa-star"></i>{{ product.rating }} / 5</small>
+							{% else %}
+								<small>No rating</small>
+							{% endif %}
+						</div>
+					</div>
+					<hr class="breaker">
+				{% endfor %}
+			</div>
+		</div>
 	</div>
 {% endblock %}

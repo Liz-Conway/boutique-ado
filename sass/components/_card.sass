@@ -1,0 +1,66 @@
+/*~~~~~~~  Card  ~~~~~~~*/
+
+.productCard
+	/*2 cards per row = 50%*/
+	width: calc(50% - #{$cardGutter})
+	height: 100%
+	@include respond(desktop)
+		/*3 cards per row = 33%*/
+		width: calc(33% - #{$cardGutter})
+	@include respond(XL)
+		/*4 cards per row = 25%*/
+		width: calc(25% - #{$cardGutter})
+
+		&Body
+			p
+				margin-bottom: 0
+
+		&Footer
+			background-color: $white
+			padding-top: 0
+			text-align: left
+			p
+				margin-bottom: 0
+				font:
+					weight: $boldWt
+					size: 1.3rem
+				opacity: .7
+			small
+				color: $grey
+
+/*Added a <hr> after every 'card' */
+/*Shows as a vertical line between the cards*/
+/*use this to set every nth hr to be horizontal*/
+.breaker
+	display: none
+	margin-top: 2rem
+	margin-bottom: 5rem
+	&:nth-child(4n)
+		/* On mobile 2 cards per row then show the hr */
+		display: block
+		width: 100%
+	@include respond(desktop)
+		&:nth-child(4n)
+			/* First hide the hrs for the mobile screen size */
+			display: none
+			width: initial
+		&:nth-child(6n)
+			/* On desktop 3 cards per row then show the hr */
+			display: block
+			width: 100%
+			display:block
+	@include respond(XL)
+		&:nth-child(4n)
+			/* First hide the hrs for the mobile screen size */
+			display: none
+			width: initial
+		&:nth-child(6n)
+			/* then hide the hrs for the desktop screen size */
+			display: none
+			width: initial
+		&:nth-child(8n)
+			/* On large screen 4 cards per row then show the hr */
+			width: 100%
+			display: block
+
+/*===== END  Card  =====*/
