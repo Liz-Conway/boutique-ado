@@ -1,6 +1,9 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic.base import TemplateView
 from .models import Product
+from django.contrib import messages
+from django.urls.base import reverse
+from django.db.models.query_utils import Q
 # from django.template import context
 
 
@@ -14,8 +17,44 @@ class AllProducts(TemplateView):
     def get(self, request):
         products = Product.objects.all()
         
+        # Start as none to ensure we don't get an error
+        # when loading the products page without a search term.
+        query = None
+        
+        # Access URL parameters by checking whether request.GET exists
+        if request.GET:
+            # Since we named the text input in the form "q". 
+            # We can just check if "q" is in request.get
+            if 'q' in request.GET:
+                # If "q" is a URL parameter 
+                # set it equal to a variable called query.
+                query = request.GET['q']
+                # If the query is blank it's not going to return any results
+                if not query:
+                    # Use the Django messages framework 
+                    # to attach an error message to the request
+                    messages.error(
+                        request, 
+                        "You didn't enter any search criteria"
+                    )
+                    # Redirect back to the products URL
+                    return redirect(reverse('products'))
+                
+                # Django can't handle basic database OR logic
+                # We want to return results where the query was matched 
+                # in either the product name OR the description
+                # In order to accomplish this OR logic, we need to use Q
+                # Set a variable equal to a Q object
+                #  - Where the "name" contains the query
+                #  - OR the "description" contains the query.
+                # The pipe generates the OR statement.
+                # The i in front of contains makes the queries case insensitive.
+                queries = Q(name__icontains=query) | Q(description__icontains=query)
+                products = products.filter(queries)
+        
         context = {
             'products': products,
+            'search_term': query,
         }
     
         return render(request, self.template_name, context)

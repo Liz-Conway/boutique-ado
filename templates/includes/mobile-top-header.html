@@ -10,7 +10,9 @@
 				    </a>
 				    <menu>
 				    	<menuitem class="mobileSearchWrapper" aria-labelledby="mobileSearch">
-						        <form class="form" method="GET" action="">
+			    			<!-- When we submit a search query
+							It'll end up in the URL as a get parameter. -->
+			    			 <form method="GET" action="{% url 'products' %}">
 						            <div class="mobileSearchGroup">
 						                <input class="mobileSearchBox" type="text" name="q" placeholder="Search our site">
 						                <div class="input-group-append">

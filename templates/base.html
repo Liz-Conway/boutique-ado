@@ -44,8 +44,10 @@
     			</a>
     		</div>
     		<div class="link linkSearch">
-    			 <!-- Our form will have a method of get, meaning we'll be submitting searches as url parameters -->
-    			 <form method="GET" action="">
+    			 <!-- Our form will have a method of get, meaning we'll be submitting searches as URL parameters -->
+    			<!-- When we submit a search query
+				It'll end up in the URL as a get parameter. -->
+    			 <form method="GET" action="{% url 'products' %}">
                     <div class="input-group searchBox">
                          <!-- Text input with the name of q for query - that's what will be submitted to the action url. -->
                         <input class="searchInput" type="text" name="q" placeholder="Search our site">
