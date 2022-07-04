@@ -7,6 +7,7 @@ menuitem
 	position: relative
 	display: block
 	opacity: 0
+	// width: 0
 	cursor: pointer
 	z-index: 4000
 
@@ -30,17 +31,24 @@ menu
 	& menuitem a
 		white-space: nowrap
 		display: block
-   
+ 
+menuitem > menu > menuitem
+	/* Initially hide the submenu */
+	display: none
+
 menuitem:hover > menu
 	pointer-events: initial
 
 	& > menuitem, menu:hover > menuitem
+		/* Show the submenu when its parent is hovered */
 		opacity: 1
+		display: block
 
 menu > menuitem menuitem menu
 	transform: translateX(100%)
 	top: 0
 	right: 0
+	color: #bada55
 
 /* User Styles Below Not Required */
 /* User Styles Below Not Required */

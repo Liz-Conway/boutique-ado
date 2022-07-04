@@ -594,7 +594,22 @@ body {
 /*~~~~~~~  Products Page  ~~~~~~~ */
 .productTitle {
   text-align: center;
-  margin-top: 164px;
+  margin-top: 1rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .productTitle {
+    margin-top: 164px;
+  }
+}
+.productTitle h2 {
+  font-size: 2rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+.productTitle hr {
+  width: 50%;
+  margin: 0.5rem auto 1rem auto;
 }
 .productContainer {
   width: 80%;
@@ -613,6 +628,49 @@ body {
 }
 
 /*===== END  Products Page  ===== */
+/*~~~~~~~  Product Detail Page  ~~~~~~~ */
+@media only screen and (min-width: 59.375em) {
+  .productWrapper {
+    margin-top: 10rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+  }
+}
+@media only screen and (min-width: 59.375em) {
+  .productImageWrapper {
+    width: 50%;
+  }
+}
+@incude respond(XL) {
+  .productImageWrapper {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+}
+.productDetails {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .productDetails {
+    width: 50%;
+  }
+}
+@incude respond(XL) {
+  .productDetails {
+    width: 33%;
+    margin-left: 15%;
+  }
+}
+/*===== END  Product Detail Page  ===== */
 /*~~~~~~~  Links  ~~~~~~~ */
 .linkWrapper {
   -webkit-box-orient: vertical;
@@ -893,11 +951,18 @@ menu menuitem a {
   display: block;
 }
 
+menuitem > menu > menuitem {
+  /* Initially hide the submenu */
+  display: none;
+}
+
 menuitem:hover > menu {
   pointer-events: initial;
 }
 menuitem:hover > menu > menuitem, menuitem:hover > menu menu:hover > menuitem {
+  /* Show the submenu when its parent is hovered */
   opacity: 1;
+  display: block;
 }
 
 menu > menuitem menuitem menu {
@@ -905,6 +970,7 @@ menu > menuitem menuitem menu {
           transform: translateX(100%);
   top: 0;
   right: 0;
+  color: #bada55;
 }
 
 /* User Styles Below Not Required */

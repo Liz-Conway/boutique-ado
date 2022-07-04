@@ -3,7 +3,20 @@
 .product
 	&Title
 		text-align: center
-		margin-top: 164px
+		margin-top: 1rem
+		@include respond(desktop)
+			margin-top: 164px
+
+		h2
+			font:
+				size: 2rem
+				weight: $thickWt
+			text-transform: uppercase
+			margin-bottom: .5rem
+
+		hr
+			width: 50%
+			margin: .5rem auto 1rem auto
 
 
 	&Container

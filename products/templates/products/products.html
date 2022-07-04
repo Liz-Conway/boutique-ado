@@ -20,11 +20,11 @@
 				{% for product in products %}
 					<div class="productCard">
 						{% if product.image %}
-							<a href="">
+							<a href="{% url 'productDetails' product.id %}">
 								<img  class="" src="{{ product.image_url }}" alt="{{ product.name }}">
 							</a>
 						{% else %}
-							<a href="">
+							<a href="{% url 'productDetails' product.id %}">
 								<img  class="" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
 							</a>
 						{% endif %}
