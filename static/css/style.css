@@ -626,6 +626,9 @@ body {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.productCard img {
+  width: 100%;
+}
 
 /*===== END  Products Page  ===== */
 /*~~~~~~~  Product Detail Page  ~~~~~~~ */

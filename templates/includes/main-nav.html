@@ -33,10 +33,19 @@
 						        Clothing
 						    </a>
 						    <menu aria-labelledby="clothingLink">
-						    	<menuitem><a href="">Activewear & Essentials</a></menuitem>
-						    	<menuitem><a href="">Jeans</a></menuitem>
-						    	<menuitem><a href="">Shirts</a></menuitem>
-						    	<menuitem><a href="">All Clothing</a></menuitem>
+						    	<!-- Pass a category parameter to the products URL -->
+						    	<!-- These parameters will use the "name" field from the 
+						    	Category model so we have a programmatic way to access them
+						    	Of course we could also use the category id.
+								But this makes the URLs a little more semantic which is nice for the user -->
+								<!-- The products URL followed by a question mark 
+								to indicate we're about to pass the category parameter.
+								Followed by "activewear"" and "essentials" separated by a comma.
+								This syntax ensures we end up with a comma-separated string in the view. -->
+						    	<menuitem><a href="{% url 'products'%}?categories=activewear,essentials">Activewear & Essentials</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=jeans">Jeans</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=shirts">Shirts</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=activewear,essentials,jeans,shirts">All Clothing</a></menuitem>
 					    	</menu>
 					    </menuitem>
 				    </menu>
@@ -49,9 +58,9 @@
 						        Homeware
 						    </a>
 						    <menu aria-labelledby="homewareLink">
-						    	<menuitem><a href="">Bed & Bath</a></menuitem>
-						    	<menuitem><a href="">Kitchen & Dining</a></menuitem>
-						    	<menuitem><a href="">All Homeware</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=bed_bath">Bed & Bath</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=kitchen_dining">Kitchen & Dining</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=bed_bath,kitchen_dining">All Homeware</a></menuitem>
 					    	</menu>
 					    </menuitem>
 				    </menu>
@@ -64,10 +73,10 @@
 						        Special Offers
 						    </a>
 						    <menu aria-labelledby="specialOffersLink">
-						    	<menuitem><a href="">New Arrivals</a></menuitem>
-						    	<menuitem><a href="">Deals</a></menuitem>
-						    	<menuitem><a href="">Clearance</a></menuitem>
-						    	<menuitem><a href="">All Specials</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=new_arrivals">New Arrivals</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=deals">Deals</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=clearance">Clearance</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?categories=new_arrivals,deals,clearance">All Specials</a></menuitem>
 					    	</menu>
 					    </menuitem>
 				    </menu>

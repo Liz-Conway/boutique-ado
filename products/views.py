@@ -4,6 +4,7 @@ from .models import Product
 from django.contrib import messages
 from django.urls.base import reverse
 from django.db.models.query_utils import Q
+from products.models import Category
 # from django.template import context
 
 
@@ -20,9 +21,20 @@ class AllProducts(TemplateView):
         # Start as none to ensure we don't get an error
         # when loading the products page without a search term.
         query = None
+        category = None
         
         # Access URL parameters by checking whether request.GET exists
         if request.GET:
+            if 'categories' in request.GET:
+                # Split it into a list at the commas.
+                category = request.GET['categories'].split(',')
+                # Use that list to filter the current query set of all products 
+                # down to only products whose category name is in the list
+                products = products.filter(category__name__in=category)
+                # Filter a list of Category objects
+                # to those passed in the URL parameter
+                category = Category.objects.filter(name__in=category)
+            
             # Since we named the text input in the form "q". 
             # We can just check if "q" is in request.get
             if 'q' in request.GET:
@@ -55,6 +67,7 @@ class AllProducts(TemplateView):
         context = {
             'products': products,
             'search_term': query,
+            'current_categories': category,
         }
     
         return render(request, self.template_name, context)
