@@ -625,6 +625,9 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 }
 .productCard img {
   width: 100%;
@@ -1107,6 +1110,14 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   /*2 cards per row = 50% */
   width: calc(50% - 20px);
   height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  position: relative;
 }
 @media only screen and (min-width: 59.375em) {
   .productCard {
@@ -1119,6 +1130,11 @@ menuitem > menu > menuitem.hover > menu > menuitem {
     /*4 cards per row = 25% */
     width: calc(25% - 20px);
   }
+  .productCardBody {
+    -webkit-box-flex: 1;
+        -ms-flex: auto 1 1;
+            flex: auto 1 1;
+  }
   .productCardBody p {
     margin-bottom: 0;
   }
@@ -1130,7 +1146,7 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   .productCardFooter p {
     margin-bottom: 0;
     font-weight: 700;
-    font-size: 1.3rem;
+    color: #000000;
     opacity: 0.7;
   }
   .productCardFooter small {

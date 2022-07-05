@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.urls.base import reverse
 from django.db.models.query_utils import Q
 from products.models import Category
+from django.db.models.functions.text import Lower
 # from django.template import context
 
 
@@ -22,9 +23,39 @@ class AllProducts(TemplateView):
         # when loading the products page without a search term.
         query = None
         category = None
+        sort = None
+        direction = None
         
         # Access URL parameters by checking whether request.GET exists
         if request.GET:
+            if 'sort' in request.GET:
+                sortkey = request.GET['sort']
+                sort = sortkey
+                if sortkey == 'name':
+                    # annotate() allows us to add another field to the 
+                    # dataset returned from the database.
+                    # Using the Lower() function on the original "name" field
+                    products = products.annotate(lower_name=Lower('name'))
+                    # set the sortKey to lower_name
+                    sortkey = 'lower_name'
+                    # The reason for copying the sort parameter 
+                    # into a new variable called sortkey,
+                    # Is because now we've preserved the original field
+                    # we want to sort on ("name").
+                    # But we have the actual field we're going to sort on,
+                    # ("lower_name") in the sort key variable.
+                    # If we had just renamed sort itself to "lower_name"
+                    # we would have lost the original field ("name")
+                
+                if 'direction' in request.GET:
+                    direction = request.GET['direction']
+                    if direction == 'desc':
+                        # Add a minus in front of the sort key 
+                        # using string formatting, which reverses the order
+                        sortkey = f'-{sortkey}'
+                
+                products = products.order_by(sortkey)
+                
             if 'categories' in request.GET:
                 # Split it into a list at the commas.
                 category = request.GET['categories'].split(',')
@@ -63,6 +94,10 @@ class AllProducts(TemplateView):
                 # The i in front of contains makes the queries case insensitive.
                 queries = Q(name__icontains=query) | Q(description__icontains=query)
                 products = products.filter(queries)
+        
+        # If there is no sorting
+        # The value of this variable will be the string "None_None".
+        current_sorting = f'{sort}_{direction}'
         
         context = {
             'products': products,

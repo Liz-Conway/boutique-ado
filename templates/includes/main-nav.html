@@ -17,9 +17,9 @@
 						        All Products
 						    </a>
 						    <menu aria-labelledby="allProductsLink">
-						    	<menuitem><a href="">By Price</a></menuitem>
-						    	<menuitem><a href="">By Rating</a></menuitem>
-						    	<menuitem><a href="">By Category</a></menuitem>
+						    	<menuitem><a href="{% url 'products' %}?sort=price&direction=asc">By Price</a></menuitem>
+						    	<menuitem><a href="{% url 'products' %}?sort=rating&direction=desc">By Rating</a></menuitem>
+						    	<menuitem><a href="{% url 'products' %}?sort=category&direction=asc">By Category</a></menuitem>
 						    	<menuitem><a href="{% url 'products' %}">All Products</a></menuitem>
 					    	</menu>
 					    </menuitem>
