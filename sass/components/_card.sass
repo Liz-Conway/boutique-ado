@@ -3,7 +3,6 @@
 .productCard
 	/*2 cards per row = 50%*/
 	width: calc(50% - #{$cardGutter})
-	height: 100%
 	display: flex
 	flex-direction: column
 	position: relative
@@ -32,6 +31,23 @@
 				opacity: .7
 			small
 				color: $grey
+
+	&Category
+		color: grey
+		font:
+			size: 1.2rem
+			family: $baseFontFamily
+
+		a
+			text-decoration-color: $grey
+			text-decoration-line: underline
+			text-decoration-style: solid
+			text-decoration-thickness: auto
+			&:visited, &:link
+				color: $grey
+
+	img
+		width: 100%
 
 /*Added a <hr> after every 'card' */
 /*Shows as a vertical line between the cards*/

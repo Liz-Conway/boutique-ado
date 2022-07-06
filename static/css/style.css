@@ -629,9 +629,6 @@ body {
       -ms-flex-align: stretch;
           align-items: stretch;
 }
-.productCard img {
-  width: 100%;
-}
 
 /*===== END  Products Page  ===== */
 /*~~~~~~~  Product Detail Page  ~~~~~~~ */
@@ -1109,7 +1106,6 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 .productCard {
   /*2 cards per row = 50% */
   width: calc(50% - 20px);
-  height: 100%;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1152,6 +1148,26 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   .productCardFooter small {
     color: #999999;
   }
+}
+.productCardCategory {
+  color: grey;
+  font-size: 1.2rem;
+  font-family: Gabriela;
+}
+.productCardCategory a {
+  -webkit-text-decoration-color: #999999;
+          text-decoration-color: #999999;
+  -webkit-text-decoration-line: underline;
+          text-decoration-line: underline;
+  -webkit-text-decoration-style: solid;
+          text-decoration-style: solid;
+  text-decoration-thickness: auto;
+}
+.productCardCategory a:visited, .productCardCategory a:link {
+  color: #999999;
+}
+.productCard img {
+  width: 100%;
 }
 
 /*Added a <hr> after every 'card' */
@@ -1198,5 +1214,52 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 }
 
 /*===== END  Card  ===== */
+/*~~~~~~~  Badge  ~~~~~~~ */
+.categoryBadge {
+  text-decoration: none;
+  text-align: center;
+}
+.categoryBadge span {
+  color: #000000;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border: 1px solid #333333;
+  border-radius: 0;
+  font-weight: 700;
+  font-size: 75%;
+  tranistion: all 0.15s ease-in-out;
+}
+.categoryBadge span:hover {
+  background-color: #333333;
+  color: #FFFFFF;
+}
+
+/*===== END  Badge  ===== */
+/*~~~~~~~  Sort  ~~~~~~~ */
+.sortRow {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 2rem 0;
+}
+@media only screen and (min-width: 59.375em) {
+  .sortRow {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: row-reverse;
+            flex-direction: row-reverse;
+  }
+}
+
+/*===== END  Sort  ===== */
 
 /*# sourceMappingURL=style.css.map */

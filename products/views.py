@@ -56,15 +56,15 @@ class AllProducts(TemplateView):
                 
                 products = products.order_by(sortkey)
                 
-            if 'categories' in request.GET:
+            if 'category' in request.GET:
                 # Split it into a list at the commas.
-                category = request.GET['categories'].split(',')
+                categories = request.GET['category'].split(',')
                 # Use that list to filter the current query set of all products 
                 # down to only products whose category name is in the list
-                products = products.filter(category__name__in=category)
+                products = products.filter(category__name__in=categories)
                 # Filter a list of Category objects
                 # to those passed in the URL parameter
-                category = Category.objects.filter(name__in=category)
+                category = Category.objects.filter(name__in=categories)
             
             # Since we named the text input in the form "q". 
             # We can just check if "q" is in request.get
@@ -103,6 +103,7 @@ class AllProducts(TemplateView):
             'products': products,
             'search_term': query,
             'current_categories': category,
+            'current_sorting': current_sorting,
         }
     
         return render(request, self.template_name, context)

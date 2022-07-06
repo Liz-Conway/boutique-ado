@@ -42,10 +42,10 @@
 								to indicate we're about to pass the category parameter.
 								Followed by "activewear"" and "essentials" separated by a comma.
 								This syntax ensures we end up with a comma-separated string in the view. -->
-						    	<menuitem><a href="{% url 'products'%}?categories=activewear,essentials">Activewear & Essentials</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=jeans">Jeans</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=shirts">Shirts</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=activewear,essentials,jeans,shirts">All Clothing</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=activewear,essentials">Activewear & Essentials</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=jeans">Jeans</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=shirts">Shirts</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=activewear,essentials,jeans,shirts">All Clothing</a></menuitem>
 					    	</menu>
 					    </menuitem>
 				    </menu>
@@ -58,9 +58,9 @@
 						        Homeware
 						    </a>
 						    <menu aria-labelledby="homewareLink">
-						    	<menuitem><a href="{% url 'products'%}?categories=bed_bath">Bed & Bath</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=kitchen_dining">Kitchen & Dining</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=bed_bath,kitchen_dining">All Homeware</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=bed_bath">Bed & Bath</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=kitchen_dining">Kitchen & Dining</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=bed_bath,kitchen_dining">All Homeware</a></menuitem>
 					    	</menu>
 					    </menuitem>
 				    </menu>
@@ -73,10 +73,10 @@
 						        Special Offers
 						    </a>
 						    <menu aria-labelledby="specialOffersLink">
-						    	<menuitem><a href="{% url 'products'%}?categories=new_arrivals">New Arrivals</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=deals">Deals</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=clearance">Clearance</a></menuitem>
-						    	<menuitem><a href="{% url 'products'%}?categories=new_arrivals,deals,clearance">All Specials</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=new_arrivals">New Arrivals</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=deals">Deals</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=clearance">Clearance</a></menuitem>
+						    	<menuitem><a href="{% url 'products'%}?category=new_arrivals,deals,clearance">All Specials</a></menuitem>
 					    	</menu>
 					    </menuitem>
 				    </menu>

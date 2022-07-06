@@ -28,6 +28,13 @@
 				</div>
 				<div class="productCardFooter">
 					<p>€{{ product.price }}</p>
+							{% if product.category %}
+								<p class="productCardCategory">
+									<a href="{% url 'products' %}?category={{ product.category.name }}">
+										<i class="fas fa-tag"></i>{{ product.category.friendly_name }}
+									</a>
+								</p>
+							{% endif %}
 					{% if product.rating %}
 						<small><i class="fas fa-star"></i>{{ product.rating }} / 5</small>
 					{% else %}
