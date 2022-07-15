@@ -50,6 +50,24 @@
 		background-color: $black
 		color: $white
 
+	&BackToTop
+		height: 42px
+		width: 42px
+		position: fixed
+		bottom: 10px
+		right: 10px
+		display: flex
+		@include flexCentre
+		border: 1px solid $black
+		color: $black
+		box-shadow: 0 .125rem .125rem rgba($black, .075)
+
+		a
+			cursor: pointer
+
+			i
+				margin: auto
+
 .shopNowButton
 	background-color: $black
 	color: $white
@@ -57,10 +75,11 @@
 	border-radius: 0
 	margin-left: 2rem
 	padding: 1rem 3rem
-	width: fit-content 
+	width: fit-content
 
 	&:hover, &:active, &:focus, .btnBlack:hover, .btnBlack:active, .btnBlack:focus
 		background-color: $grey
+
 
 .buttonWrapper
 	margin-top: 3rem
