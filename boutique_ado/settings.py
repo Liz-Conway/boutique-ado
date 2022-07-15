@@ -86,6 +86,11 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                # Anytime we need to access the bag contents
+                # in any template across the entire site they'll be available to us
+                # without having to return them from 
+                # a whole bunch of different views across different apps
+                'bag.contexts.bag_contents',
             ],
         },
     },
@@ -192,3 +197,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+# Variables to be used throughout the site
+FREE_DELIVERY_THRESHOLD = 50
+STANDARD_DELIVERY_PERCENTAGE = 10
