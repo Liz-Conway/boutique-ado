@@ -1,0 +1,875 @@
+/*~~~~~~~  Typography  ~~~~~~~ */
+@import url("https://fonts.googleapis.com/css2?family=Gabriela&family=Roboto+Slab:wght@100;200;300;400;500;600;700;800;900&display=swap");
+/*TEST */
+body {
+  font-family: Gabriela;
+  font-weight: 400;
+  font-size: 1.6rem;
+  /* For accessibility - The WCAG criteria states that line-height should be at least 1.5 */
+  /* The WCAG criteria is meant for "body" text, not headings. */
+  /* So we can calculate the proper line height for all elements : */
+  /* Instead of calculating the line height by multiplying the font-size with a number like 1.5, */
+  /* this alternative uses the font-size as a base, and adds a fixed amount of space to each line. */
+  line-height: calc(1em + 0.7rem);
+  color: #555; }
+
+.textBlack {
+  color: #000000; }
+
+.titleWrapper {
+  width: 60%;
+  height: 100%;
+  max-width: 1140px;
+  padding-left: 2rem; }
+  @media only screen and (min-width: 59.375em) {
+    .titleWrapper {
+      width: 50%; } }
+
+.headingTitle {
+  max-width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; }
+  @media only screen and (min-width: 59.375em) {
+    .headingTitle {
+      max-width: 50%; } }
+.headingCollection {
+  font-size: 3.2rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #000000;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem; }
+  @media only screen and (min-width: 28em) {
+    .headingCollection {
+      font-size: 3.5rem; } }
+  @media only screen and (min-width: 59.375em) {
+    .headingCollection {
+      font-size: 3.1rem; } }
+  @media only screen and (min-width: 65.625em) {
+    .headingCollection {
+      font-size: 3.5rem; } }
+  @media only screen and (min-width: 75em) {
+    .headingCollection {
+      font-size: 3.3rem; } }
+  @media only screen and (min-width: 78.125em) {
+    .headingCollection {
+      font-size: 3.5rem; } }
+
+#deliveryBanner {
+  background-color: #bada55;
+  color: #FFFFFF;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2rem; }
+
+/*===== END  Typography  ===== */
+/*~~~~~~~  Reset  ~~~~~~~ */
+/* Josh's Custom CSS Reset
+ * https://www.joshwcomeau.com/css/custom-css-reset */
+*, *::before, *::after {
+  box-sizing: inherit;
+  text-decoration: none;
+  padding: 0;
+  margin: 0; }
+
+/* The height of an element is calculated based on its CHILDREN.
+ * So setting height: 100% on an element will cause it to be 100% of the child's height.
+ * This setting causes the height to be calculated from the parent */
+html, body {
+  height: 100%; }
+
+body {
+  /* MacOS browsers like Chrome and Safari still use subpixel antialiasing by default. */
+  /* We need to explicitly turn it off. */
+  -webkit-font-smoothing: antialiased; }
+
+img, picture, video, canvas, svg {
+  /*display: block*/      /* Will remove extra space from under an image - Use flexbox on its parent instead */
+  /* Keep large images from overflowing, if theyre placed in a container that isnt wide enough to contain them. */
+  max-width: 100%; }
+
+/* by default, buttons and inputs don't inherit typographical styles from their parents. */
+/* Instead, they have their own weird styles. */
+/* Form inputs shouldn't have their own typographical styles! */
+input, button, textarea, select {
+  font: inherit; }
+
+/* The overflow-wrap property lets us tweak the line-wrapping algorithm, */
+/* and give it permission to use hard wraps when no soft wrap opportunties can be found */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word; }
+
+/*===== END  Reset  ===== */
+html {
+  /* Since browser default font-size is 16px */
+  /* Set it to 10px (on a desktop) to make converting px to rem easier. */
+  /* Use a percentage so that if a user changes the font size */
+  /* on their browser or zooms the font sizes,  */
+  /* paddings and margins adjust accordingly. */
+  /* This defines what 1rem is */
+  /* For mobile 1st design we will use 8px for the mobile device */
+  font-size: 50%;
+  height: 100%; }
+  @media only screen and (min-width: 50em) {
+    html {
+      font-size: 56.25%; } }
+  @media only screen and (min-width: 59.375em) {
+    html {
+      font-size: 62.5%; } }
+  @media only screen and (min-width: 75em) {
+    html {
+      font-size: 75%; } }
+
+body {
+  /* Inheritable properties */
+  box-sizing: border-box;
+  /* Set up page for sticky footer */
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  /* Non-inheritable properties */
+  padding: 0;
+  /*size of cover and options of no-repeat center centre and fixed. */
+  /*which will ensure that the image stays put in the centre of the page. */
+  background: url("/media/homepage-background-cropped.jpg") no-repeat center center fixed;
+  background-size: cover;
+  /*164 pixels the eventual height of our top header */
+  height: calc(100vh - 164px); }
+  @media only screen and (min-width: 59.375em) {
+    body {
+      padding: 3rem; } }
+
+/*~~~~~~~  Utilities  ~~~~~~~ */
+.centreText {
+  text-align: center; }
+
+.marginBottomSmall {
+  margin-bottom: 1.5rem; }
+.marginBottomMedium {
+  /* Mobile first - so smaller values first */
+  margin-bottom: 3rem; }
+  @media only screen and (min-width: 50em) {
+    .marginBottomMedium {
+      margin-bottom: 4rem; } }
+.marginBottomBig {
+  margin-bottom: 5rem; }
+  @media only screen and (min-width: 50em) {
+    .marginBottomBig {
+      margin-bottom: 8rem; } }
+
+.marginTopSmall {
+  margin-top: 1.5rem; }
+.marginTopMedium {
+  margin-top: 4rem; }
+.marginTopBig {
+  margin-top: 8rem; }
+.marginTopHuge {
+  margin-top: 10rem; }
+
+.invisible {
+  display: none; }
+
+/*===== END  Utilities  ===== */
+/*~~~~~~~  Header  ~~~~~~~ */
+.container {
+  padding: 0; }
+  @media only screen and (min-width: 75em) {
+    .container {
+      width: 80%; } }
+
+@media only screen and (min-width: 59.375em) {
+  .headerContainer {
+    width: 100%; } }
+
+@media only screen and (min-width: 59.375em) {
+  #topNav {
+    padding-left: 2rem;
+    padding-right: 2rem; } }
+
+@media only screen and (min-width: 59.375em) {
+  .titleWrapper {
+    padding-top: 164px; } }
+
+@media only screen and (min-width: 59.375em) {
+  .fixedTop {
+    position: fixed;
+    top: 0;
+    right: 0;
+    left: 0;
+    z-index: 1030; } }
+
+.mobile {
+  position: relative;
+  z-index: 2000; }
+  .mobileHead {
+    display: flex;
+    flex-direction: row-reverse; }
+  .mobileSearchGroup {
+    display: flex;
+    flex-direction: row; }
+  .mobileSearchWrapper {
+    position: relative;
+    z-index: 1000; }
+
+.siteNav {
+  background-color: ghostwhite; }
+
+/*===== END  Header  ===== */
+/*~~~~~~~  Navbar  ~~~~~~~ */
+#navigationNav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1500;
+  /*Hide the navigation initially */
+  opacity: 0;
+  /*It is not enough to have an opacity of zero */
+  /*The elements are still there and are clickable, so we need to set the width to zero as well */
+  width: 0;
+  transition: all 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55); }
+  @media only screen and (min-width: 59.375em) {
+    #navigationNav {
+      background-color: #777777;
+      width: 100%;
+      height: auto;
+      opacity: 1;
+      position: relative;
+      top: 0; } }
+
+#naviToggle {
+  display: none; }
+
+.navigationButton {
+  display: inline;
+  background-color: #FFFFFF;
+  /*Make this slightly larger than the navigationBackground, to be sure to cover it */
+  width: 7rem;
+  height: 7rem;
+  border-radius: 50%;
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 2000;
+  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.1);
+  text-align: center;
+  cursor: pointer; }
+  @media only screen and (min-width: 59.375em) {
+    .navigationButton {
+      display: none; } }
+.navigationBackground {
+  /*Coloured background for the navigation */
+  /*It will start as a small circle behind the white circle containing the "hamburger" icon */
+  /*It will expand to fill the screen when the "hamburger" icon is clicked */
+  display: block;
+  width: 6rem;
+  height: 6rem;
+  border-radius: 50%;
+  /*Stays in the same position even if we scroll down the page */
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  background-image: radial-gradient(whitesmoke, ghostwhite);
+  z-index: 1000;
+  /*Custom transition function, uses a cubic bezier curve for ease-in and ease-out */
+  /*See easings.net & cubic-bezier.com */
+  transition: transform 0.8s cubic-bezier(0.86, 0, 0.07, 1); }
+  @media only screen and (min-width: 59.375em) {
+    .navigationBackground {
+      display: none; } }
+.navigationList {
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  margin-top: 10rem;
+  margin-right: 22rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column; }
+  @media only screen and (min-width: 59.375em) {
+    .navigationList {
+      background-color: #FFFFFF;
+      margin: 0;
+      flex-direction: row; } }
+.navigationLink {
+  transform: translateX(-200px); }
+  .navigationLink:link, .navigationLink:visited {
+    display: inline-block;
+    font-size: 3rem;
+    font-weight: 300;
+    padding: 1rem 2rem;
+    color: #191970;
+    text-decoration: none;
+    text-transform: uppercase;
+    background-image: linear-gradient(120deg, transparent 0%, transparent 50%, #FFFFFF 50%);
+    /*Increasing the background shoves the RHS of the linear gradient off the element, so it is invisible */
+    background-size: 235%;
+    transition: all 0.4s; }
+    @media only screen and (min-width: 59.375em) {
+      .navigationLink:link, .navigationLink:visited {
+        font-size: 1.8rem;
+        transform: none; } }
+  .navigationLink:hover, .navigationLink:active {
+    background-position: 100%;
+    color: #777777;
+    transform: translateX(1rem); }
+.navigationItem {
+  margin: 1rem;
+  /*Hide the navigation list item initially */
+  width: 0; }
+  @media only screen and (min-width: 59.375em) {
+    .navigationItem {
+      width: initial; } }
+.navigationCheckbox:checked ~ .navigationBackground {
+  transform: scale(80); }
+.navigationCheckbox:checked ~ #navigationNav {
+  opacity: 1;
+  width: 100%; }
+.navigationIcon {
+  display: inline-block;
+  position: relative;
+  margin-top: 3.5rem;
+  color: #FFFFFF;
+  /*A bar before the span, the span is a bar, a bar after the span */
+  /*Each bar is 3rem x 2px and is coloured dark grey */
+  /*For ::before and ::after to show they need content and display properties to be set */ }
+  .navigationIcon, .navigationIcon::before, .navigationIcon::after {
+    width: 3rem;
+    /*Always stays the same height, no matter what the base font size is */
+    height: 2px;
+    background-color: #333333;
+    display: inline-block; }
+  .navigationIcon::before, .navigationIcon::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    transition: all 0.2s; }
+  .navigationIcon::before {
+    top: -0.8rem;
+    /*By default elements will rotate around the centre. */
+    /*If you want to rotate around the edge you can set the transform-origin */
+    /*transform-origin: right */ }
+  .navigationIcon::after {
+    top: 0.8rem;
+    /*transform-origin: left */ }
+  @media only screen and (min-width: 59.375em) {
+    .navigationIcon {
+      display: none; } }
+.navigationButton:hover .navigationIcon::before {
+  top: -1rem; }
+.navigationButton:hover .navigationIcon::after {
+  top: 1rem; }
+.navigationCheckbox:checked + .navigationButton > .navigationIcon {
+  /*When the button is clicked change the "hamburger" to a cross */
+  /*When the checkbox is selected - get its adjacent sibling and */
+  /*select the child element of the adjacent sibling */
+  /*Step 1 make the middle bar invisible (this is the span in the navigationIcon) */
+  background-color: transparent; }
+.navigationCheckbox:checked + .navigationButton > .navigationIcon::before {
+  /*Step 2 make the top bar rotate (this is the navigationIcon::before) */
+  /*Rotate 180 degrees - 45 degrees : Takes longer, so looks better */
+  transform: rotate(135deg);
+  top: 0; }
+.navigationCheckbox:checked + .navigationButton > .navigationIcon::after {
+  /*Step 3 make the bottom bar rotate (this is the navigationIcon::after) */
+  /*Rotate 180 degrees - 45 degrees : Takes longer, so looks better */
+  transform: rotate(-135deg);
+  top: 0; }
+.navigationActive {
+  background-color: #FFC14B; }
+.navigation.navigationActive {
+  background-color: #FFC14B; }
+
+.nonMobile {
+  display: none; }
+  @media only screen and (min-width: 59.375em) {
+    .nonMobile {
+      display: initial; } }
+
+@media only screen and (min-width: 59.375em) {
+  .mobileOnly {
+    display: none; } }
+
+.navList {
+  list-style: none;
+  text-align: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-right: 8rem;
+  padding-top: 1rem; }
+  @media only screen and (min-width: 59.375em) {
+    .navList {
+      margin-right: 0; } }
+
+/*===== END  Navbar  ===== */
+/*~~~~~~~  Grid  ~~~~~~~ */
+.overlay {
+  /*Full-page overlay in order to cover up the body's background image */
+  /*and give this page a white background. */
+  /*100% height and width div. */
+  height: 100%;
+  width: 100%;
+  /*Fixed at the top left of the screen. */
+  position: fixed;
+  top: 0;
+  left: 0;
+  /*With the white background */
+  background-color: #FFFFFF;
+  /*z-index of minus 1 to make sure that it sits behind all the content. */
+  z-index: -1; }
+
+/*===== END  Grid  ===== */
+/*~~~~~~~  Products Page  ~~~~~~~ */
+.productTitle {
+  text-align: center;
+  margin-top: 1rem; }
+  @media only screen and (min-width: 59.375em) {
+    .productTitle {
+      margin-top: 164px; } }
+  .productTitle h2 {
+    font-size: 2rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem; }
+  .productTitle hr {
+    width: 50%;
+    margin: 0.5rem auto 1rem auto; }
+.productContainer {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto; }
+.productList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch; }
+
+/*===== END  Products Page  ===== */
+/*~~~~~~~  Product Detail Page  ~~~~~~~ */
+@media only screen and (min-width: 59.375em) {
+  .productWrapper {
+    margin-top: 12rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center; } }
+@media only screen and (min-width: 59.375em) {
+  .productImageWrapper {
+    width: 50%; } }
+@incude respond(XL) {
+  .productImageWrapper {
+    margin-top: 5rem;
+    margin-bottom: 5rem; } }
+.productDetails {
+  padding-left: 2rem;
+  padding-right: 2rem; }
+  @media only screen and (min-width: 59.375em) {
+    .productDetails {
+      width: 50%; } }
+@incude respond(XL) {
+  .productDetails {
+    width: 33%;
+    margin-left: 15%; } }
+/*===== END  Product Detail Page  ===== */
+/*~~~~~~~  Links  ~~~~~~~ */
+.linkWrapper {
+  flex-direction: column;
+  margin-right: auto;
+  margin-left: auto;
+  text-align: center;
+  display: none; }
+  @media only screen and (min-width: 59.375em) {
+    .linkWrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      text-align: left;
+      background-color: #FFFFFF;
+      padding-top: 1rem;
+      padding-bottom: 1rem; } }
+.linkAccounts {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  text-align: center; }
+  @media only screen and (min-width: 59.375em) {
+    .linkAccounts {
+      text-align: right; } }
+  .linkAccountsDropdown {
+    margin-right: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center; }
+  .linkAccounts li {
+    display: inline; }
+.link #userOptions {
+  margin-top: 1.4rem; }
+
+/*===== END  Links  ===== */
+/*~~~~~~~  Icons & Logos  ~~~~~~~ */
+/* from Bulma */
+/*Ensure that whenever we use font awesome icons. */
+/*They will always stay perfectly centred and have a consistent size */
+/*unless we manually change it */
+.icon {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem; }
+
+.accountIcon {
+  margin-bottom: -0.5rem;
+  margin-top: 0.9rem;
+  font-size: 2rem !important;
+  color: #000000; }
+
+.bagSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center; }
+
+.logoFont {
+  text-transform: uppercase;
+  color: #000000;
+  font-size: 2rem; }
+
+.mainLogoLink {
+  /*logo only takes up as much space as the text requires and no more */
+  width: fit-content; }
+
+/*===== END  Icons & Logos  ===== */
+/*~~~~~~~  Button  ~~~~~~~ */
+.btn {
+  text-transform: uppercase;
+  display: inline-block;
+  padding: 1rem;
+  border-radius: 5%;
+  font-size: 1.6rem;
+  background-color: #FFFFFF;
+  color: #555;
+  border: 1px solid #555;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s; }
+  .btn:hover {
+    /* Make the button pop up => 3D effect */
+    transform: translateY(-0.5rem);
+    /* Box Shadow X Y Blur Colour */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .btn:active {
+    color: #191970;
+    background-color: #555;
+    /* Make the button appear to be pressed => 3D effect */
+    transform: translateY(-0.1rem);
+    /* Box Shadow X Y Blur Colour */
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
+  .btn:not(:last-child) {
+    margin-right: 1.5rem; }
+  .btnCTA {
+    background-color: #191970; }
+  .btnGhost {
+    background-color: #FFFFFF; }
+    .btnGhost:hover {
+      color: #000000; }
+    .btnGhost:active {
+      color: #FFFFFF; }
+  .btnTextOnly {
+    border: none;
+    background-color: transparent; }
+    .btnTextOnly:hover, .btnTextOnly:active {
+      background-color: transparent;
+      color: #777777; }
+  .btnBlack {
+    background-color: #000000;
+    color: #FFFFFF; }
+
+.shopNowButton {
+  background-color: #000000;
+  color: #FFFFFF;
+  border-radius: 0;
+  margin-left: 2rem;
+  padding: 1rem 3rem;
+  width: fit-content; }
+  .shopNowButton:hover, .shopNowButton:active, .shopNowButton:focus, .shopNowButton .btnBlack:hover, .shopNowButton .btnBlack:active, .shopNowButton .btnBlack:focus {
+    background-color: #999999; }
+
+.buttonWrapper {
+  margin-top: 3rem;
+  margin-bottom: 3.5rem; }
+
+.searchLink {
+  flex: 3; }
+
+/*===== END  Button  ===== */
+/*~~~~~~~  Search  ~~~~~~~ */
+.linkSearch {
+  width: 40%; }
+
+.searchBox {
+  display: flex;
+  flex-direction: row;
+  width: 100%; }
+.searchInput {
+  border: 1px solid #333333;
+  border-radius: 0;
+  width: 100%; }
+.searchButton {
+  background-color: #000000;
+  color: #FFFFFF;
+  border: 1px solid #000000;
+  border-radius: 0; }
+
+/*===== END  Search  ===== */
+/*~~~~~~~  Dropdown Menu  ~~~~~~~ */
+/* HTML Nav Styles */
+/* HTML Nav Styles */
+/* HTML Nav Styles */
+menuitem {
+  position: relative;
+  display: block;
+  opacity: 0;
+  cursor: pointer;
+  z-index: 4000; }
+  menuitem > menu {
+    position: absolute;
+    pointer-events: none; }
+
+menu {
+  display: flex;
+  flex-direction: column; }
+  menu.topMenu {
+    flex-direction: row; }
+    menu.topMenu > menuitem > a {
+      padding-left: 0; }
+  menu > menuitem {
+    pointer-events: all;
+    opacity: 1; }
+  menu menuitem a {
+    white-space: nowrap;
+    display: block; }
+
+menuitem > menu > menuitem {
+  /* Initially hide the submenu */
+  display: none; }
+
+menuitem:hover > menu {
+  pointer-events: initial; }
+  menuitem:hover > menu > menuitem, menuitem:hover > menu menu:hover > menuitem {
+    /* Show the submenu when its parent is hovered */
+    opacity: 1;
+    display: block; }
+
+menu > menuitem menuitem menu {
+  transform: translateX(100%);
+  top: 0;
+  right: 0;
+  color: #bada55; }
+
+/* User Styles Below Not Required */
+/* User Styles Below Not Required */
+/* User Styles Below Not Required */
+menu a {
+  background: #FFFFFF;
+  color: #000000;
+  min-width: 9rem;
+  transition: background 0.5s, color 0.5s, transform 0.5s;
+  margin: 0;
+  text-align: left;
+  padding-left: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-right: 1rem;
+  border-radius: 3px;
+  position: relative; }
+
+menu a:hover:before {
+  content: "";
+  top: 0;
+  left: 0;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.2);
+  width: 100%;
+  height: 100%; }
+
+menu > menuitem > a + menu:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+  border-top: 10px solid white;
+  left: 12px;
+  top: -27px; }
+  @media only screen and (min-width: 59.375em) {
+    menu > menuitem > a + menu:after {
+      top: -40px; } }
+
+.navigationList menu > menuitem > a + menu:after {
+  top: 6px; }
+  @media only screen and (min-width: 59.375em) {
+    .navigationList menu > menuitem > a + menu:after {
+      top: -40px; } }
+
+menuitem > menu > menuitem > a + menu:after {
+  content: "";
+  position: absolute;
+  border: 10px solid transparent;
+  border-left: 10px solid white;
+  top: 20px;
+  left: -180px;
+  transition: opacity 0.6, transform 0s; }
+
+.navigationList menu > menuitem > menu {
+  margin-top: -4rem; }
+  @media only screen and (min-width: 59.375em) {
+    .navigationList menu > menuitem > menu {
+      margin-top: 0; } }
+
+menu > menuitem > menu > menuitem {
+  transition: transform 0.6s, opacity 0.6s;
+  transform: translateY(150%);
+  opacity: 0; }
+
+menu > menuitem:hover > menu > menuitem,
+menu > menuitem.hover > menu > menuitem {
+  transform: translateY(0%);
+  opacity: 1; }
+
+.navigationList menu > menuitem:hover > menu > menuitem,
+.navigationList menu > menuitem.hover > menu > menuitem {
+  /*For a vertical menu (mobile) - move to the right of the menu list */
+  transform: translateX(12.5rem); }
+  @media only screen and (min-width: 59.375em) {
+    .navigationList menu > menuitem:hover > menu > menuitem,
+    .navigationList menu > menuitem.hover > menu > menuitem {
+      /*Desktop is a horizontal menu - so do not shift to the right */
+      transform: translateX(0%); } }
+
+menuitem > menu > menuitem > menu > menuitem {
+  transition: transform 0.6s, opacity 0.6s;
+  transform: translateX(195px) translateY(0%);
+  opacity: 0; }
+
+menuitem > menu > menuitem:hover > menu > menuitem,
+menuitem > menu > menuitem.hover > menu > menuitem {
+  transform: translateX(0) translateY(0%);
+  opacity: 1; }
+
+/*===== END Dropdown Menu   ===== */
+/*~~~~~~~  Card  ~~~~~~~ */
+.productCard {
+  /*2 cards per row = 50% */
+  width: calc(50% - 20px);
+  display: flex;
+  flex-direction: column;
+  position: relative; }
+  @media only screen and (min-width: 59.375em) {
+    .productCard {
+      /*3 cards per row = 33% */
+      width: calc(33% - 20px); } }
+  @media only screen and (min-width: 75em) {
+    .productCard {
+      /*4 cards per row = 25% */
+      width: calc(25% - 20px); }
+      .productCardBody {
+        flex: auto 1 1; }
+        .productCardBody p {
+          margin-bottom: 0; }
+      .productCardFooter {
+        background-color: #FFFFFF;
+        padding-top: 0;
+        text-align: left; }
+        .productCardFooter p {
+          margin-bottom: 0;
+          font-weight: 700;
+          color: #000000;
+          opacity: 0.7; }
+        .productCardFooter small {
+          color: #999999; } }
+  .productCardCategory {
+    color: grey;
+    font-size: 1.2rem;
+    font-family: Gabriela; }
+    .productCardCategory a {
+      text-decoration-color: #999999;
+      text-decoration-line: underline;
+      text-decoration-style: solid;
+      text-decoration-thickness: auto; }
+      .productCardCategory a:visited, .productCardCategory a:link {
+        color: #999999; }
+  .productCard img {
+    width: 100%; }
+
+/*Added a <hr> after every 'card' */
+/*Shows as a vertical line between the cards */
+/*use this to set every nth hr to be horizontal */
+.breaker {
+  display: none;
+  margin-top: 2rem;
+  margin-bottom: 5rem; }
+  .breaker:nth-child(4n) {
+    /* On mobile 2 cards per row then show the hr */
+    display: block;
+    width: 100%; }
+  @media only screen and (min-width: 59.375em) {
+    .breaker:nth-child(4n) {
+      /* First hide the hrs for the mobile screen size */
+      display: none;
+      width: initial; }
+    .breaker:nth-child(6n) {
+      /* On desktop 3 cards per row then show the hr */
+      display: block;
+      width: 100%; } }
+  @media only screen and (min-width: 75em) {
+    .breaker:nth-child(4n) {
+      /* First hide the hrs for the mobile screen size */
+      display: none;
+      width: initial; }
+    .breaker:nth-child(6n) {
+      /* then hide the hrs for the desktop screen size */
+      display: none;
+      width: initial; }
+    .breaker:nth-child(8n) {
+      /* On large screen 4 cards per row then show the hr */
+      width: 100%;
+      display: block; } }
+
+/*===== END  Card  ===== */
+/*~~~~~~~  Badge  ~~~~~~~ */
+.categoryBadge {
+  text-decoration: none;
+  text-align: center; }
+  .categoryBadge span {
+    color: #000000;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border: 1px solid #333333;
+    border-radius: 0;
+    font-weight: 700;
+    font-size: 75%;
+    tranistion: all 0.15s ease-in-out; }
+    .categoryBadge span:hover {
+      background-color: #333333;
+      color: #FFFFFF; }
+
+/*===== END  Badge  ===== */
+/*~~~~~~~  Sort  ~~~~~~~ */
+.sortRow {
+  margin-top: 0.5rem;
+  margin-bottom: 0.25rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin: 2rem 0; }
+  @media only screen and (min-width: 59.375em) {
+    .sortRow {
+      flex-direction: row-reverse; } }
+
+/*===== END  Sort  ===== */
+
+/*# sourceMappingURL=main.css.map */

@@ -36,8 +36,6 @@ class AllProducts(TemplateView):
                     # dataset returned from the database.
                     # Using the Lower() function on the original "name" field
                     products = products.annotate(lower_name=Lower('name'))
-                    # set the sortKey to lower_name
-                    sortkey = 'lower_name'
                     # The reason for copying the sort parameter 
                     # into a new variable called sortkey,
                     # Is because now we've preserved the original field
@@ -46,6 +44,12 @@ class AllProducts(TemplateView):
                     # ("lower_name") in the sort key variable.
                     # If we had just renamed sort itself to "lower_name"
                     # we would have lost the original field ("name")
+
+                    # set the sortKey to lower_name
+                    sortkey = 'lower_name'
+                
+                if sortkey == 'category':
+                    sortkey == 'category__name'
                 
                 if 'direction' in request.GET:
                     direction = request.GET['direction']
