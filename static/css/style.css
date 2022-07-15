@@ -674,6 +674,43 @@ body {
   }
 }
 /*===== END  Product Detail Page  ===== */
+/*~~~~~~~  Bag  ~~~~~~~ */
+.containerBag {
+  width: 100%;
+  padding: 0 2rem;
+  margin: 164px auto 1rem auto;
+}
+@media only screen and (min-width: 75em) {
+  .containerBag {
+    max-width: 80%;
+  }
+}
+.containerBag hr {
+  margin: 1.25rem 0;
+}
+.containerBag .bagTitle {
+  text-transform: uppercase;
+  margin-bottom: 2rem;
+  font-size: 2.75rem;
+}
+.containerBag .bagItems p {
+  font-size: 1.75rem;
+  font-weight: 300;
+  margin-bottom: 4rem;
+}
+.containerBag .bagItemsShoppingButton {
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
+  color: #000000;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+}
+.containerBag .bagItemsShoppingButton:hover, .containerBag .bagItemsShoppingButton:active, .containerBag .bagItemsShoppingButton:focus {
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+/*===== END  Bag  ===== */
 /*~~~~~~~  Links  ~~~~~~~ */
 .linkWrapper {
   -webkit-box-orient: vertical;

@@ -1,0 +1,36 @@
+/*~~~~~~~  Bag  ~~~~~~~*/
+
+.containerBag
+	width: 100%
+	padding: 0 2rem
+	margin: 164px auto 1rem auto
+	@include respond(XL)
+		max-width: 80%
+
+	hr
+		margin: 1.25rem 0
+
+	.bag
+		&Title
+			text-transform: uppercase
+			margin-bottom: 2rem
+			font-size: 2.75rem
+
+		&Items
+			p
+				font:
+					size: 1.75rem
+					weight: $thinWt
+				margin-bottom: 4rem
+
+			&ShoppingButton
+				background-color: $white
+				border: 1px solid $black
+				color: $black
+				text-transform: uppercase
+				padding: .75rem 1.5rem
+				&:hover, &:active, &:focus
+					color: $white
+					background-color: $black
+
+/*===== END  Bag  =====*/

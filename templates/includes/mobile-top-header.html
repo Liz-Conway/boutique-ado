@@ -32,7 +32,7 @@
 		<li>
 		    <menu class="topMenu">
 			    <menuitem>
-				    <a class="navLink mobileOnly mobileHead" href="#" id="userOptions" aria-haspopup="true" aria-expanded="false">
+				    <a class="navLink mobileOnly mobileHead" id="userOptions" aria-haspopup="true" aria-expanded="false">
 			            <div><i class="fas fa-user fa-lg"></i></div>
 			            <p>My Account</p>
 				    </a>
@@ -63,14 +63,14 @@
 		
 		</li>
 		<li>
-		    <a class="{% if grand_total %}grandTotal{% endif %} navLink mobileOnly" href="">
+		    <a class="{% if grand_total %}grandTotal{% endif %} navLink mobileOnly" href="{% url 'bag' %}">
 		        <div class="bagSection mobileHead">
 		            <div><i class="fas fa-shopping-bag fa-lg"></i></div>
 		            <p class="my-0">
 		                {% if grand_total %}
-		                    ${{ grand_total|floatformat:2 }}
+		                    €{{ grand_total|floatformat:2 }}
 		                {% else %}
-		                    $0.00
+		                    €0.00
 		                {% endif %}
 		            </p>
 		        </div>

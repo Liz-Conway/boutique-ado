@@ -87,14 +87,14 @@
 	                    </div>
                     </li>
     				<li>
-    		            <a class="{% if grand_total %}grandTotal{% endif %} navLink" href="">
+    		            <a class="{% if grand_total %}grandTotal{% endif %} navLink" href="{% url 'bag' %}">
                             <div class="bagSection">
                                 <div><i class="fas fa-shopping-bag fa-lg accountIcon"></i></div>
                                 <p class="my-0">
                                     {% if grand_total %}
-                                        ${{ grand_total|floatformat:2 }}
+                                        €{{ grand_total|floatformat:2 }}
                                     {% else %}
-                                        $0.00
+                                        €0.00
                                     {% endif %}
                                 </p>
                             </div>
