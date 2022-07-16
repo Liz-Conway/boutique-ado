@@ -1,0 +1,26 @@
+.table
+    &RoundedResponsive
+        .border-radius: .5rem
+        display: none
+        width: 100%
+        overflow-x: auto
+        @include respond(desktop)
+            display: block
+
+    &Bag
+        width: 100%
+        margin-bottom: 1.5rem
+        border-collapse: collapse
+        th
+            padding: 0 5px
+            text-align: left
+        td
+            padding: 5px
+            vertical-align: top
+        tr
+            border-bottom: 3rem solid transparent
+
+        &Totals
+            text-align: right
+            .btnShopping
+                margin-right: 2px

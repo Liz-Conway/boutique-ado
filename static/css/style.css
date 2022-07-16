@@ -947,16 +947,27 @@ body {
           flex: 3;
 }
 
-.keepShoppingButton {
+.btnShopping {
   background-color: #FFFFFF;
   border: 1px solid #000000;
   color: #000000;
   text-transform: uppercase;
   padding: 0.75rem 1.5rem;
 }
-.keepShoppingButton:hover, .keepShoppingButton:active, .keepShoppingButton:focus {
+.btnShopping:hover, .btnShopping:active, .btnShopping:focus {
   color: #FFFFFF;
   background-color: #000000;
+}
+.btnShoppingInverse {
+  background-color: #000000;
+  border: 1px solid #000000;
+  color: #FFFFFF;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+}
+.btnShoppingInverse:hover, .btnShoppingInverse:active, .btnShoppingInverse:focus {
+  color: #000000;
+  background-color: #FFFFFF;
 }
 
 .shopButtons {
@@ -1356,5 +1367,38 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 }
 
 /*===== END  Sort  ===== */
+.tableRoundedResponsive {
+  .border-radius: 0.5rem;
+  display: none;
+  width: 100%;
+  overflow-x: auto;
+}
+@media only screen and (min-width: 59.375em) {
+  .tableRoundedResponsive {
+    display: block;
+  }
+}
+.tableBag {
+  width: 100%;
+  margin-bottom: 1.5rem;
+  border-collapse: collapse;
+}
+.tableBag th {
+  padding: 0 5px;
+  text-align: left;
+}
+.tableBag td {
+  padding: 5px;
+  vertical-align: top;
+}
+.tableBag tr {
+  border-bottom: 3rem solid transparent;
+}
+.tableBagTotals {
+  text-align: right;
+}
+.tableBagTotals .btnShopping {
+  margin-right: 2px;
+}
 
 /*# sourceMappingURL=style.css.map */

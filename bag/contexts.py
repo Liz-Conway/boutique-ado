@@ -53,7 +53,7 @@ def bag_contents(request):
         bag_items.append({
             'product_id': product_id,
             'quantity': quantity,
-            'product': product
+            'product': product,
         })
         
     

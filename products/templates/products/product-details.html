@@ -54,13 +54,13 @@
 						</div>
 					</div>
 					<div class="shopButtons">
-						<a href="{% url 'products' %}" class="keepShoppingButton">
+						<a href="{% url 'products' %}" class="btnShopping">
 							<span class="icon">
 								<i class="fas fa-chevron-left"></i>
 							</span>
 							Keep Shopping
 						</a>
-						<input type="submit" value="Add to Bag" class="btnBlack">
+						<input type="submit" value="Add to Bag" class="btnShoppingInverse">
 					</div>
 					<input type="hidden" name="redirectUrl" value="{{ request.path }}">
 				</form>
