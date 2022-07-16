@@ -43,6 +43,27 @@
 					{% endif %}
 				</div>
 				<div>{{ product.description }}</div>
+				<!-- action URL submits to the 'add_to_bag' URL, including the product id the user is adding. -->
+				<form class="productCardForm" method="POST" action="{% url 'add_to_bag' product.id %}">
+					{% csrf_token %}
+					<div class="productQuantity">
+						<p><strong>Quantity:</strong></p>
+						<div class="productQuantityInput">
+							<input type="number" name="quantity" value="1" min="1" max="99" 
+								data-itemId="{{ product.id }}" id="idQty{{ product.id }}">
+						</div>
+					</div>
+					<div class="shopButtons">
+						<a href="{% url 'products' %}" class="keepShoppingButton">
+							<span class="icon">
+								<i class="fas fa-chevron-left"></i>
+							</span>
+							Keep Shopping
+						</a>
+						<input type="submit" value="Add to Bag" class="btnBlack">
+					</div>
+					<input type="hidden" name="redirectUrl" value="{{ request.path }}">
+				</form>
 			</div>
 		</div>
 	</div>

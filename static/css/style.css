@@ -634,7 +634,7 @@ body {
 /*~~~~~~~  Product Detail Page  ~~~~~~~ */
 @media only screen and (min-width: 59.375em) {
   .productWrapper {
-    margin-top: 12rem;
+    margin-top: 16rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -697,17 +697,6 @@ body {
   font-size: 1.75rem;
   font-weight: 300;
   margin-bottom: 4rem;
-}
-.containerBag .bagItemsShoppingButton {
-  background-color: #FFFFFF;
-  border: 1px solid #000000;
-  color: #000000;
-  text-transform: uppercase;
-  padding: 0.75rem 1.5rem;
-}
-.containerBag .bagItemsShoppingButton:hover, .containerBag .bagItemsShoppingButton:active, .containerBag .bagItemsShoppingButton:focus {
-  color: #FFFFFF;
-  background-color: #000000;
 }
 
 /*===== END  Bag  ===== */
@@ -948,6 +937,36 @@ body {
   -webkit-box-flex: 3;
       -ms-flex: 3;
           flex: 3;
+}
+
+.keepShoppingButton {
+  background-color: #FFFFFF;
+  border: 1px solid #000000;
+  color: #000000;
+  text-transform: uppercase;
+  padding: 0.75rem 1.5rem;
+}
+.keepShoppingButton:hover, .keepShoppingButton:active, .keepShoppingButton:focus {
+  color: #FFFFFF;
+  background-color: #000000;
+}
+
+.shopButtons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  margin-top: 4rem;
+}
+.shopButtons input {
+  text-transform: uppercase;
+  margin-left: 1rem;
 }
 
 /*===== END  Button  ===== */
