@@ -821,6 +821,14 @@ body {
   width: fit-content;
 }
 
+.grandTotal .accountIcon {
+  color: #FFC14B;
+}
+
+.grandTotal {
+  color: #FFC14B;
+}
+
 /*===== END  Icons & Logos  ===== */
 /*~~~~~~~  Button  ~~~~~~~ */
 .btn {

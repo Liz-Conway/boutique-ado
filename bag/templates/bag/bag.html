@@ -16,7 +16,9 @@
 		<hr>
 		<div class="bagItems">
 			{% if bag_items %}
-				<div class="tableRoundedResponsive"></div>
+				<div class="tableRoundedResponsive">
+					{{ bag_items }}
+				</div>
 			{% else %}
 				<p>Your bag is empty.</p>
 				<a href="{% url 'products' %}" class="keepShoppingButton">
