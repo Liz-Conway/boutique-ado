@@ -673,6 +673,14 @@ body {
     margin-left: 15%;
   }
 }
+.productDetailsDescription {
+  font-size: 1.4rem;
+}
+
+#idProductSize {
+  width: 50%;
+}
+
 /*===== END  Product Detail Page  ===== */
 /*~~~~~~~  Bag  ~~~~~~~ */
 .containerBag {

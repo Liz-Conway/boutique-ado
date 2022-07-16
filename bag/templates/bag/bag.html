@@ -33,6 +33,7 @@
 									</td>
 									<td>
 										<p><strong>{{ item.product.name }}</strong></p>
+										<p><strong>Size :  {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</strong></p>
 										<p>SKU :  {{ item.product.sku|upper }}</p>
 									</td>
 									<td>

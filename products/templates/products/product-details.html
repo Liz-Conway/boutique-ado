@@ -42,10 +42,21 @@
 						<small>No rating</small>
 					{% endif %}
 				</div>
-				<div>{{ product.description }}</div>
+				<div class="productDetailsDescription">{{ product.description }}</div>
 				<!-- action URL submits to the 'add_to_bag' URL, including the product id the user is adding. -->
 				<form class="productCardForm" method="POST" action="{% url 'add_to_bag' product.id %}">
 					{% csrf_token %}
+					{% with product.has_sizes as size %}
+					{% if size %}
+						<p><strong>Size :</strong></p>
+						<select name="productSize" id="idProductSize">
+							<option value="xs">XS</option>
+							<option value="s">S</option>
+							<option value="m" selected>M</option>
+							<option value="l">L</option>
+							<option value="xl">XL</option>
+						</select>
+					{% endif %}
 					<div class="productQuantity">
 						<p><strong>Quantity:</strong></p>
 						<div class="productQuantityInput">
@@ -53,7 +64,7 @@
 								data-itemId="{{ product.id }}" id="idQty{{ product.id }}">
 						</div>
 					</div>
-					<div class="shopButtons">
+					<div class="shopButtons  {% if size %}hasSize{% endif %}">
 						<a href="{% url 'products' %}" class="btnShopping">
 							<span class="icon">
 								<i class="fas fa-chevron-left"></i>
@@ -61,6 +72,7 @@
 							Keep Shopping
 						</a>
 						<input type="submit" value="Add to Bag" class="btnShoppingInverse">
+					{% endwith %}
 					</div>
 					<input type="hidden" name="redirectUrl" value="{{ request.path }}">
 				</form>
