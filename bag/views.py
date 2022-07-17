@@ -26,6 +26,11 @@ class AddToBag(TemplateView):
         # where to redirect once the process here is finished.
         redirect_url = request.POST.get('redirectUrl')
         
+        size = None
+        # If product size is in request.post we'll set it equal to that.
+        if 'productSize' in request.POST:
+            size = request.POST['productSize']
+        
         # Every request-response cycle between the server and the client,
         # (In our case between the django view on the server-side
         #  and our form making the request on the client-side.)
@@ -47,17 +52,41 @@ class AddToBag(TemplateView):
         # and if not this code will create one
         bag = request.session.get('bag', {})
         
-        if product_id in list(bag.keys()):
-            # If the product is already in the bag
-            # (if there's already a key in the bag dictionary
-            #  matching this product id)
-            # Increment its quantity
-            bag[product_id] += quantity
+        if size:
+            # Use a dictionary with a key of items_by_size.
+            # Since we may have multiple items with this product id
+            # but different sizes.
+            # This allows us to structure the bags
+            # so we have a single product id for each item
+            # but still track multiple sizes
+            if product_id in list(bag.keys()):
+                # If the item is already in the bag
+                
+                # If another item of the same id and same size already exists
+                if size in bag[product_id]['products_by_size'].keys():
+                    # Increment the quantity for that size
+                    bag[product_id]['products_by_size'][size] += quantity
+                else:
+                    # Product already exists, but this is a new size for it
+                    # So set the 'product by size' to this order quantity
+                    bag[product_id]['products_by_size'][size] = quantity
+            else:
+                # Product is not in the bag
+                # Set the 'product by size' to the order quantity
+                bag[product_id] = {'products_by_size': {size: quantity}}
         else:
-            # This product does not exist in the shopping bag.
-            # Create a key for the product in our dictionary,
-            # and set its value to the quantity ordered.
-            bag[product_id] = quantity
+            # No sizes so just use the product ID
+            if product_id in list(bag.keys()):
+                # If the product is already in the bag
+                # (if there's already a key in the bag dictionary
+                #  matching this product id)
+                # Increment its quantity
+                bag[product_id] += quantity
+            else:
+                # This product does not exist in the shopping bag.
+                # Create a key for the product in our dictionary,
+                # and set its value to the quantity ordered.
+                bag[product_id] = quantity
             
         # Put the bag variable into the session.
         #  Which itself is just a python dictionary.

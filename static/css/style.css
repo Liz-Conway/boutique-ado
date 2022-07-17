@@ -92,6 +92,10 @@ body {
   font-size: 2rem;
 }
 
+.small {
+  font-size: 1rem;
+}
+
 /*===== END  Typography  ===== */
 /*~~~~~~~  Reset  ~~~~~~~ */
 /* Josh's Custom CSS Reset
@@ -705,6 +709,9 @@ body {
   font-size: 1.75rem;
   font-weight: 300;
   margin-bottom: 4rem;
+}
+.containerBag .bagItems p.small {
+  font-size: 1.3rem;
 }
 
 /*===== END  Bag  ===== */

@@ -31,31 +31,67 @@ def bag_contents(request):
     # And elsewhere throughout the site.
     
     # First variable is the key from the bag item (we call it 'product_id')
-    # Second variable is the value of that key (we are calling it 'quantity')
-    for product_id, quantity in bag.items():
-        # For each product id and quantity in bag.items.
+    # Second variable is the value of that key (we are calling it 'product_data')
+    # In the case of an item with no sizes,
+    # the product data will just be the quantity.
+    # But in the case of a product that has sizes,
+    # the product data will be a dictionary of all the products by size.
+    for product_id, product_data in bag.items():
+        # For each product id and quantity/data in bag.items
 
-        # First get the product.
-        product = get_object_or_404(Product, pk=product_id)
-        
-        # Add quantity times the price to the total
-        total += quantity * product.price
-        
-        # Increment the product count by the quantity.
-        product_count += quantity
-        
-        # Add a dictionary to the list of bag items
-        #  containing not only the id and the quantity,
-        # but also the product object itself.
-        # That will give us access to all the other fields,
-        #  such as the product image and so on,
-        # when iterating through the bag items in our templates.
-        bag_items.append({
-            'product_id': product_id,
-            'quantity': quantity,
-            'product': product,
-        })
-        
+        # Execute this code if the item has no sizes.
+        # Check whether or not the product data is an integer.
+        # If it's an integer -> we know the product data is just the quantity.
+        if isinstance(product_data, int):
+            # First get the product.
+            product = get_object_or_404(Product, pk=product_id)
+            
+            # Add quantity (in product_data) times the price to the total
+            total += product_data * product.price
+            
+            # Increment the product count by the quantity (in product_data)
+            product_count += product_data
+            
+            # Add a dictionary to the list of bag items
+            #  containing not only the id and the quantity (in product_data),
+            # but also the product object itself.
+            # That will give us access to all the other fields,
+            #  such as the product image and so on,
+            # when iterating through the bag items in our templates.
+            bag_items.append({
+                'product_id': product_id,
+                'quantity': product_data,
+                'product': product,
+            })
+        else:
+            # product data is not an integer -> Must have sizes
+            
+            # First get the product.
+            product = get_object_or_404(Product, pk=product_id)
+            
+            # Iterate through the inner dictionary of products_by_size
+            # incrementing the product count and total accordingly.
+            for size, quantity in product_data['products_by_size'].items():
+                # Add quantity times the price to the total
+                total += quantity * product.price
+                
+                # Increment the product count by the quantity.
+                product_count += quantity
+                
+                # Add a dictionary to the list of bag items
+                #  containing not only the id and the quantity,
+                # but also the product object itself and the size.
+                # That will give us access to all the other fields,
+                #  such as the product image and so on,
+                # when iterating through the bag items in our templates.
+                bag_items.append({
+                    'product_id': product_id,
+                    'quantity': product_data,
+                    'product': product,
+                    'size': size,
+                })
+                
+
     
     # In order to entice customers to purchase more.
     # We're going to give them free delivery if they spend more than the amount
