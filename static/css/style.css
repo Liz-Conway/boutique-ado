@@ -1003,6 +1003,21 @@ body {
   margin-left: 1rem;
 }
 
+button[class$="crementQty"] {
+  background-color: #000000;
+  color: #FFFFFF;
+  cursor: pointer;
+  padding: 0.25rem 0.5rem;
+}
+
+.incrementQty {
+  margin-left: -0.5rem;
+}
+
+.decrementQty {
+  margin-right: -0.5rem;
+}
+
 /*===== END  Button  ===== */
 /*~~~~~~~  Search  ~~~~~~~ */
 .linkSearch {
