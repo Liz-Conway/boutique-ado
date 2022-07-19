@@ -706,12 +706,33 @@ body {
   font-size: 2.75rem;
 }
 .containerBag .bagItems p {
-  font-size: 1.75rem;
+  font-size: 1.25rem;
   font-weight: 300;
   margin-bottom: 4rem;
 }
 .containerBag .bagItems p.small {
   font-size: 1.3rem;
+}
+
+.editLinks {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.editLinks a {
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.updateLink {
+  color: #1171BC;
+}
+
+.removeLink {
+  color: #E84610;
 }
 
 /*===== END  Bag  ===== */
@@ -1016,6 +1037,10 @@ button[class$="crementQty"] {
 
 .decrementQty {
   margin-right: -0.5rem;
+}
+
+.updateForm button[class$="crementQty"] {
+  font-size: 1rem;
 }
 
 /*===== END  Button  ===== */
@@ -1430,5 +1455,19 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 .tableBagTotals .btnShopping {
   margin-right: 2px;
 }
+
+/*~~~~~~~  Form  ~~~~~~~ */
+.updateForm {
+  width: 20rem;
+}
+.updateForm .quantityBox {
+  width: 15rem;
+  font-size: 1rem;
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  line-height: 1.5;
+}
+
+/*===== END  Form  ===== */
 
 /*# sourceMappingURL=style.css.map */

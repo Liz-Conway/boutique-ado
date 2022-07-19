@@ -86,7 +86,7 @@ def bag_contents(request):
                 # when iterating through the bag items in our templates.
                 bag_items.append({
                     'product_id': product_id,
-                    'quantity': product_data,
+                    'quantity': quantity,
                     'product': product,
                     'size': size,
                 })

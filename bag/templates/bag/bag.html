@@ -40,7 +40,41 @@
 										<p>€{{ item.product.price }}</p>
 									</td>
 									<td>
-										<p>{{ item.quantity }}</p>
+										<form method="POST" action="" class="updateForm">
+											{% csrf_token %}
+												<div class="productQuantityInput">
+													<button class="decrementQty" 
+														data-productID="{{ item.product.id }}" id="decrementQty{{ item.product.id }}">
+														<span>
+															<i class="fas fa-minus fa-sm"></i>
+														</span>
+													</button>
+													<input type="number" name="quantity" value="{{ item.quantity }}" 
+														min="1" max="99" 
+														data-productID="{{ item.product.id }}" id="idQty{{ item.product.id }}" 
+														class="quantityBox inputSmall">
+													<button class="incrementQty" 
+														data-productID="{{ item.product.id }}" id="incrementQty{{ item.product.id }}">
+														<span>
+															<i class="fas fa-plus fa-sm"></i>
+														</span>
+													</button>
+												</div>
+												{% if item.product.has_sizes %}
+													<input type="hidden" name="productSize" value="{{ item.size }}">
+												{% endif %}
+										</form>
+										<!-- Rather than add a submit button. Let's keep the visual impact minimal.
+										Just use a simple link and handle its click event with JavaScript. -->
+										<!-- One for updating the quantity which will submit the form. -->
+										<div class="editLinks">
+											<a class="updateLink"><small>Update</small></a>
+											<!-- And the other for removing the item from the bag entirely. -->
+											<!-- Has a data attribute similar to the data item ID attributes on the buttons,
+											which will be used to discern which specific item the customer wants to remove
+											if there are multiple sizes of this item in the bag -->
+											<a class="removeLink" id="remove{{item.product_id}}" data-size="{{ item.size }}"><small>Remove</small></a>
+										</div>
 									</td>
 									<td>
 										<p>€{{ item.product.price }}</p>
@@ -89,4 +123,9 @@
 			{% endif %}
 		</div>
 	</div>
+{% endblock %}
+
+{% block postloadjs %}
+	{{ block.super }}
+	<script src="{% static 'js/quantity-input.js' %}"></script>
 {% endblock %}
