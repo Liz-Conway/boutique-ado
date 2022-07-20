@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 
 {% block extra_title %}Bag{% endblock %}
 {% block page_header %}
@@ -40,21 +41,21 @@
 										<p>€{{ item.product.price }}</p>
 									</td>
 									<td>
-										<form method="POST" action="" class="updateForm">
+										<form method="POST" action="{% url 'adjust_bag' item.product_id %}" class="updateForm">
 											{% csrf_token %}
 												<div class="productQuantityInput">
 													<button class="decrementQty" 
-														data-productID="{{ item.product.id }}" id="decrementQty{{ item.product.id }}">
+														data-productID="{{ item.product_id }}" id="decrementQty{{ item.product_id }}">
 														<span>
 															<i class="fas fa-minus fa-sm"></i>
 														</span>
 													</button>
 													<input type="number" name="quantity" value="{{ item.quantity }}" 
 														min="1" max="99" 
-														data-productID="{{ item.product.id }}" id="idQty{{ item.product.id }}" 
+														data-productID="{{ item.product_id }}" id="idQty{{ item.product_id }}" 
 														class="quantityBox inputSmall">
 													<button class="incrementQty" 
-														data-productID="{{ item.product.id }}" id="incrementQty{{ item.product.id }}">
+														data-productID="{{ item.product_id }}" id="incrementQty{{ item.product_id }}">
 														<span>
 															<i class="fas fa-plus fa-sm"></i>
 														</span>
@@ -73,11 +74,11 @@
 											<!-- Has a data attribute similar to the data item ID attributes on the buttons,
 											which will be used to discern which specific item the customer wants to remove
 											if there are multiple sizes of this item in the bag -->
-											<a class="removeLink" id="remove{{item.product_id}}" data-size="{{ item.size }}"><small>Remove</small></a>
+											<a class="removeLink" id="remove{{item.product_id}}" data-productSize="{{ item.size }}"><small>Remove</small></a>
 										</div>
 									</td>
 									<td>
-										<p>€{{ item.product.price }}</p>
+										<p>€{{ item.product.price | calculate_subtotal:item.quantity }}</p>
 									</td>
 								</tr>
 							{% endfor %}
@@ -128,4 +129,5 @@
 {% block postloadjs %}
 	{{ block.super }}
 	<script src="{% static 'js/quantity-input.js' %}"></script>
+	<script src="{% static 'js/edit-quantity.js' %}"></script>
 {% endblock %}

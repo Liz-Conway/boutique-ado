@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
+from django.urls.base import reverse
+from django.http.response import HttpResponse
 
 # Create your views here.
 class BagContents(TemplateView):
@@ -94,3 +96,164 @@ class AddToBag(TemplateView):
         
         return redirect(redirect_url)
         
+        
+class AdjustBag(TemplateView):
+    """
+    Adjust the quantity of a specified product to the specified amount
+    """
+    
+    def post(self, request, product_id):
+        
+        # Get the quantity from the form.
+        # Convert it to an integer
+        # since it'll come from the template as a string.
+        quantity = int(request.POST.get('quantity'))
+        
+        # No need for a  redirect URL
+        # Since we alway want to redirect back to the shopping bag page
+        # redirect_url = request.POST.get('redirectUrl')
+        
+        size = None
+        # If product size is in request.post we'll set it equal to that.
+        if 'productSize' in request.POST:
+            size = request.POST['productSize']
+        
+        # Every request-response cycle between the server and the client,
+        # (In our case between the django view on the server-side
+        #  and our form making the request on the client-side.)
+        #  uses a session, to allow information to be stored
+        #  until the client and server are done communicating.
+        # This allows us to store the contents of the shopping bag 
+        # in the HTTP session,
+        #  while the user browses the site and adds items to be purchased.
+        # By storing the shopping bag in the session,
+        # it will persist until the user closes their browser
+        #  so that they can add something to the bag,
+        # then browse to a different part of the site add something else
+        # and so on without losing the contents of their bag.
+        
+        # The variable bag accesses the requests session,
+        # tries to get the bag stored in the session - if it already exists,
+        # and initialises it to an empty dictionary {} if it doesn't.
+        # First check to see if there's a bag variable in the session,
+        # and if not this code will create one
+        bag = request.session.get('bag', {})
+        
+        # Basic idea :
+        # If quantity > zero Set the product's quantity accordingly
+        #  Otherwise we'll just remove the product.
+        if size:
+            # Use a dictionary with a key of products_by_size.
+            # Since we may have multiple items with this product id
+            # but different sizes.
+            # This allows us to structure the bags
+            # so we have a single product id for each item
+            # but still track multiple sizes
+            
+            # Drill into the products_by_size dictionary,
+            # find that specific size
+            if quantity > 0:
+                # Set the product's size quantity to the updated value
+                bag[product_id]['products_by_size'][size] = quantity
+            else:
+                # Remove the product's entry for the specific size
+                del bag[product_id]['products_by_size'][size]
+                # If updating with a quantity of zero
+                # I.E., the products_by_size dictionary is now empty
+                # it will evaluate to false.
+                if not bag[product_id]['products_by_size']:
+                    # Remove the entire product id
+                    # so we don't end up with an empty products_by_size 
+                    # dictionary hanging around
+                    bag.pop(product_id)
+        else:
+            # No sizes so just use the product ID
+            if quantity > 0:
+                # Set the product's quantity to the updated value
+                bag[product_id] = quantity
+            else:
+                # Remove the product entirely by using the pop() function
+                bag.pop(product_id)
+            
+        # Put the bag variable into the session.
+        #  Which itself is just a python dictionary.
+        request.session['bag'] = bag
+        
+        # Redirect back to the view bag URL
+        return redirect(reverse('bag'))
+
+
+class RemoveFromBag(TemplateView):
+    """
+    Remove the item from the shopping bag
+    """
+    
+    def post(self, request, product_id):
+        
+        # No need for a  redirect URL
+        # Since we alway want to redirect back to the shopping bag page
+        # redirect_url = request.POST.get('redirectUrl')
+        
+        # Wrap this entire block of code in a try block.
+        try:
+            size = None
+            # If product size is in request.post we'll set it equal to that.
+            if 'productSize' in request.POST:
+                size = request.POST['productSize']
+            
+            # Every request-response cycle between the server and the client,
+            # (In our case between the django view on the server-side
+            #  and our form making the request on the client-side.)
+            #  uses a session, to allow information to be stored
+            #  until the client and server are done communicating.
+            # This allows us to store the contents of the shopping bag 
+            # in the HTTP session,
+            #  while the user browses the site and adds items to be purchased.
+            # By storing the shopping bag in the session,
+            # it will persist until the user closes their browser
+            #  so that they can add something to the bag,
+            # then browse to a different part of the site add something else
+            # and so on without losing the contents of their bag.
+            
+            # The variable bag accesses the requests session,
+            # tries to get the bag stored in the session - if it already exists,
+            # and initialises it to an empty dictionary {} if it doesn't.
+            # First check to see if there's a bag variable in the session,
+            # and if not this code will create one
+            bag = request.session.get('bag', {})
+            
+            if size:
+                # Use a dictionary with a key of products_by_size.
+                # Since we may have multiple items with this product id
+                # but different sizes.
+                # This allows us to structure the bags
+                # so we have a single product id for each item
+                # but still track multiple sizes
+                
+                # If size is in request.POST. 
+                # Delete that size key in the products_by_size dictionary
+                del bag[product_id]['products_by_size'][size]
+                # If that's the only size they had in the bag.
+                # I.E., if the products_by_size dictionary is now empty
+                # it will evaluate to false.
+                if not bag[product_id]['products_by_size']:
+                    # Remove the entire product id
+                    # so we don't end up with an empty products_by_size 
+                    # dictionary hanging around
+                    bag.pop(product_id)
+            else:
+                # There is no size
+                # Removing the product is as simple as popping it out of the bag
+                bag.pop(product_id)
+                
+            # Put the bag variable into the session.
+            #  Which itself is just a python dictionary.
+            request.session['bag'] = bag
+            
+            # Since this view will be posted to from a JavaScript function.
+            # Return a 200 HTTP response.
+            # Implying that the product was successfully removed
+            return HttpResponse(status=200)
+        # Catch any exceptions that happen in order to return a 500 server error
+        except Exception as ex:
+            return HttpResponse(status=500)

@@ -1030,6 +1030,10 @@ button[class$="crementQty"] {
   cursor: pointer;
   padding: 0.25rem 0.5rem;
 }
+button[class$="crementQty"]:disabled {
+  background-color: #808080;
+  cursor: not-allowed;
+}
 
 .incrementQty {
   margin-left: -0.5rem;
