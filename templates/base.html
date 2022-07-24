@@ -114,7 +114,30 @@
     </header>
 
     {% if messages %}
-        <div class="message-container"></div>
+        <div class="messageContainer">
+        	{% for message in messages %}
+        	<!-- Djanggo messages have levels which are classifiers 
+			like debug, info, error and so on for different message types. -->
+			 <!-- Choose which of our includes we want to render based on the message level. -->
+        		{% with message.level as level %}
+        			<!-- A message of level 40 is an error -->
+        			<strong>Level :  {{ level }}</strong>
+        			<strong>Level :  {{ level_tag }}</strong>
+        			{% if level == 40 %}
+		        		{% include "includes/toasts/toast-error.html" %}
+        			<!-- A message of level 30 is an warning -->
+        			{% elif level == 30 %}
+		        		{% include "includes/toasts/toast-warning.html" %}
+        			<!-- A message of level 25 is a success message -->
+        			{% elif level == 25 %}
+		        		{% include "includes/toasts/toast-success.html" %}
+		        	<!-- Use info toast for everything else -->
+        			{% else %}
+		        		{% include "includes/toasts/toast-info.html" %}
+        			{% endif %}
+        		{% endwith %}
+        	{% endfor %}
+        </div>
     {% endif %}
 
     {% block page_header %}
@@ -124,6 +147,12 @@
     {% endblock %}
 
     {% block postloadjs %}
+    <!-- This  explains why we've been including block.super in
+	our templates when overriding the post loadjs block.
+	By doing that we ensure that any JavaScript we've written 
+	in the templates that extend this one
+	Won't overwrite this call -->
+    	<script src="{% static 'js/toast.js' %}"></script>
     {% endblock %}
 
     

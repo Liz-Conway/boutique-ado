@@ -594,6 +594,13 @@ body {
   z-index: -1;
 }
 
+.messageContainer {
+  position: fixed;
+  top: 72px;
+  right: 15px;
+  z-index: 9999;
+}
+
 /*===== END  Grid  ===== */
 /*~~~~~~~  Products Page  ~~~~~~~ */
 .productTitle {
@@ -1473,5 +1480,109 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 }
 
 /*===== END  Form  ===== */
+.toast {
+  min-width: 250px;
+  max-width: 350px;
+  background-color: ghostwhite;
+  color: #333;
+  text-align: center;
+  border-radius: 2px;
+  position: fixed;
+  z-index: 1;
+  top: 30px;
+  right: 30px;
+  font-size: 17px;
+  overflow: visible;
+}
+.toast button.close {
+  margin-left: auto;
+  background-color: ghostwhite;
+  border: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.toastTitle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  padding: 5px 8px;
+}
+.toastCapper {
+  height: 2px;
+}
+.toastCapperSuccess {
+  background-color: green;
+}
+.toastCapperError {
+  background-color: #E84610;
+}
+.toastCapperWarning {
+  background-color: orange;
+}
+.toastCapperInfo {
+  background-color: #1171BC;
+}
+.toastBody {
+  padding: 10px 20px;
+}
+.toast.show {
+  visibility: visible;
+  -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+  animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+
+@-webkit-keyframes {
+  fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
+}
+@keyframes {
+  fadein {
+    from {
+      bottom: 0;
+      opacity: 0;
+    }
+    to {
+      bottom: 30px;
+      opacity: 1;
+    }
+  }
+}
+@-webkit-keyframes {
+  fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+}
+@keyframes {
+  fadeout {
+    from {
+      bottom: 30px;
+      opacity: 1;
+    }
+    to {
+      bottom: 0;
+      opacity: 0;
+    }
+  }
+}
 
 /*# sourceMappingURL=style.css.map */

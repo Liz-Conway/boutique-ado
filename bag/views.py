@@ -2,6 +2,8 @@ from django.shortcuts import render, redirect
 from django.views.generic.base import TemplateView
 from django.urls.base import reverse
 from django.http.response import HttpResponse
+from products.models import Product
+from django.contrib import messages
 
 # Create your views here.
 class BagContents(TemplateView):
@@ -19,6 +21,7 @@ class AddToBag(TemplateView):
     
     def post(self, request, product_id):
         
+        product = Product.objects.get(pk=product_id)
         # Get the quantity from the form.
         # Convert it to an integer
         # since it'll come from the template as a string.
@@ -89,6 +92,7 @@ class AddToBag(TemplateView):
                 # Create a key for the product in our dictionary,
                 # and set its value to the quantity ordered.
                 bag[product_id] = quantity
+                messages.success(request, f'Added {product.name} to your bag')
             
         # Put the bag variable into the session.
         #  Which itself is just a python dictionary.
