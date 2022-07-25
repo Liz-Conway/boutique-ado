@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic.base import TemplateView
 from django.urls.base import reverse
 from django.http.response import HttpResponse
@@ -21,7 +21,7 @@ class AddToBag(TemplateView):
     
     def post(self, request, product_id):
         
-        product = Product.objects.get(pk=product_id)
+        product = get_object_or_404(Product, pk=product_id)
         # Get the quantity from the form.
         # Convert it to an integer
         # since it'll come from the template as a string.
@@ -41,7 +41,7 @@ class AddToBag(TemplateView):
         #  and our form making the request on the client-side.)
         #  uses a session, to allow information to be stored
         #  until the client and server are done communicating.
-        # This allows us to store the contents of the shopping bag 
+        # This allows us to store the contents of the shopping bag
         # in the HTTP session,
         #  while the user browses the site and adds items to be purchased.
         # By storing the shopping bag in the session,
@@ -67,18 +67,32 @@ class AddToBag(TemplateView):
             if product_id in list(bag.keys()):
                 # If the item is already in the bag
                 
-                # If another item of the same id and same size already exists
+                # If another item of the same id
+                # and same size already exists
                 if size in bag[product_id]['products_by_size'].keys():
                     # Increment the quantity for that size
                     bag[product_id]['products_by_size'][size] += quantity
+                    messages.success(
+                        request,
+                        f'Updated size {size.upper()} {product.name} quantity '\
+                        f'to {bag[product_id]["products_by_size"][size]}'
+                    )
                 else:
                     # Product already exists, but this is a new size for it
                     # So set the 'product by size' to this order quantity
                     bag[product_id]['products_by_size'][size] = quantity
+                    messages.success(
+                        request,
+                        f'Added  {product.name} (size {size.upper()}) to your bag'
+                    )
             else:
                 # Product is not in the bag
                 # Set the 'product by size' to the order quantity
                 bag[product_id] = {'products_by_size': {size: quantity}}
+                messages.success(
+                    request,
+                    f'Added  {product.name} (size {size.upper()}) to your bag'
+                )
         else:
             # No sizes so just use the product ID
             if product_id in list(bag.keys()):
@@ -87,12 +101,19 @@ class AddToBag(TemplateView):
                 #  matching this product id)
                 # Increment its quantity
                 bag[product_id] += quantity
+                messages.success(
+                    request,
+                    f'Updated {product.name} quantity to {bag[product_id]}'
+                )
             else:
                 # This product does not exist in the shopping bag.
                 # Create a key for the product in our dictionary,
                 # and set its value to the quantity ordered.
                 bag[product_id] = quantity
-                messages.success(request, f'Added {product.name} to your bag')
+                messages.success(
+                    request,
+                    f'Added {product.name} to your bag'
+                )
             
         # Put the bag variable into the session.
         #  Which itself is just a python dictionary.
@@ -108,6 +129,7 @@ class AdjustBag(TemplateView):
     
     def post(self, request, product_id):
         
+        product = get_object_or_404(Product, pk=product_id)
         # Get the quantity from the form.
         # Convert it to an integer
         # since it'll come from the template as a string.
@@ -127,7 +149,7 @@ class AdjustBag(TemplateView):
         #  and our form making the request on the client-side.)
         #  uses a session, to allow information to be stored
         #  until the client and server are done communicating.
-        # This allows us to store the contents of the shopping bag 
+        # This allows us to store the contents of the shopping bag
         # in the HTTP session,
         #  while the user browses the site and adds items to be purchased.
         # By storing the shopping bag in the session,
@@ -159,6 +181,11 @@ class AdjustBag(TemplateView):
             if quantity > 0:
                 # Set the product's size quantity to the updated value
                 bag[product_id]['products_by_size'][size] = quantity
+                messages.success(
+                    request,
+                    f'Updated  {product.name} (size {size.upper()}) quantity '\
+                    f'to {bag[product_id]["products_by_size"][size]}'
+                    )
             else:
                 # Remove the product's entry for the specific size
                 del bag[product_id]['products_by_size'][size]
@@ -167,17 +194,29 @@ class AdjustBag(TemplateView):
                 # it will evaluate to false.
                 if not bag[product_id]['products_by_size']:
                     # Remove the entire product id
-                    # so we don't end up with an empty products_by_size 
+                    # so we don't end up with an empty products_by_size
                     # dictionary hanging around
                     bag.pop(product_id)
+                messages.success(
+                    request,
+                    f'Removed  {product.name} (size {size.upper()}) from the bag'
+                )
         else:
             # No sizes so just use the product ID
             if quantity > 0:
                 # Set the product's quantity to the updated value
                 bag[product_id] = quantity
+                messages.success(
+                    request,
+                    f'Updated {product.name} quantity to {bag[product_id]}'
+                )
             else:
                 # Remove the product entirely by using the pop() function
                 bag.pop(product_id)
+                messages.success(
+                    request,
+                    f'Removed {product.name} from your bag'
+                )
             
         # Put the bag variable into the session.
         #  Which itself is just a python dictionary.
@@ -200,6 +239,7 @@ class RemoveFromBag(TemplateView):
         
         # Wrap this entire block of code in a try block.
         try:
+            product = get_object_or_404(Product, pk=product_id)
             size = None
             # If product size is in request.post we'll set it equal to that.
             if 'productSize' in request.POST:
@@ -210,7 +250,7 @@ class RemoveFromBag(TemplateView):
             #  and our form making the request on the client-side.)
             #  uses a session, to allow information to be stored
             #  until the client and server are done communicating.
-            # This allows us to store the contents of the shopping bag 
+            # This allows us to store the contents of the shopping bag
             # in the HTTP session,
             #  while the user browses the site and adds items to be purchased.
             # By storing the shopping bag in the session,
@@ -220,7 +260,7 @@ class RemoveFromBag(TemplateView):
             # and so on without losing the contents of their bag.
             
             # The variable bag accesses the requests session,
-            # tries to get the bag stored in the session - if it already exists,
+            # tries to get the bag stored in the session-if it already exists,
             # and initialises it to an empty dictionary {} if it doesn't.
             # First check to see if there's a bag variable in the session,
             # and if not this code will create one
@@ -245,10 +285,19 @@ class RemoveFromBag(TemplateView):
                     # so we don't end up with an empty products_by_size 
                     # dictionary hanging around
                     bag.pop(product_id)
+                messages.success(
+                    request,
+                    f'Removed {product.name} (size {size.upper()}) from the bag'
+                )
             else:
                 # There is no size
-                # Removing the product is as simple as popping it out of the bag
+                # Removing the product is as simple as
+                # popping it out of the bag
                 bag.pop(product_id)
+                messages.success(
+                    request,
+                    f'Removed {product.name} from your bag'
+                )
                 
             # Put the bag variable into the session.
             #  Which itself is just a python dictionary.
@@ -258,6 +307,8 @@ class RemoveFromBag(TemplateView):
             # Return a 200 HTTP response.
             # Implying that the product was successfully removed
             return HttpResponse(status=200)
-        # Catch any exceptions that happen in order to return a 500 server error
+        # Catch any exceptions that happen
+        # in order to return a 500 server error
         except Exception as ex:
+            messages.error(request, f'Error removing product :  {ex}')
             return HttpResponse(status=500)

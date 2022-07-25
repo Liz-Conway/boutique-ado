@@ -121,8 +121,6 @@
 			 <!-- Choose which of our includes we want to render based on the message level. -->
         		{% with message.level as level %}
         			<!-- A message of level 40 is an error -->
-        			<strong>Level :  {{ level }}</strong>
-        			<strong>Level :  {{ level_tag }}</strong>
         			{% if level == 40 %}
 		        		{% include "includes/toasts/toast-error.html" %}
         			<!-- A message of level 30 is an warning -->

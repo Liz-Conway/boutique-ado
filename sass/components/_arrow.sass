@@ -1,0 +1,76 @@
+/* https://css-tricks.com/snippets/css/css-triangle/ */
+
+.zeroSize
+	width: 0
+	height: 0
+
+.arrowUp
+	@extend .zeroSize
+	border:
+		left: 4px solid transparent
+		right: 4px solid transparent
+		bottom: 10px solid $black
+	position: absolute
+	top: -10px
+	right: 36px
+
+.arrowDown
+	@extend .zeroSize
+	border:
+		left: 20px solid transparent
+		right: 20px solid transparent
+		top: 20px solid $midtone
+
+.arrowRight
+	@extend .zeroSize
+	border:
+		top: 60px solid transparent
+		bottom: 60px solid transparent
+		left: 60px solid $accentLight
+
+.arrowLeft
+	@extend .zeroSize
+	border:
+		top: 10px solid transparent
+		bottom: 10px solid transparent
+		right: 10px solid $accentDark
+
+/* Primary */
+.arrowBlue
+	border-bottom-color: $accentLight
+
+/* Secondary */
+.arrowGrey
+	border-bottom-color: $greyHelp
+
+/* Success */
+.arrowGreen
+	border-bottom-color: $success
+
+/* Danger */
+.arrowRed
+	border-bottom-color: $error
+
+/* Warning */
+.arrowOrange
+	border-bottom-color: $warning
+
+/* Success */
+.arrowGreen
+	border-bottom-color: $success
+
+/* Info */
+.arrowDarkBlue
+	border-bottom-color: $accentDark
+
+/* Light */
+.arrowLight
+	border-bottom-color: $whiteLight
+
+/* Dark */
+.arrowDarkGrey
+	border-bottom-color: $greyDark
+
+/* Transparent */
+.arrowNone
+	border-bottom-color: transparent

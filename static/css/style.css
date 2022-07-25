@@ -595,9 +595,6 @@ body {
 }
 
 .messageContainer {
-  position: fixed;
-  top: 72px;
-  right: 15px;
   z-index: 9999;
 }
 
@@ -1489,10 +1486,9 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   border-radius: 2px;
   position: fixed;
   z-index: 1;
-  top: 30px;
-  right: 30px;
+  top: 6rem;
+  right: 1.5rem;
   font-size: 17px;
-  overflow: visible;
 }
 .toast button.close {
   margin-left: auto;
@@ -1516,7 +1512,7 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   height: 2px;
 }
 .toastCapperSuccess {
-  background-color: green;
+  background-color: #197019;
 }
 .toastCapperError {
   background-color: #E84610;
@@ -1534,6 +1530,56 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   visibility: visible;
   -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
   animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
+.toastBag {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.toastBagImage {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 0px;
+          flex: 1 1 0;
+  min-width: 25%;
+}
+.toastBagDetails {
+  -webkit-box-flex: 3;
+      -ms-flex: 3 3 0px;
+          flex: 3 3 0;
+}
+.toastBagDetails p {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.toastBagDetails p:not(:first-child) {
+  @extends .small;
+}
+.toastBagWrapper {
+  height: 100px;
+  /* horizontal overflow hidden */
+  overflow-x: hidden;
+  /* V'ertical overflow will turn into a scrollbar when the height is greater than 100 pixels */
+  overflow-y: auto;
+}
+.toastBagTotal {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin: 1rem 0;
+}
+.toastBagFreeDelivery {
+  background-color: orange;
 }
 
 @-webkit-keyframes {
@@ -1583,6 +1629,88 @@ menuitem > menu > menuitem.hover > menu > menuitem {
       opacity: 0;
     }
   }
+}
+/* https://css-tricks.com/snippets/css/css-triangle/ */
+.zeroSize, .arrowUp, .arrowDown, .arrowRight, .arrowLeft {
+  width: 0;
+  height: 0;
+}
+
+.arrowUp {
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-bottom: 10px solid #000000;
+  position: absolute;
+  top: -10px;
+  right: 36px;
+}
+
+.arrowDown {
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #777777;
+}
+
+.arrowRight {
+  border-top: 60px solid transparent;
+  border-bottom: 60px solid transparent;
+  border-left: 60px solid #FFC14B;
+}
+
+.arrowLeft {
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  border-right: 10px solid #191970;
+}
+
+/* Primary */
+.arrowBlue {
+  border-bottom-color: #FFC14B;
+}
+
+/* Secondary */
+.arrowGrey {
+  border-bottom-color: #808080;
+}
+
+/* Success */
+.arrowGreen {
+  border-bottom-color: #197019;
+}
+
+/* Danger */
+.arrowRed {
+  border-bottom-color: #E84610;
+}
+
+/* Warning */
+.arrowOrange {
+  border-bottom-color: orange;
+}
+
+/* Success */
+.arrowGreen {
+  border-bottom-color: #197019;
+}
+
+/* Info */
+.arrowDarkBlue {
+  border-bottom-color: #191970;
+}
+
+/* Light */
+.arrowLight {
+  border-bottom-color: #f8f9fa;
+}
+
+/* Dark */
+.arrowDarkGrey {
+  border-bottom-color: #333333;
+}
+
+/* Transparent */
+.arrowNone {
+  border-bottom-color: transparent;
 }
 
 /*# sourceMappingURL=style.css.map */

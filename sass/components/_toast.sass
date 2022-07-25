@@ -7,10 +7,10 @@
 	border-radius: 2px
 	position: fixed
 	z-index: 1
-	top: 30px
-	right: 30px
+	top: 6rem
+	right: 1.5rem
 	font-size: 17px
-	overflow: visible
+	//overflow: visible
 
 	button.close
 		margin-left: auto
@@ -41,6 +41,37 @@
 		visibility: visible
 		-webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s
 		animation: fadein 0.5s, fadeout 0.5s 2.5s
+
+	&Bag
+		display: flex
+		flex-direction: row
+
+		&Image
+			flex: 1 1 0
+			min-width: 25%
+		&Details
+			flex: 3 3 0
+			p
+				margin-top: 0
+				margin-bottom: 0
+				&:not(:first-child)
+					@extends .small
+
+		&Wrapper
+			height: 100px
+			/* horizontal overflow hidden */
+			overflow-x: hidden
+			/* V'ertical overflow will turn into a scrollbar when the height is greater than 100 pixels */
+			overflow-y: auto
+
+		&Total
+			display: flex
+			flex-direction: row
+			justify-content: space-between
+			margin: 1rem 0
+
+		&FreeDelivery
+			background-color: $warning
 
 @-webkit-keyframes
 	fadein

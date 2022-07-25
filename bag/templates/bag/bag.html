@@ -41,7 +41,7 @@
 										<p>€{{ item.product.price }}</p>
 									</td>
 									<td>
-										<form method="POST" action="{% url 'adjust_bag' item.product_id %}" class="updateForm">
+										<form method="POST" action="{% url 'adjustBag' item.product_id %}" class="updateForm">
 											{% csrf_token %}
 												<div class="productQuantityInput">
 													<button class="decrementQty" 
