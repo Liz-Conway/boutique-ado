@@ -9,17 +9,18 @@ from decimal import Decimal
 from django.shortcuts import get_object_or_404
 from products.models import Product
 
+
 def bag_contents(request):
-    
+
     # An empty list for the bag items to live in
     bag_items = []
     total = 0
     product_count = 0
-    
+
     # Retrieve the 'bag' from the session
     # or create an empty dictionary {} if it does not exist
-    bag = request.session.get('bag', {})
-    
+    bag = request.session.get("bag", {})
+
     # In order to populate the values of the variables :
     # . bag_items
     # . total
@@ -29,7 +30,7 @@ def bag_contents(request):
     # And add the products and their data to the bag items list.
     # So we can display them on the shopping bag page.
     # And elsewhere throughout the site.
-    
+
     # First variable is the key from the bag item (we call it 'product_id')
     # Second variable is the value of that key (we are calling it 'product_data')
     # In the case of an item with no sizes,
@@ -45,60 +46,62 @@ def bag_contents(request):
         if isinstance(product_data, int):
             # First get the product.
             product = get_object_or_404(Product, pk=product_id)
-            
+
             # Add quantity (in product_data) times the price to the total
             total += product_data * product.price
-            
+
             # Increment the product count by the quantity (in product_data)
             product_count += product_data
-            
+
             # Add a dictionary to the list of bag items
             #  containing not only the id and the quantity (in product_data),
             # but also the product object itself.
             # That will give us access to all the other fields,
             #  such as the product image and so on,
             # when iterating through the bag items in our templates.
-            bag_items.append({
-                'product_id': product_id,
-                'quantity': product_data,
-                'product': product,
-            })
+            bag_items.append(
+                {
+                    "product_id": product_id,
+                    "quantity": product_data,
+                    "product": product,
+                }
+            )
         else:
             # product data is not an integer -> Must have sizes
-            
+
             # First get the product.
             product = get_object_or_404(Product, pk=product_id)
-            
+
             # Iterate through the inner dictionary of products_by_size
             # incrementing the product count and total accordingly.
-            for size, quantity in product_data['products_by_size'].items():
+            for size, quantity in product_data["products_by_size"].items():
                 # Add quantity times the price to the total
                 total += quantity * product.price
-                
+
                 # Increment the product count by the quantity.
                 product_count += quantity
-                
+
                 # Add a dictionary to the list of bag items
                 #  containing not only the id and the quantity,
                 # but also the product object itself and the size.
                 # That will give us access to all the other fields,
                 #  such as the product image and so on,
                 # when iterating through the bag items in our templates.
-                bag_items.append({
-                    'product_id': product_id,
-                    'quantity': quantity,
-                    'product': product,
-                    'size': size,
-                })
-                
+                bag_items.append(
+                    {
+                        "product_id": product_id,
+                        "quantity": quantity,
+                        "product": product,
+                        "size": size,
+                    }
+                )
 
-    
     # In order to entice customers to purchase more.
     # We're going to give them free delivery if they spend more than the amount
     # specified in the free delivery threshold in settings.py.
     # Check whether total is less than that threshold.
     if total < settings.FREE_DELIVERY_THRESHOLD:
-        # If it is less we'll calculate delivery as 
+        # If it is less we'll calculate delivery as
         # the total multiplied by the standard delivery percentage
         # from settings.py. which in this case is 10%.
 
@@ -108,8 +111,7 @@ def bag_contents(request):
         # and using float is susceptible to rounding errors.
         # So just in general using decimal is preferred when working with money
         # because it's more accurate.
-        delivery = total * Decimal(
-                                        settings.STANDARD_DELIVERY_PERCENTAGE / 100)
+        delivery = total * Decimal(settings.STANDARD_DELIVERY_PERCENTAGE / 100)
         # Let the user know how much more they need to spend
         # to get free delivery by creating a variable called free_delivery_delta
         # This way we'll be able to entice the user across the site
@@ -119,23 +121,22 @@ def bag_contents(request):
     else:
         delivery = 0
         free_delivery_delta = 0
-        
+
     grand_total = total + delivery
-    
-    
+
     # This context concept is the same as the context we've been using in our views
     # the only difference is we're returning it directly and making it available to
     # all templates by putting it in settings.py
     # Add all these items to the context.
     # So they'll be available in templates across the site.
     context = {
-        'bag_items': bag_items,
-        'total': total,
-        'product_count': product_count,
-        'delivery': delivery,
-        'free_delivery_delta': free_delivery_delta,
-        'free_delivery_threshold': settings.FREE_DELIVERY_THRESHOLD,
-        'grand_total': grand_total,
+        "bag_items": bag_items,
+        "total": total,
+        "product_count": product_count,
+        "delivery": delivery,
+        "free_delivery_delta": free_delivery_delta,
+        "free_delivery_threshold": settings.FREE_DELIVERY_THRESHOLD,
+        "grand_total": grand_total,
     }
-    
-    return context;
+
+    return context

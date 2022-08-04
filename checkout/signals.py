@@ -1,8 +1,10 @@
 # These signals are sent by django to the entire application
 # after a model instance is saved and after it's deleted respectively
 from django.db.models.signals import post_save, post_delete
+
 # To receive these signals we can import receiver from django.dispatch
 from django.dispatch import receiver
+
 # Since we'll be listening for signals from the OrderLineItem model
 # we'll also need that
 from .models import OrderLineItem
@@ -18,7 +20,7 @@ def update_on_save(sender, instance, created, **kwargs):
     Parameters :
     sender - the sender of the signal. In our case OrderLineItem
     instance - The actual instance of the model that sent it
-    created - A boolean sent by django referring to 
+    created - A boolean sent by django referring to
                     whether this is a new instance or one being updated
     **kwargs - Any keyword arguments
     """
@@ -28,7 +30,8 @@ def update_on_save(sender, instance, created, **kwargs):
     # And call the update_total method on it
     instance.order.update_total()
 
-# Special type of function which will 
+
+# Special type of function which will
 # handle signals from the post_delete event
 # To execute this function anytime the post_delete signal is sent.
 # Use the receiver decorator. Telling it we're receiving post_delete signals

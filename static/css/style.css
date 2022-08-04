@@ -740,6 +740,20 @@ body {
 }
 
 /*===== END  Bag  ===== */
+/*~~~~~~~  Checkout  ~~~~~~~ */
+.checkout {
+  width: 100%;
+}
+@media only screen and (min-width: 59.375em) {
+  .checkout {
+    width: 50%;
+  }
+}
+.checkout p:first-child {
+  color: #808080;
+}
+
+/*===== END  Checkout  ===== */
 /*~~~~~~~  Links  ~~~~~~~ */
 .linkWrapper {
   -webkit-box-orient: vertical;
@@ -1630,6 +1644,7 @@ menuitem > menu > menuitem.hover > menu > menuitem {
     }
   }
 }
+/*~~~~~~~  Arrow  ~~~~~~~ */
 /* https://css-tricks.com/snippets/css/css-triangle/ */
 .zeroSize, .arrowUp, .arrowDown, .arrowRight, .arrowLeft {
   width: 0;
@@ -1712,5 +1727,7 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 .arrowNone {
   border-bottom-color: transparent;
 }
+
+/*===== END  Arrow  ===== */
 
 /*# sourceMappingURL=style.css.map */

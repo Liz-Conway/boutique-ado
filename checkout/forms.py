@@ -9,10 +9,18 @@ class OrderForm(forms.ModelForm):
         # which will be automatically calculated.
         # Since no one will ever be filling that information out.
         # It'll all be done via the model methods we've created.
-        fields = ('full_name', 'email', 'phone_number', 
-              'street_address1', 'street_address2',
-              'town_or_city', 'postcode', 'country', 'county')
-        
+        fields = (
+            "full_name",
+            "email",
+            "phone_number",
+            "street_address1",
+            "street_address2",
+            "town_or_city",
+            "postcode",
+            "country",
+            "county",
+        )
+
         def __init__(self, *args, **kwargs):
             """
             Add placeholders and classes, remove auto-generated
@@ -25,35 +33,35 @@ class OrderForm(forms.ModelForm):
             # in the form fields rather than having
             # clunky looking labels and empty text boxes.
             placeholders = {
-                'full_name': 'Full name',
-                'email': 'Email Address',
-                'phone_number': 'Phone number',
-                'country': 'Country',
-                'postcode': 'Postal Code',
-                'town_or_city': 'Town or City',
-                'street_address1': 'Street Address 1',
-                'street_address2': 'Street Address 2',
-                'county': 'County',
+                "full_name": "Full name",
+                "email": "Email Address",
+                "phone_number": "Phone number",
+                "country": "Country",
+                "postcode": "Postal Code",
+                "town_or_city": "Town or City",
+                "street_address1": "Street Address 1",
+                "street_address2": "Street Address 2",
+                "county": "County",
             }
-            
+
             # Set the "autofocus" attribute on the full_name field to True
             # so the cursor will start in the full_name field
             # when the user loads the page
-            self.fields['full_name'].widget.attrs['autofocus'] = True
+            self.fields["full_name"].widget.attrs["autofocus"] = True
             # Iterate through the forms fields
             for field in self.fields:
                 if self.fields[field].required:
                     # Add a star to the placeholder
                     # if it's a "required" field on the model.
-                    placeholder = f'{placeholders[field]} *'
+                    placeholder = f"{placeholders[field]} *"
                 else:
                     placeholder = placeholder[field]
-                
+
                 # Set all the placeholder attributes
                 # to their values in the dictionary above.
-                self.fields[field].widget.attrs['placeholder'] = placeholder
+                self.fields[field].widget.attrs["placeholder"] = placeholder
                 # Add a CSS class we'll use later.
-                self.fields[field].widget.attrs['class'] = 'stripeStyleInput'
+                self.fields[field].widget.attrs["class"] = "stripeStyleInput"
                 # Remove the form fields' labels
                 # since we won't need them given the placeholders are now set
                 self.fields[field].label = False
