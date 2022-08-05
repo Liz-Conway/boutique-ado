@@ -1,9 +1,122 @@
 /*~~~~~~~  Checkout  ~~~~~~~*/
+.containerCheckout
+	max-width: 80%
+	.checkoutTitle
+		margin-bottom: 2rem
+		text-transform: uppercase
+	> hr
+		margin-top: 1.2rem
+		margin-bottom: 1.2rem
+
 .checkout
+	flex: 1 1 50%
 	width: 100%
 	@include respond(desktop)
 		width: 50%
 	p:first-child
 		color: $greyHelp
+		font-size: 1.2rem
+
+	&Order
+		display: flex
+		flex-direction: column
+		@include respond(desktop)
+			flex-direction: row-reverse
+
+		.order
+			&Summary
+				flex: 1 1 50%
+				display: flex
+				flex-direction: column
+				hr
+					margin: 0
+				p:first-child
+					font-size: 1.3rem
+					color: $greyHelp
+
+			&Titles
+				margin-bottom: 1rem
+				align-self: flex-end
+				display: flex
+				flex-direction: row
+				flex-wrap: wrap
+				width: 85%
+				p
+					margin-bottom: .33rem
+					margin-top: 0
+					font-size: $small
+					color: $greyHelp
+			&Item
+				flex: 1 1 60%
+			&Subtotal
+				flex: 1 1 25%
+				text-align: right
+
+			&Content
+				display: flex
+				flex-wrap: wrap
+			&Image
+				flex: 1 1 17%
+				img
+					width: 100%
+			&Details
+				flex: 1 1 60%
+				p
+					margin-top: 0
+					margin-bottom: 0
+					&:not(:first-child)
+						font-size: $small
+					&:last-child
+						color: $greyHelp
+			&Price
+				flex: 1 1 23%
+				text-align: right
+				p
+					margin-top: 0
+					margin-bottom: 0
+					font-size: $small
+					color: $greyHelp
+
+			&Totals
+				display: flex
+				flex-wrap: wrap
+				text-align: right
+				p
+					margin-top: 0
+					margin-bottom: 0
+				&Titles
+					flex: 1 1 60%
+				&Costs
+					flex: 1 1 25%
+					margin-left: auto
+
+#stripeError
+	color: $error
+
+.submitButton
+	text-align: right
+	margin-top: 4rem
+	margin-bottom: .65rem
+	font-size: 1.3rem
+
+	span
+		text-transform: none
+
+	a > span:last-child
+			font-weight: $boldWt
+
+	p
+		font-size: $small
+		margin-top: 0
+		margin-bottom: 0
+		color: $error
+
+#submitButton
+	margin-left: .5rem
+	font-size: 1.3rem
+	border-radius: 0
+	padding: .5rem 1.5rem
+	span:first-child
+		font-weight: $boldWt
 
 /*===== END  Checkout  =====*/

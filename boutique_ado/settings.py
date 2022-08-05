@@ -54,6 +54,8 @@ INSTALLED_APPS = [
     "products",
     "bag",
     "checkout",
+    # Other
+    "crispy_forms",
 ]
 
 
@@ -69,6 +71,8 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "boutique_ado.urls"
+
+CRISPY_TEMPLATE_PACK = "bootstrap4"
 
 TEMPLATES = [
     {
@@ -88,11 +92,19 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                # Without this the media URL template tag doesn't work
+                "django.template.context_processors.media",
                 # Anytime we need to access the bag contents
                 # in any template across the entire site they'll be available to us
                 # without having to return them from
                 # a whole bunch of different views across different apps
                 "bag.contexts.bag_contents",
+            ],
+            # Contains all the tags we want available in all our templates by default
+            "builtins": [
+                # Access to everything we need from crispy forms across all templates by default
+                "crispy_forms.templatetags.crispy_forms_tags",
+                "crispy_forms.templatetags.crispy_forms_field",
             ],
         },
     },

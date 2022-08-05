@@ -33,7 +33,7 @@
  			{% if free_delivery_delta > 0 %}
  				<p class="toastBagFreeDelivery">Spend <strong>€{{ free_delivery_delta }}</strong> more to get free next day delivery!</p>
  			{% endif %}
- 			<a href="{% url 'bag' %}" class="btn btnBlack">
+ 			<a href="{% url 'checkout' %}" class="btn btnBlack">
  				<span>Go To Secure Checkout</span>
  				<span class="icon"><i class="fas fa-lock"></i></span>
  			</a>

@@ -1,4 +1,97 @@
 /*~~~~~~~  Checkout  ~~~~~~~*/
+.checkout
+	width: 100%
+	@include respond(desktop)
+		width: 50%
+	p:first-child
+		color: $greyHelp
+
+	&Order
+		display: flex
+		flex-direction: column
+		@include respond(desktop)
+			flex-direction: row-reverse
+
+		.order
+			&Titles
+				margin-bottom: 4rem
+				display: flex
+				flex-direction: row
+				flex-wrap: wrap
+				p
+					margin-bottom: .33rem
+					margin-top: 0
+					font-size: $small
+					color: $greyHelp
+			&Item
+				flex: 1 1 60%
+			&Subtotal
+				flex: 1 1 25%
+				margin-left: auto
+				text-align: right
+
+			&Content
+				display: flex
+				flex-wrap: wrap
+			&Image
+				flex: 1 1 17%
+				img
+					width: 100%
+			&Details
+				flex: 1 1 60%
+				p
+					margin-top: 0
+					margin-bottom: 0
+					&:not(:first-child)
+						font-size: $small
+					&:last-child
+						color: $greyHelp
+			&Price
+				flex: 1 1 23%
+				text-align: right
+				p
+					margin-top: 0
+					margin-bottom: 0
+					font-size: $small
+					color: $greyHelp
+
+			&Summary
+				hr
+					margin: 0
+
+			&Totals
+				display: flex
+				flex-wrap: wrap
+				p
+					margin-top: 0
+					margin-bottom: 0
+				&Titles
+					flex: 1 1 60%
+				&Costs
+					flex: 1 1 25%
+					margin-left: auto
+
+#stripeError
+	color: $error
+
+.submitButton
+	text-align: right
+	margin-top: 4rem
+	margin-bottom: .65rem
+
+	a > span:last-child
+			font-weight: $boldWt
+
+	p
+		font-size: $small
+		margin-top: 0
+		margin-bottom: 0
+		color: $error
+
+#submitButton
+	padding-left: 1rem
+	span:first-child
+		font-weight: $boldWt
 
 
 /*===== END  Checkout  =====*/

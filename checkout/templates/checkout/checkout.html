@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% load static %}
+{% load bag_tools %}
 
 {% block extra_css %}
-	<link rel="stylesheet" type="text/css" href="{% static ''checkout/css/checkout.css %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'checkout/css/checkout.css' %}">
 {% endblock %}
 
 {% block extra_title %}Checkout{% endblock %}
@@ -16,10 +17,113 @@
 	<div class="overlay"></div>
 	<div class="containerCheckout">
 		<hr>
-		<h2 class="checkoutTitle">Shopping Bag</h2>
+		<h2 class="checkoutTitle">Checkout</h2>
 		<hr>
-		<div class="checkout">
-			<p>Please fill out the form below to complete your order</p>
+		<div class="checkoutOrder">
+			<div class="orderSummary">
+				<p>Order Summary ({{ product_count }})</p>
+				<div class="orderTitles">
+					<div class="orderItem">
+						<p>Item</p>
+					</div>
+					<div class="orderSubtotal">
+						<p>Subtotal</p>
+					</div>
+				</div>
+				{% for item in bag_items %}
+				<div class="orderContent">
+					<div class="orderImage">
+						<a href="{% url 'productDetails' item.product.id %}">
+							{% if item.product.image %}
+								<img src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+							{% else %}
+								<img src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+							{% endif %}
+						</a>
+					</div>
+					<div class="orderDetails">
+						<p><strong>{{ item.product.name }}</strong></p>
+						<p>Size: {% if item.product.has_sizes %}{{ item.size|upper }}{% else  %}N/A{% endif  %}</p>
+						<p>Qty: {{ item.quantity }}</p>
+					</div>
+					<div class="orderPrice">
+						<p>€{{ item.product.price | calculate_subtotal:item.quantity }}</p>
+					</div>					
+				</div>
+				{% endfor %}
+				<hr>
+				<div  class="orderTotals">
+					<div class="orderTotalsTitles">
+						<p>Order Total:</p>
+						<p>Delivery:</p>
+						<p>Grand Total:</p>
+					</div>
+					<div class="orderTotalsCosts">
+						<p>€{{ total | floatformat:2 }}</p>
+						<p>€{{ delivery | floatformat:2 }}</p>
+						<p>€{{ grand_total | floatformat:2 }}</p>
+					</div>
+				</div>
+			</div>
+			<div class="checkout">
+				<p>Please fill out the form below to complete your order</p>
+				<form action="{% url 'checkout' %}" method="POST" id="paymentForm">
+					{% csrf_token %}
+					<fieldset>
+						<legend class="fieldsetLabel">Details</legend>
+							{{ order_form.full_name | as_crispy_field }}
+							{{ order_form.email | as_crispy_field }}
+					</fieldset>
+					<fieldset>
+						<legend class="fieldsetLabel">Delivery</legend>
+							{{ order_form.phone_number | as_crispy_field }}
+							{{ order_form.country | as_crispy_field }}
+							{{ order_form.postcode | as_crispy_field }}
+							{{ order_form.town_or_city | as_crispy_field }}
+							{{ order_form.street_address1 | as_crispy_field }}
+							{{ order_form.street_address2 | as_crispy_field }}
+							{{ order_form.county | as_crispy_field }}
+							<div class="formCheck">
+								{% if user.is_authenticated %}
+									<!-- Allow authenticated users to save the information in the form to their profile -->
+									<label class="formCheckLabel" for="saveInfo">Save this delivery information to my profile</label>
+									<!-- Submitting the form with this checked will autofill the user's profile with this information -->
+									<!-- And also auto-fill the form with the same information next time they check out -->
+									<input class="formCheckInput" type="checkbox" id="saveInfo" name="saveInfo" checked>
+								{% else %}
+									<!-- Not authenticated => give them a link to signup or login -->
+									<label class="formCheckLabel" for="saveInfo">
+										<a href="{% url 'account_signup' %}">Create an account</a> or
+										<a href="{% url 'account_login' %}">login</a> to save this information
+									</label>
+								{% endif %}
+							</div>
+					</fieldset>
+					<fieldset>
+						<legend class="fieldsetLabel">Payment</legend>
+						<!-- Need two empty divs in this fieldset to hold the stripe elements -->
+						<!-- A Stripe card element will go here -->
+						<div id="stripeCard"></div>
+						
+						<!-- Used to display form errors -->
+						<div id="stripeError" role="alert"></div>
+					</fieldset>
+					<div class="submitButton">
+						<a href="{% url 'bag' %}" class="btnShopping">
+							<span class="icon"><i class="fas fa-chevron-left"></i></span>
+							<span>Adjust Bag</span>
+						</a>
+						<button id="submitButton" class="btn btnBlack">
+							<span>Complete Order</span>
+							<span class="icon"><i class="fas fa-lock"></i></span>
+						</button>
+						<p>
+							<span class="icon"><i class="fas fa-exclamation-circle"></i></span>
+							<span>Your card will be charged <strong>€{{ grand_total|floatformat:2 }}</strong></span>
+						</p>
+					</div>
+				</form>
+			</div>
 		</div>
 	</div>
 {% endblock %}
