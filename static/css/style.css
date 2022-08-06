@@ -1999,13 +1999,14 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   right: 0.5rem;
 }
 
-#payment-form .form-control,
+#paymentForm .form-control,
 #stripeCard {
   color: #000;
   border: 1px solid #000;
+  padding: 0.5rem 0.75rem;
 }
 
-#loading-overlay {
+#loadingOverlay {
   display: none;
   position: fixed;
   top: 0;
