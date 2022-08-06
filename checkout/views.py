@@ -23,6 +23,8 @@ class Checkout(TemplateView):
         # Context containing the order form.
         context = {
             "order_form": order_form,
+            "stripe_public_key": "pk_test_51LTZcpIYwD1Sv5tNNF2yHlPgyxmjvxChh3i4eBhb1ISyZq7NjNDJzFeRgWDmf0thkPkDkN5g7IvXQ1kYVJ1N7pDg008nH17kl8",
+            "client_secret": "Test client secret",
         }
 
         return render(request, template_name, context)

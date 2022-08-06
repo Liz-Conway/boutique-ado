@@ -127,3 +127,13 @@
 		</div>
 	</div>
 {% endblock %}
+
+{% block postloadjs %}
+	{{ block.super }}
+	<!-- We can't render Django template variables in external javascript files.
+	We need to use a built-in template filter called json_script to render them here. 
+	And then we can access them in the external file -->
+	{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+	{{ client_secret|json_script:"id_stripe_client_secret" }}
+	<script src="{% static 'checkout/js/stripeElements.js' %}"></script>
+{% endblock %}
