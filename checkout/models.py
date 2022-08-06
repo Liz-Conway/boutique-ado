@@ -59,10 +59,14 @@ class Order(models.Model):
         # Use the aggregate() function
         # to add a new field to the query set called "lineitem_total_sum"
         # this field is named automatically for us.
-        # We can then get the "lineitem_sum" and set the order total to it.
-        self.order_total = self.lineitems.aggregate(Sum("lineitem_total"))[
-            "lineitem_total_sum"
-        ]
+        # We can then get the "lineitem_total__sum" and set the order total to it.
+        # NB THERE IS A DOUBLE UNDERSCORE  BEFORE 'sum' where it is aggregated
+        aggregation = self.lineitems.aggregate(Sum("lineitem_total"))
+        line_sum = aggregation["lineitem_total__sum"]
+        # Add " or 0" to the end to prevent an error
+        # if we manually delete all the line items from an order
+        # by making sure that this sets the order_total to zero instead of None
+        self.order_total = line_sum or 0
 
         if self.order_total < settings.FREE_DELIVERY_THRESHOLD:
             # With the order total calculated,
@@ -96,11 +100,11 @@ class Order(models.Model):
 
         super().save(*args, **kwargs)
 
-        def __str__(self):
-            """
-            Return the order number
-            """
-            return self.order_number
+    def __str__(self):
+        """
+        Return the order number
+        """
+        return self.order_number
 
 
 class OrderLineItem(models.Model):
@@ -157,12 +161,9 @@ class OrderLineItem(models.Model):
 
         super().save(*args, **kwargs)
 
-        def __str__(self):
-            """
-            Return the SKU of the product
-            along with the order number it's part of for each order line item
-            """
-            return (
-                f"SKU {self.product.sku}"
-                f" on order {self.order.order_number}"
-            )
+    def __str__(self):
+        """
+        Return the SKU of the product
+        along with the order number it's part of for each order line item
+        """
+        return f"SKU {self.product.sku}" f" on order {self.order.order_number}"

@@ -608,11 +608,6 @@ body {
   text-align: center;
   margin-top: 1rem;
 }
-@media only screen and (min-width: 59.375em) {
-  .productTitle {
-    margin-top: 164px;
-  }
-}
 .productTitle h2 {
   font-size: 2rem;
   font-weight: 500;
@@ -939,6 +934,37 @@ body {
 }
 #submitButton span:first-child {
   font-weight: 700;
+}
+
+/*===== END  Checkout  ===== */
+/*~~~~~~~  Checkout Success  ~~~~~~~ */
+.containerCheckoutSuccess hr {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+.checkoutSuccess {
+  margin-top: 2rem;
+  width: 100%;
+}
+@media only screen and (min-width: 59.375em) {
+  .checkoutSuccess {
+    width: 60%;
+    margin-right: auto;
+  }
+}
+.checkoutSuccessTitle {
+  text-transform: uppercase;
+  margin-top: 1.3rem;
+}
+.checkoutSuccessDeals {
+  width: 100%;
+}
+@media only screen and (min-width: 59.375em) {
+  .checkoutSuccessDeals {
+    width: 60%;
+    margin-left: auto;
+  }
 }
 
 /*===== END  Checkout  ===== */
@@ -1742,7 +1768,9 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   padding: 5px 8px;
 }
 .toastCapper {
-  height: 2px;
+  height: 4px;
+  border-top-right-radius: 3px;
+  border-top-left-radius: 3px;
 }
 .toastCapperSuccess {
   background-color: #197019;
