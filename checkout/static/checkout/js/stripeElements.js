@@ -99,8 +99,9 @@ function formSubmit(event) {
 	 to prevent multiple submissions.*/
     card.update({ 'disabled': true});
     $('#submitButton').attr('disabled', true);
-    // $('#paymentForm').fadeToggle(100);
-    // $('#loadingOverlay').fadeToggle(100);
+	/*Trigger the overlay and fade out the form when the user clicks the submit*/
+    $('#paymentForm').fadeToggle(100);
+    $('#loadingOverlay').fadeToggle(100);
 
     // let saveInfo = Boolean($('#saveInfo').attr('checked'));
     // // From using {% csrf_token %} in the form
@@ -152,8 +153,9 @@ function formSubmit(event) {
                     </span>
                     <span>${result.error.message}</span>`;
                 $(errorDiv).html(html);
-                // $('#paymentForm').fadeToggle(100);
-                // $('#loadingOverlay').fadeToggle(100);
+				/*Show the form and fade out the overlay when there is an error*/
+                $('#paymentForm').fadeToggle(100);
+                $('#loadingOverlay').fadeToggle(100);
 				/*If there's an error.
 				Re-enable the card element and the submit button
 				 to allow the user to fix it*/
