@@ -967,7 +967,35 @@ body {
   }
 }
 
-/*===== END  Checkout  ===== */
+.orderConfirmationWrapper {
+  padding: 1rem;
+  border: 1px solid #808080;
+  margin-top: 1.3rem;
+}
+.orderConfirmationRow {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+.orderConfirmationRow > p {
+  margin-bottom: 0;
+}
+.orderConfirmationRow > p:first-child {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 30%;
+          flex: 1 1 30%;
+  font-weight: 700;
+}
+.orderConfirmationRow > p:last-child {
+  -webkit-box-flex: 1;
+      -ms-flex: 1 1 70%;
+          flex: 1 1 70%;
+  text-align: right;
+}
+
+/*===== END  Checkout Success  ===== */
 /*~~~~~~~  Links  ~~~~~~~ */
 .linkWrapper {
   -webkit-box-orient: vertical;

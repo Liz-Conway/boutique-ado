@@ -21,4 +21,24 @@
 				width: 60%
 				margin-left: auto
 
-/*===== END  Checkout  =====*/
+.orderConfirmation
+	// display: flex
+	// flex-direction: column
+	&Wrapper
+		padding: 1rem
+		border: 1px solid $greyHelp
+		margin-top: 1.3rem
+
+	&Row
+		display: flex
+		flex-wrap: wrap
+		> p
+			margin-bottom: 0
+			&:first-child
+				flex: 1 1 30%
+				font-weight: $boldWt
+			&:last-child
+				flex: 1 1 70%
+				text-align: right
+
+/*===== END  Checkout Success  =====*/

@@ -19,6 +19,96 @@
 		<h2 class="checkoutSuccessTitle">Success</h2>
 		<hr>
 		<p>Your order information is below.  A confirmation email will be sent to <strong>{{ order.email }}</strong></p>
+		<div class="orderConfirmationWrapper">
+			<div class="orderConfirmationInfo">
+				<small>Order Info:</small>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Order Number</p>
+				<p>{{ order.order_number }}</p>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Order Date</p>
+				<p>{{ order.date }}</p>
+			</div>
+			
+			<div class="orderConfirmationInfo">
+				<small>Order Details:</small>
+			</div>
+			<!-- "lineitems" comes from the "related_name" attribute
+			on the order field of the OrderLineItem model -->
+			{% for item in order.lineitems.all %}
+				<div class="orderConfirmationRow">
+					<p class="small">
+						{{ item.product.name }}
+						{% if item.product.size %}
+							 - Size {{ item.product.size | upper }}
+						{% endif %}
+					</p>
+					<p class="small">{{ item.quantity }} @ €{{ item.product.price }} each</p>
+				</div>
+			{% endfor %}
+			
+			<div class="orderConfirmationInfo">
+				<small>Delivering To:</small>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Name</p>
+				<p>{{ order.full_name }}</p>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Address 1</p>
+				<p>{{ order.street_address1 }}</p>
+			</div>
+			{% if order.street_address2 %}
+			<div class="orderConfirmationRow">
+				<p>Address 2</p>
+				<p>{{ order.street_address2 }}</p>
+			</div>
+			{% endif %}
+			{% if order.county %}
+			<div class="orderConfirmationRow">
+				<p>County</p>
+				<p>{{ order.county }}</p>
+			</div>
+			{% endif %}
+			<div class="orderConfirmationRow">
+				<p>City/Town</p>
+				<p>{{ order.town_or_city }}</p>
+			</div>
+			{% if order.postcode %}
+			<div class="orderConfirmationRow">
+				<p>Eircode</p>
+				<p>{{ order.postcode }}</p>
+			</div>
+			{% endif %}
+			<div class="orderConfirmationRow">
+				<p>Country</p>
+				<p>{{ order.country }}</p>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Phone Number</p>
+				<p>{{ order.phone_number }}</p>
+			</div>
+			
+			
+			<div class="orderConfirmationInfo">
+				<small>Billing Info:</small>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Order Total</p>
+				<p>€{{ order.order_total }}</p>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Delivery</p>
+				<p>€{{ order.delivery_cost }}</p>
+			</div>
+			<div class="orderConfirmationRow">
+				<p>Grand Total</p>
+				<p>€{{ order.grand_total }}</p>
+			</div>
+			
+		</div>
 		<div class="checkoutSuccess">
 		</div>
 		<div class="checkoutSuccessDeals">
