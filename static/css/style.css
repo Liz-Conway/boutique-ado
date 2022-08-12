@@ -629,9 +629,8 @@ body {
   display: flex;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -webkit-column-gap: 20px;
+          column-gap: 20px;
   -webkit-box-align: stretch;
       -ms-flex-align: stretch;
           align-items: stretch;
@@ -1561,7 +1560,9 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 /*~~~~~~~  Card  ~~~~~~~ */
 .productCard {
   /*2 cards per row = 50% */
-  width: calc(50% - 20px);
+  -webkit-box-flex: 0;
+      -ms-flex: 0 1 calc(100%/2 - 10px);
+          flex: 0 1 calc(100%/2 - 10px);
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1574,36 +1575,40 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 @media only screen and (min-width: 59.375em) {
   .productCard {
     /*3 cards per row = 33% */
-    width: calc(33% - 20px);
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 calc(100%/3 - 13.3333333333px);
+            flex: 0 1 calc(100%/3 - 13.3333333333px);
   }
 }
 @media only screen and (min-width: 75em) {
   .productCard {
     /*4 cards per row = 25% */
-    width: calc(25% - 20px);
+    -webkit-box-flex: 0;
+        -ms-flex: 0 1 calc(100%/4 - 15px);
+            flex: 0 1 calc(100%/4 - 15px);
   }
-  .productCardBody {
-    -webkit-box-flex: 1;
-        -ms-flex: auto 1 1;
-            flex: auto 1 1;
-  }
-  .productCardBody p {
-    margin-bottom: 0;
-  }
-  .productCardFooter {
-    background-color: #FFFFFF;
-    padding-top: 0;
-    text-align: left;
-  }
-  .productCardFooter p {
-    margin-bottom: 0;
-    font-weight: 700;
-    color: #000000;
-    opacity: 0.7;
-  }
-  .productCardFooter small {
-    color: #999999;
-  }
+}
+.productCardBody {
+  -webkit-box-flex: 1;
+      -ms-flex: auto 1 1;
+          flex: auto 1 1;
+}
+.productCardBody p {
+  margin-bottom: 0;
+}
+.productCardFooter {
+  background-color: #FFFFFF;
+  padding-top: 0;
+  text-align: left;
+}
+.productCardFooter p {
+  margin-bottom: 0;
+  font-weight: 700;
+  color: #000000;
+  opacity: 0.7;
+}
+.productCardFooter small {
+  color: #999999;
 }
 .productCardCategory {
   color: grey;
@@ -1717,6 +1722,7 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 }
 
 /*===== END  Sort  ===== */
+/*~~~~~~~  Table  ~~~~~~~ */
 .tableRoundedResponsive {
   .border-radius: 0.5rem;
   display: none;
@@ -1751,6 +1757,7 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   margin-right: 2px;
 }
 
+/*===== END  Table  ===== */
 /*~~~~~~~  Form  ~~~~~~~ */
 .updateForm {
   width: 20rem;
@@ -1951,17 +1958,18 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 }
 /*~~~~~~~  Arrow  ~~~~~~~ */
 /* https://css-tricks.com/snippets/css/css-triangle/ */
-.zeroSize, .arrowUp, .arrowDown, .arrowRight, .arrowLeft {
+.zeroSize, .arrowDown, .arrowRight, .arrowLeft {
   width: 0;
   height: 0;
 }
 
 .arrowUp {
-  border-left: 4px solid transparent;
-  border-right: 4px solid transparent;
-  border-bottom: 10px solid #000000;
+  width: 0;
+  height: 0;
+  border: 7px solid transparent;
+  border-bottom: 15px solid #197019;
   position: absolute;
-  top: -10px;
+  top: -18px;
   right: 36px;
 }
 

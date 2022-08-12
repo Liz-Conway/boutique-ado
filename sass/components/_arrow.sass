@@ -1,18 +1,23 @@
 /*~~~~~~~  Arrow  ~~~~~~~*/
 /* https://css-tricks.com/snippets/css/css-triangle/ */
 
+// Should use the mixin arrow instead
+// E.G. @include arrow(10px, 4px, $black, up)
+// or @include arrow(20px, 5px, $accentLight, down)
+
 .zeroSize
 	width: 0
 	height: 0
 
 .arrowUp
-	@extend .zeroSize
-	border:
-		left: 4px solid transparent
-		right: 4px solid transparent
-		bottom: 10px solid $black
+	@include arrow(15px, 7px, $success, up)
+	// @extend .zeroSize
+	// border:
+	// 	left: 4px solid transparent
+	// 	right: 4px solid transparent
+	// 	bottom: 10px solid $black
 	position: absolute
-	top: -10px
+	top: -18px
 	right: 36px
 
 .arrowDown

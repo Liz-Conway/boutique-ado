@@ -1,5 +1,5 @@
 from django.urls import path
-from checkout.views import Checkout, CheckoutSuccess
+from checkout.views import Checkout, CheckoutSuccess, CacheCheckoutData
 
 # The webhook() function will live in a file called "webhooks.py"
 from .webhooks import webhook
@@ -10,6 +10,11 @@ urlpatterns = [
         "checkout-success/<order_number>",
         CheckoutSuccess.as_view(),
         name="checkoutSuccess",
+    ),
+    path(
+        "cacheCheckoutData/",
+        CacheCheckoutData.as_view(),
+        name="cacheCheckoutData",
     ),
     path("wh/", webhook, name="webhook"),
 ]

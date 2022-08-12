@@ -1,0 +1,19 @@
+/* [1] Break words when there is enough space */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+a
+	overflow-wrap: break-word; /* [1] */
+
+
+/*
+[1] Set a maximum width for an image
+[2] Let the image cover its bounding box to avoid distortion.
+*/
+img
+	max-width: 100%; /* [1] */
+	object-fit: cover; /* [2] */

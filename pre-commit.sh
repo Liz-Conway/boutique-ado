@@ -32,6 +32,8 @@ for file in $( git diff-index --cached --name-only $against ); do
 	if [[ "$file" == *.py ]]; then
 		### Run the 'black' auto-formatter on the file ###
 		black --line-length 79 $file
+		### Add the modified version of the file to the commit ###
+		git add $file
 	fi
 done
 

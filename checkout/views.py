@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic.base import TemplateView
+from django.views.generic.base import TemplateView, View
 from django.contrib import messages
 from django.urls.base import reverse
 from checkout.forms import OrderForm
@@ -10,13 +10,16 @@ from boutique_ado.settings import (
     STRIPE_CURRENCY,
 )
 
-import stripe
+import stripe, json
 from products.models import Product
 from checkout.models import OrderLineItem, Order
+from boutique_ado import settings
+from django.http.response import HttpResponse
 
 
 class Checkout(TemplateView):
     def get(self, request):
+        print("Checkout::get()")
         stripe_public_key = STRIPE_PUBLIC_KEY
         stripe_secret_key = STRIPE_SECRET_KEY
 
@@ -43,6 +46,8 @@ class Checkout(TemplateView):
             currency=STRIPE_CURRENCY,
         )
 
+        print(f"Intent before modification : \n {intent}")
+
         # An instance of our order form - which will be empty for now.
         order_form = OrderForm()
 
@@ -63,6 +68,7 @@ class Checkout(TemplateView):
         return render(request, template_name, context)
 
     def post(self, request):
+        print("Checkout::post()")
         bag = request.session.get("bag", {})
 
         # Doing this manually in order to skip the save info box,
@@ -159,6 +165,7 @@ class CheckoutSuccess(TemplateView):
     """
 
     def get(self, request, order_number):
+        print("CheckoutSuccess::get()")
         # first check whether the user wanted to save their information
         # by getting that from the session
         save_info = request.session.get("saveInfo")
@@ -180,3 +187,45 @@ class CheckoutSuccess(TemplateView):
         context = {"order": order}
 
         return render(request, template_name, context)
+
+
+class CacheCheckoutData(View):
+    """
+    Determine in the webhook whether the user had the "save info" box checked.
+    We can add that to the payment intent in a key called metadata,
+    but we have to do it from the server-side
+    because the confirm card payment method doesn't support adding it
+    """
+
+    # Before we call the confirm card payment method in the stripe JavaScript.
+    # we'll make a post request to this view
+    # and give it the client secret from the payment intent
+    def post(self, request):
+        print("In CacheCheckoutData::post() method")
+        try:
+            # Split the "client_secret" at the word "_secret"
+            # the first part of it will be the payment intent Id
+            pid = request.POST.get("client_secret").split("_secret")[0]
+            # Set up stripe with the secret key so we can modify the payment intent
+            stripe.api_key = settings.STRIPE_SECRET_KEY
+            # Call stripe.PaymentIntent.modify() give it the pid,
+            # and tell it what we want to modify.
+            # Add some metadata - add the user who's placing the order,
+            # add whether or not they wanted to save their information,
+            # add a JSON dump of their shopping bag (which we'll use a little later)
+            stripe.PaymentIntent.modify(
+                pid,
+                metadata={
+                    "bag": json.dumps(request.session.get("bag", {})),
+                    "save_info": request.POST.get("save_info"),
+                    "username": request.user,
+                },
+            )
+            return HttpResponse(status=200)
+
+        except Exception as ex:
+            messages.error(
+                request,
+                "Sorry, your payment cannot be processed right now.  Please try again later.",
+            )
+            return HttpResponse(content=ex, status=400)

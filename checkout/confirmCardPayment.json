@@ -1,0 +1,45 @@
+{
+    "paymentIntent": {
+        "id": "pi_3LWL7XIYwD1Sv5tN20gOeeYl",
+        "object": "payment_intent",
+        "amount": 7699,
+        "amount_details": {
+            "tip": {}
+        },
+        "automatic_payment_methods": null,
+        "canceled_at": null,
+        "cancellation_reason": null,
+        "capture_method": "automatic",
+        "client_secret": "pi_3LWL7XIYwD1Sv5tN20gOeeYl_secret_n0xV4y3EyB1fXuL14dqciTmjQ",
+        "confirmation_method": "automatic",
+        "created": 1660400123,
+        "currency": "eur",
+        "description": null,
+        "last_payment_error": null,
+        "livemode": false,
+        "next_action": null,
+        "payment_method": "pm_1LWL82IYwD1Sv5tNfDbZpYtk",
+        "payment_method_types": [
+            "card"
+        ],
+        "processing": null,
+        "receipt_email": null,
+        "setup_future_usage": null,
+        "shipping": {
+            "address": {
+                "city": "Toytown",
+                "country": "IE",
+                "line1": "Big Mushroom",
+                "line2": "",
+                "postal_code": "",
+                "state": ""
+            },
+            "carrier": null,
+            "name": "Big Ears",
+            "phone": "12345678",
+            "tracking_number": null
+        },
+        "source": null,
+        "status": "succeeded"
+    }
+}

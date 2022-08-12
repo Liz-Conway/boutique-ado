@@ -2,35 +2,41 @@
 
 .productCard
 	/*2 cards per row = 50%*/
-	width: calc(50% - #{$cardGutter})
+	//width: calc(50% - #{$cardGutter})
+	// flex: 0 1 calc(50% - #{$cardGutter})
+	@include cardWidth($rowOf2, $cardGutter)
 	display: flex
 	flex-direction: column
 	position: relative
 	@include respond(desktop)
 		/*3 cards per row = 33%*/
-		width: calc(33% - #{$cardGutter})
+		//width: calc(33% - #{$cardGutter})
+		// flex: 0 1 calc(33% - #{$cardGutter})
+		@include cardWidth($rowOf3, $cardGutter)
 	@include respond(XL)
 		/*4 cards per row = 25%*/
-		width: calc(25% - #{$cardGutter})
+		// width: calc(25% - #{$cardGutter})
+		// flex: 0 1 calc(25% - #{$cardGutter})
+		@include cardWidth($rowOf4, $cardGutter)
 
-		&Body
-			p
-				margin-bottom: 0
-			flex: auto 1 1
+	&Body
+		p
+			margin-bottom: 0
+		flex: auto 1 1
 
-		&Footer
-			background-color: $white
-			padding-top: 0
-			text-align: left
-			p
-				margin-bottom: 0
-				font:
-					weight: $boldWt
-					// size: 1.3rem
-				color: $black
-				opacity: .7
-			small
-				color: $grey
+	&Footer
+		background-color: $white
+		padding-top: 0
+		text-align: left
+		p
+			margin-bottom: 0
+			font:
+				weight: $boldWt
+				// size: 1.3rem
+			color: $black
+			opacity: .7
+		small
+			color: $grey
 
 	&Category
 		color: grey

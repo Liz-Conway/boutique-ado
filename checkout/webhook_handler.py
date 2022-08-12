@@ -1,5 +1,5 @@
 """
-Ehat happens if the users somehow intentionally or accidentally
+What happens if the users somehow intentionally or accidentally
 closes the browser window after the payment is confirmed but before the form is submitted.
 We would end up with a payment in stripe but no order in our database.
 What's more, if we needed to complete
@@ -21,6 +21,7 @@ class StripeWH_Handler:
 
     # A setup method that's called every time an instance of the class is created
     def __init__(self, request):
+        print("Stripe Webhook handler initialised")
         # Assign the request as an attribute of the class
         # just in case we need to access any attributes of the request coming from stripe
         self.request = request
@@ -31,6 +32,7 @@ class StripeWH_Handler:
         """
         Handle a generic/unknown/unexpected webhook event
         """
+        print("handle_event() called")
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}', status=200
         )
@@ -40,6 +42,16 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.succeeded webhook from Stripe
         """
+        print("Handling payment succeeded")
+        # Once the user makes a payment, it will have our metadata attached.
+        # The payment intent will be saved in a key called "event.data.object"
+        intent = event.data.object
+
+        print(f"Intent :\n {intent}")
+        pid = intent.Id
+        bag = intent.metadata.bag
+        save_info = intent.metadata.saveInfo
+
         return HttpResponse(
             content=f'Webhook received: {event["type"]}', status=200
         )
@@ -49,6 +61,7 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.payment_failed webhook from Stripe
         """
+        print("handle_payment_intent_payment_failed() called")
         return HttpResponse(
             content=f'Webhook received: {event["type"]}', status=200
         )
