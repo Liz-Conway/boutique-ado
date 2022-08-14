@@ -2,11 +2,12 @@ from django.template.context_processors import request
 import stripe
 import json
 from django.http.response import HttpResponse
-from django.conf import settings
 from .webhook_handler import StripeWH_Handler
 
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
+from boutique_ado import settings
+
 
 # Will make this view require a post request and will reject get requests
 @require_POST
@@ -44,7 +45,6 @@ def webhook(request):
         return HttpResponse(content=ex, status=400)
 
     print("Webhook Success!")
-    return HttpResponse(status=200)
 
     # Set up a webhook handler
     handler = StripeWH_Handler(request)

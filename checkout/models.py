@@ -3,6 +3,7 @@ from django.db import models
 from django.db.models import Sum
 from django.conf import settings
 from products.models import Product
+from _ast import Or
 
 
 class Order(models.Model):
@@ -36,6 +37,16 @@ class Order(models.Model):
     )
     grand_total = models.DecimalField(
         max_digits=10, decimal_places=2, null=False, default=0
+    )
+
+    # It's possible for the same customer to purchase
+    # the same things twice on separate occasions
+    # which would result in us finding an identical order in the database
+    # when they place the second one.
+    # These field ensure that each order is unique
+    original_bag = models.TextField(null=False, blank=False, default="")
+    stripe_pid = models.CharField(
+        max_length=254, null=False, blank=False, default=""
     )
 
     # Prepended with an underscore by convention

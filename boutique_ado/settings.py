@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
 """
-import os
 import environ
+import os
 
 from pathlib import Path
 from django.conf.global_settings import EMAIL_BACKEND
@@ -20,12 +20,21 @@ from django.conf.global_settings import EMAIL_BACKEND
 # noqa means 'no quality assurance' - the linter will not try to validate this line
 
 # Initialise environment variables
-env = environ.Env()
-environ.Env.read_env()
+# env = environ.Env()
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# environ.Env.read_env()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
+# Take environment variables from .env file
+environ.Env.read_env(os.path.join(BASE_DIR, ".env"))
+
+# False if not in os.environ because of casting above
+DEBUG = env("DEBUG")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
@@ -230,4 +239,4 @@ STRIPE_CURRENCY = "eur"
 STRIPE_PUBLIC_KEY = env("STRIPE_PUBLIC_KEY")
 STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 
-# STRIPE_WH_SECRET = env("STRIPE_WH_SECRET")
+STRIPE_WH_SECRET = env("STRIPE_WH_SECRET")

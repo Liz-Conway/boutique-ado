@@ -89,8 +89,19 @@ class Checkout(TemplateView):
         # Create an instance of the form using the form data
         order_form = OrderForm(form_data)
         if order_form.is_valid():
-            # If the form is valid --> save the order.
-            order = order_form.save()
+            # If the form is valid --> save the order
+            # but delay saving to Database until further data
+            # which is in the model but not in the OrderForm is collected
+            order = order_form.save(commit=False)
+            # Split the "client_secret" at the word "_secret"
+            # the first part of it will be the payment intent Id
+            pid = request.POST.get("client_secret").split("_secret")[0]
+            order.stripe_pid = pid
+            # Dump the "bag" to a JSON string and set it on the order
+            order.original_bag = json.dumps(bag)
+
+            order.save()
+
             # Iterate through the bag items to create each line item
             # First variable is the key from the bag item (we call it 'product_id')
             # Second variable is the value of that key (we are calling it 'product_data')
@@ -217,7 +228,7 @@ class CacheCheckoutData(View):
                 pid,
                 metadata={
                     "bag": json.dumps(request.session.get("bag", {})),
-                    "save_info": request.POST.get("save_info"),
+                    "saveInfo": request.POST.get("save_info"),
                     "username": request.user,
                 },
             )

@@ -31,6 +31,8 @@ class OrderAdmin(admin.ModelAdmin):
         "delivery_cost",
         "order_total",
         "grand_total",
+        "original_bag",
+        "stripe_pid",
     )
 
     # Allow us to specify the order of the fields in the admin interface
@@ -52,6 +54,8 @@ class OrderAdmin(admin.ModelAdmin):
         "delivery_cost",
         "order_total",
         "grand_total",
+        "original_bag",
+        "stripe_pid",
     )
 
     # Restrict the columns that show up in the order list
