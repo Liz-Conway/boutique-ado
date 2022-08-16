@@ -5,6 +5,7 @@ from django.conf import settings
 from products.models import Product
 
 from django_countries.fields import CountryField
+from profiles.models import UserProfile
 
 
 class Order(models.Model):
@@ -14,6 +15,20 @@ class Order(models.Model):
     # And we'll want it to be unique and permanent
     # so users can find their previous orders.
     order_number = models.CharField(max_length=32, null=False, editable=False)
+    #  Foreign key to "userprofile" on the order.
+    # Use models.SET_NULL if the profile is deleted since that will allow us to keep
+    # an order history in the admin even if the user is deleted.
+    # Allow this to be either "null" or "blank" so that users who don't have an
+    # account can still make purchases.
+    # Add a related name of "orders" so we can access
+    # the user's orders by calling something like user.userprofile.orders
+    user_profile = models.ForeignKey(
+        UserProfile,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="orders",
+    )
     full_name = models.CharField(max_length=50, null=False, blank=False)
     email = models.EmailField(max_length=254, null=False, blank=False)
     phone_number = models.CharField(max_length=20, null=False, blank=False)
