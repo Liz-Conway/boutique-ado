@@ -1800,6 +1800,13 @@ menuitem > menu > menuitem.hover > menu > menuitem {
   color: #1171BC;
 }
 
+select, select option {
+  color: #000000;
+}
+select:invalid, select option[value=""] {
+  color: #aab7c4;
+}
+
 /*===== END  Form  ===== */
 .toast {
   min-width: 250px;

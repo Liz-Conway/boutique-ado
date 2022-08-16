@@ -36,12 +36,11 @@ class OrderForm(forms.ModelForm):
                 "full_name": "Full name",
                 "email": "Email Address",
                 "phone_number": "Phone number",
-                "country": "Country",
                 "postcode": "Postal Code",
                 "town_or_city": "Town or City",
                 "street_address1": "Street Address 1",
                 "street_address2": "Street Address 2",
-                "county": "County",
+                "county": "County, State or Locality",
             }
 
             # Set the "autofocus" attribute on the full_name field to True
@@ -50,7 +49,7 @@ class OrderForm(forms.ModelForm):
             self.fields["full_name"].widget.attrs["autofocus"] = True
             # Iterate through the forms fields
             for field in self.fields:
-                if self.fields[field].required:
+                if self.fields[field].required and field != "country":
                     # Add a star to the placeholder
                     # if it's a "required" field on the model.
                     placeholder = f"{placeholders[field]} *"

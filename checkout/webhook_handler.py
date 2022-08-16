@@ -18,6 +18,7 @@ from checkout.models import Order, OrderLineItem
 from products.models import Product
 import json
 import time
+from _snack import form
 
 
 class StripeWH_Handler:
@@ -36,7 +37,8 @@ class StripeWH_Handler:
         """
         Handle a generic/unknown/unexpected webhook event
         """
-        print("handle_event() called")
+        print("Unexpected webhook event:  handle_event() called")
+        print(f"Handling {event['type']}")
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}', status=200
         )
@@ -54,7 +56,8 @@ class StripeWH_Handler:
         # The payment intent will be saved in a key called "event.data.object"
         intent = event.data.object
 
-        print(f"Intent :\n {intent}")
+        # print(f"Intent :\n {intent}")
+        # print("Handling payment succeeded")
         pid = intent.id
         bag = intent.metadata.bag
         save_info = intent.metadata.saveInfo
@@ -96,6 +99,21 @@ class StripeWH_Handler:
             # Which was created with the exact same shopping bag.
             # And is associated with the same payment intent.
 
+            print(f"Full Name :  {shipping_details.name}")
+            print(f"Email:  {billing_details.email}")
+            print(f"Phone number :  {shipping_details.phone}")
+            print(f"Country :  {shipping_details.address.country}")
+            print(f"Eircode :  {billing_details.address.postal_code}")
+            print(f"Town/city :  {shipping_details.address.city}")
+            print(f"Street Address 1 :  {shipping_details.address.line1}")
+            print(f"Street Address 2 :  {shipping_details.address.line2}")
+            print(f"County :  {shipping_details.address.state}")
+            print(f"Grand Total :  {grand_total}")
+            # To remove all doubt as to which order we're looking for, here in the webhook handler;
+            # Add the shopping bag and the stripe pid
+            # to the list of attributes we want to match on when finding the order
+            print(f"Original Bag :  {bag}")
+            print(f"Stripe PID :  {pid}")
             try:
                 # Get the order using all the information from the payment intent
                 order = Order.objects.get(
@@ -116,17 +134,20 @@ class StripeWH_Handler:
                     original_bag=bag,
                     stripe_pid=pid,
                 )
+                print("Yay! order exists in DB")
                 # If the order exists - set "order_exists" to True
                 order_exists = True
                 # If the order exists then break out of the loop
                 break
 
             except Order.DoesNotExist:
+                print("Exception Order.DoesNotExist")
                 attempts += 1
                 # Use python's time module to sleep for one second
                 time.sleep(1)
 
         if order_exists:
+            print("This order already exists")
             # STEP 3a
             # When we find the existing order
             # Return a 200 response
@@ -135,6 +156,7 @@ class StripeWH_Handler:
                 status=200,
             )
         else:
+            print("Order does not exist in the database")
             # STEP 3b
             # If there is no matching order on the database
             # Create an order with the details from the form
@@ -147,9 +169,9 @@ class StripeWH_Handler:
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     email=billing_details.email,
-                    phone_number=shipping_details.phone_number,
+                    phone_number=shipping_details.phone,
                     country=shipping_details.address.country,
-                    postal_code=shipping_details.address.postal_code,
+                    postcode=shipping_details.address.postal_code,
                     town_or_city=shipping_details.address.city,
                     street_address1=shipping_details.address.line1,
                     street_address2=shipping_details.address.line2,
@@ -199,6 +221,7 @@ class StripeWH_Handler:
                 # If anything goes wrong - delete the order if it was created.
                 # And return a 500 server error response to stripe.
                 # This will cause stripe to automatically try the webhook again later.
+                print(f"Exception :  {ex}")
                 if order:
                     order.delete()
 
