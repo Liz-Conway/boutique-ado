@@ -77,7 +77,7 @@
 				                           {% if request.user.is_superuser %}
 			                                    <menuitem><a href="{% url 'home' %}">Product Management</a></menuitem>
 			                                {% endif %}
-			                                <menuitem><a href="{% url 'home' %}">My Profile</a></menuitem>
+			                                <menuitem><a href="{% url 'profile' %}">My Profile</a></menuitem>
 											<menuitem><a href="{% url 'account_logout' %}">Logout</a></menuitem>
 										{% else %}
 											<menuitem><a href="{% url 'account_signup' %}">Register</a></menuitem>

@@ -1360,6 +1360,22 @@ button[class$="crementQty"]:disabled {
   border-radius: 0;
   width: 100%;
 }
+.searchInput::-webkit-input-placeholder {
+  /* Make the same colour as the rest of the placeholders */
+  color: #aab7c4;
+}
+.searchInput:-ms-input-placeholder {
+  /* Make the same colour as the rest of the placeholders */
+  color: #aab7c4;
+}
+.searchInput::-ms-input-placeholder {
+  /* Make the same colour as the rest of the placeholders */
+  color: #aab7c4;
+}
+.searchInput::placeholder {
+  /* Make the same colour as the rest of the placeholders */
+  color: #aab7c4;
+}
 .searchButton {
   background-color: #000000;
   color: #FFFFFF;
@@ -2138,5 +2154,80 @@ select:invalid, select option[value=""] {
   height: 100%;
   /*===== END  Stripe  ===== */
 }
+
+/*~~~~~~~  Django AllAuth  ~~~~~~~ */
+.allauthWrapper {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+.allauthWrapper form.login p {
+  margin-top: 0.75rem;
+}
+.allauthTitle {
+  margin-bottom: 2rem;
+  margin-top: 1.4rem;
+  text-transform: uppercase;
+  text-align: center;
+}
+.allauthFormInnerContent p {
+  margin-top: 2rem;
+  color: #FFC14B;
+}
+.allauthFormInnerContent a {
+  color: #FFC14B;
+}
+.allauthFormInnerContent input {
+  border-color: #000000;
+  border-radius: 0;
+  margin-bottom: 1rem;
+  padding: 0.75rem 1rem;
+}
+.allauthFormInnerContent input::-webkit-input-placeholder {
+  color: #aab7c4;
+}
+.allauthFormInnerContent input:-ms-input-placeholder {
+  color: #aab7c4;
+}
+.allauthFormInnerContent input::-ms-input-placeholder {
+  color: #aab7c4;
+}
+.allauthFormInnerContent input::placeholder {
+  color: #aab7c4;
+}
+.allauthFormInnerContent label:not([for="id_remember"]) {
+  /* Hide the labels on everything except for the remember me checkbox on the login page */
+  /* since all the other inputs will have placeholders */
+  display: none;
+}
+.allauthFormInnerContent button, .allauthFormInnerContent input[type="submit"] {
+  /* Copied from bootstrap */
+  display: inline-block;
+  color: #FFFFFF;
+  text-align: center;
+  vertical-align: middle;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #000000;
+  border: 1px solid #000000;
+  padding: 0.5rem 1rem;
+  font-size: 1.33rem;
+  line-height: 1.5;
+  border-radius: 0;
+  /* Standard Bootstrap transition */
+  transistion: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.allauthFormInnerContent button:hover, .allauthFormInnerContent input[type="submit"]:hover {
+  color: #FFFFFF;
+  background-color: #333333;
+  border-color: #333333;
+}
+.allauthSignUpFirst {
+  margin-bottom: 1rem;
+}
+
+/*===== END  Django AllAuth  ===== */
 
 /*# sourceMappingURL=style.css.map */

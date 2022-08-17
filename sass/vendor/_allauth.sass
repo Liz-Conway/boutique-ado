@@ -1,0 +1,65 @@
+/*~~~~~~~  Django AllAuth  ~~~~~~~*/
+
+.allauth
+	&Wrapper
+		width: 50%
+		margin-left: auto
+		margin-right: auto
+
+		form.login
+			p
+				margin-top: .75rem
+
+	&Title
+		margin-bottom: 2rem
+		margin-top: 1.4rem
+		text-transform: uppercase
+		text-align: center
+
+	&FormInnerContent
+		p
+			margin-top: 2rem
+			color: $accentLight
+
+		a
+			color: $accentLight
+
+		input
+			border-color: $black
+			border-radius: 0
+			margin-bottom: 1rem
+			padding: .75rem 1rem
+			&::placeholder
+				color: $greyInvalid
+
+		label:not([for="id_remember"])
+			/* Hide the labels on everything except for the remember me checkbox on the login page */
+			/* since all the other inputs will have placeholders*/
+			display: none
+
+		button, input[type="submit"]
+			/* Copied from bootstrap */
+			display: inline-block
+			color: $white
+			text-align: center
+			vertical-align: middle
+			user-select: none
+			background-color: $black
+			border: 1px solid $black
+			padding: .5rem 1rem
+			font-size: 1.33rem
+			line-height: 1.5
+			border-radius: 0
+
+			/* Standard Bootstrap transition */
+			transistion: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out, box-shadow .15s ease-in-out
+
+			&:hover
+				color: $white
+				background-color: $greyDark
+				border-color: $greyDark
+
+	&SignUpFirst
+		margin-bottom: 1rem
+
+/*===== END  Django AllAuth  =====*/

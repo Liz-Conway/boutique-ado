@@ -160,15 +160,19 @@ EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 # account authentication method is what tells allauth that we want to allow
 # authentication using either usernames or emails.
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
+# ACCOUNT_AUTHENTICATION_METHOD = "username"
 
 # These three email settings
 # make it so that an email is required to register for the site.
 ACCOUNT_EMAIL_REQUIRED = True
+# ACCOUNT_EMAIL_REQUIRED = False
 # Verifying your email is mandatory so we know users are using a real email.
 ACCOUNT_EMAIL_VERIFICATION = "mandatory"
+# ACCOUNT_EMAIL_VERIFICATION = "none"
 # Required to enter their email twice on the registration page
 # to make sure that they haven't made any typos
 ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True
+# ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = False
 # setting a minimum username length of four characters
 ACCOUNT_USERNAME_MIN_LENGTH = 4
 # specifying a login url and a url to redirect back to after logging in

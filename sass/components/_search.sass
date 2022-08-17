@@ -1,6 +1,6 @@
 /*~~~~~~~  Search  ~~~~~~~*/
 .linkSearch
-	width: 40%	
+	width: 40%
 
 .search
 	&Box
@@ -12,6 +12,9 @@
 		border: 1px solid $greyDark
 		border-radius: 0
 		width: 100%
+		&::placeholder
+			/* Make the same colour as the rest of the placeholders */
+			color: $greyInvalid
 
 	&Button
 		background-color: $black

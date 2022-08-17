@@ -13,7 +13,7 @@ class UserProfile(models.Model):
 
     # One-to-one field attached to the user.
     # This is just like a foreign key except that it specifies that each user can only have one profile.
-    # And each profile can only be attached to one use
+    # And each profile can only be attached to one user
     user = models.OneToOneField(User, on_delete=models.CASCADE)
 
     # Rest of the fields in this model are the delivery information fields we want the
@@ -56,6 +56,7 @@ def create_or_update_user_profile(sender, instance, created, **kwargs):
     """
     Create or update the user profile
     """
+    print(f"Is this profile created?  {created}")
     if created:
         UserProfile.objects.create(user=instance)
 
