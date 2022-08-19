@@ -16,6 +16,29 @@
 		<h2 class="profileTitle">My Profile</h2>
 		<hr>
 	</div>
+	<!-- Half of this page will be the profile 
+	and the other half will be the order history -->
+	<div class="profileWrapper">
+		<div class="profileDetails">
+			<p class="muted">Default delivery information</p>
+			<form class="profileDetailsForm" action="{% url 'profile' %}" method="POST" id="profileUpdateForm">
+				{% csrf_token %}
+				{{ form|crispy }}
+				<button class="profileDetailsButton btn btnBlack">Update Information</button>
+			</form>
+		</div>
+		<div class="profileOrders">
+			<p class="muted">Order History</p>
+			{{ orders }}
+			
+		</div>
+	</div>
 	{{ profile }}
 	
+{% endblock %}
+{% block postloadjs %}
+	{{ block.super }}
+	<!-- <script src="{# static 'profiles/static/js/countryField.js' #}"> -->
+	<script src="{% static 'js/countryField.js' %}">
+	</script>
 {% endblock %}

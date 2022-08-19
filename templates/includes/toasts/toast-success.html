@@ -1,5 +1,5 @@
 <div class="toast">
-	<div class="arrowUp"></div>
+	<div class="arrowUp {% if bag_toast %}bagArrow{% endif %}"></div>
   <div class="toastCapper toastCapperSuccess"></div>
   <div class="toastTitle">
   	<strong>Success!</strong>
@@ -11,7 +11,7 @@
   <div class="toastBody">
  		{{ message }}
  		<hr>
- 		{% if grand_total %}
+ 		{% if grand_total and not on_profile_page %}
  			<p>Your Bag ({{ product_count }})</p>
  		<div class="toastBagWrapper">
  			{% for item in bag_items %}

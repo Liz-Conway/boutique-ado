@@ -12,6 +12,18 @@ class BagContents(TemplateView):
     template_name = "bag/bag.html"
 
     def get(self, request):
+        # print(f"args :\n {args}")
+        # print(f"kwargs :\n {kwargs}")
+        # try:
+        #     print(f"test : {test}")
+        # except:
+        #     print("No test")
+        # # print(f"kw_test :  {kw_test}")
+        # context = {}
+        # if 'bag_toast' in kwargs:
+        #     context = { 'bag_toast': True }
+
+        # return render(request, self.template_name, context)
         return render(request, self.template_name)
 
 

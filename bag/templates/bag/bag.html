@@ -14,6 +14,11 @@
 	<div class="containerBag">
 		<hr>
 		<h2 class="bagTitle">Shopping Bag</h2>
+		{% if bag_toast %}
+			<!-- Bag Toast is :  {{ bag_toast }} -->
+		{% else %}
+			<!-- NO bag toast -->
+		{% endif %}
 		<hr>
 		<div class="bagItems">
 			{% if bag_items %}

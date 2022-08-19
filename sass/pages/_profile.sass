@@ -1,4 +1,37 @@
 /*~~~~~~~  User Profile  ~~~~~~~*/
+.profile
+	&Wrapper
+		display: flex
+		flex-wrap: wrap
 
+	&Details
+		flex: 1 1 50%
+		&Form
+			display: flex
+			flex-direction: column
+			align-items: stretch
+			margin-top: 1.3rem
+
+		&Button
+			// margin-left: auto
+			align-self: flex-end
+			text-transform: uppercase
+
+	&Orders
+		flex: 1 1 50%
+
+	&FormInput
+		color: $black
+		&input::placeholder
+			color: $greyInvalid
+		width: 90%
+		margin-bottom: 1rem
+		padding: .5rem 1rem
+
+#id_default_country
+	&, option:not(:first-child)
+		color: $black
+	& option:first-child
+		color: $greyInvalid
 
 /*===== END  User Profile  =====*/
