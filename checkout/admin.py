@@ -41,6 +41,7 @@ class OrderAdmin(admin.ModelAdmin):
     # This way the order stays the same as it appears in the model.
     fields = (
         "order_number",
+        "user_profile",
         "date",
         "full_name",
         "email",

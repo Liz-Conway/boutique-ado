@@ -20,6 +20,13 @@
 	&Orders
 		flex: 1 1 50%
 
+		&History
+			/* max height in case the user has a lot of orders. */
+			/* This 416 pixels is the height of the form and the submit button in the adjacent column */
+			max-height: 416px
+			/* so above that height, the order history area will have a scrollbar. */
+			overflow-y: auto
+
 	&FormInput
 		color: $black
 		&input::placeholder
@@ -33,5 +40,6 @@
 		color: $black
 	& option:first-child
 		color: $greyInvalid
+
 
 /*===== END  User Profile  =====*/

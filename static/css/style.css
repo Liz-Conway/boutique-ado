@@ -1065,6 +1065,13 @@ body {
       -ms-flex: 1 1 50%;
           flex: 1 1 50%;
 }
+.profileOrdersHistory {
+  /* max height in case the user has a lot of orders. */
+  /* This 416 pixels is the height of the form and the submit button in the adjacent column */
+  max-height: 416px;
+  /* so above that height, the order history area will have a scrollbar. */
+  overflow-y: auto;
+}
 .profileFormInput {
   color: #000000;
   width: 90%;
@@ -2089,7 +2096,7 @@ select:invalid, select option[value=""] {
 
 /* Primary */
 .arrowBlue {
-  border-bottom-color: #FFC14B;
+  border-bottom-color: #1171BC;
 }
 
 /* Secondary */
