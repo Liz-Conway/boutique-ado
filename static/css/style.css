@@ -1897,6 +1897,11 @@ select:invalid, select option[value=""] {
   color: #aab7c4;
 }
 
+.borderBlack {
+  border: 1px solid #000000;
+  border-radius: 0;
+}
+
 /*===== END  Form  ===== */
 .toast {
   min-width: 250px;
