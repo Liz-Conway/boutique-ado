@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_title %}Add Product{% endblock %}
+{% block page_header %}
+	<div class="headerContainer">
+		
+	</div>
+{% endblock %}
+
+{% block content %}
+	<div class="overlay"></div>
+	<div class="containerAddProduct">
+		<div class="addProductHeader">
+			<hr>
+			<h2 class="addProductTitle">Product Management</h2>
+			<h3 class="muted">Add a Product</h3>
+			<hr>
+		</div>
+		<div class="addProductBody">
+			<!-- Add the encoding type attribute on this form.
+			Since it will potentially be submitting an image file, 
+			and without this the image won't be uploaded properly -->
+			<form method="POST" action="{% url 'addProduct' %}" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form }}
+				<div class="addProductButtons">
+					<a class="btn btnShopping" href="{% url 'products' %}">Cancel</a>
+					<button class="btn btnBlack" type="submit">Add Product</button> 
+				</div>
+			</form>
+		</div>
+	</div>
+	
+{% endblock %}
+

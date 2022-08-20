@@ -1,0 +1,28 @@
+/*~~~~~~~  Add Product Page  ~~~~~~~*/
+.containerAddProduct
+	display: flex
+	flex-direction: column
+	@include respond(desktop)
+		flex-direction: row
+
+.addProduct
+	&Header
+		flex: 1 1 50%
+		> hr
+			margin-top: 1.2rem
+			margin-bottom: 1.2rem
+		padding: 0 1.3rem
+	&Body
+		flex: 1 1 50%
+		form
+			display: flex
+			flex-direction: column
+			margin-bottom: 1rem
+	&Title
+		margin-bottom: 1rem
+	&Buttons
+		margin-top: 1.3rem
+		align-self: flex-end
+
+
+/*===== END  Add Product Page  =====*/

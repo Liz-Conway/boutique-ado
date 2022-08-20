@@ -6,6 +6,7 @@ from django.urls.base import reverse
 from django.db.models.query_utils import Q
 from products.models import Category
 from django.db.models.functions.text import Lower
+from products.forms import ProductForm
 
 # from django.template import context
 
@@ -118,7 +119,7 @@ class AllProducts(TemplateView):
 
 class ProductDetail(TemplateView):
     """
-    A class show all individual product details
+    A view to show all individual product details
     """
 
     template_name = "products/product-details.html"
@@ -131,3 +132,16 @@ class ProductDetail(TemplateView):
         }
 
         return render(request, self.template_name, context)
+
+
+class AddProduct(TemplateView):
+    """
+    A view to allow Admin users to add a product to the store
+    """
+
+    def get(self, request):
+        form = ProductForm()
+        template_name = "products/add-product.html"
+        context = {"form": form}
+
+        return render(request, template_name, context)
