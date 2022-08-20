@@ -21,7 +21,6 @@ from profiles.forms import UserProfileForm
 
 class Checkout(TemplateView):
     def get(self, request):
-        print("Checkout::get()")
         stripe_public_key = STRIPE_PUBLIC_KEY
         stripe_secret_key = STRIPE_SECRET_KEY
 
@@ -99,7 +98,6 @@ class Checkout(TemplateView):
         return render(request, template_name, context)
 
     def post(self, request):
-        print("Checkout::post()")
         bag = request.session.get("bag", {})
 
         # Doing this manually in order to skip the save info box,
@@ -207,7 +205,6 @@ class CheckoutSuccess(TemplateView):
     """
 
     def get(self, request, order_number):
-        print("CheckoutSuccess::get()")
         # first check whether the user wanted to save their information
         # by getting that from the session
         save_info = request.session.get("saveInfo")
@@ -283,7 +280,6 @@ class CacheCheckoutData(View):
     # we'll make a post request to this view
     # and give it the client secret from the payment intent
     def post(self, request):
-        print("In CacheCheckoutData::post() method")
         try:
             # Split the "client_secret" at the word "_secret"
             # the first part of it will be the payment intent Id

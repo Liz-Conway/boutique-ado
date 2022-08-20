@@ -15,7 +15,6 @@ from boutique_ado import settings
 @csrf_exempt
 def webhook(request):
     """Listen for webhooks from Stripe"""
-    print("Stripe Webhook was called")
     # Setup
     wh_secret = settings.STRIPE_WH_SECRET
     stripe.api_key = settings.STRIPE_SECRET_KEY
@@ -43,8 +42,6 @@ def webhook(request):
     # Generic exception handler
     except Exception as ex:
         return HttpResponse(content=ex, status=400)
-
-    print("Webhook Success!")
 
     # Set up a webhook handler
     handler = StripeWH_Handler(request)
