@@ -19,6 +19,7 @@ from products.models import Product
 import json
 import time
 from _snack import form
+from profiles.models import UserProfile
 
 
 class StripeWH_Handler:
@@ -37,8 +38,6 @@ class StripeWH_Handler:
         """
         Handle a generic/unknown/unexpected webhook event
         """
-        print("Unexpected webhook event:  handle_event() called")
-        print(f"Handling {event['type']}")
         return HttpResponse(
             content=f'Unhandled webhook received: {event["type"]}', status=200
         )
@@ -48,7 +47,6 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.succeeded webhook from Stripe
         """
-        print("Handling payment succeeded")
         # STEP 1
         # When we receive a webhook from stripe that a payment has been processed successfully.
 
@@ -75,6 +73,37 @@ class StripeWH_Handler:
             if value == "":
                 shipping_details.address[field] = None
 
+        # If the checkout view fails
+        # we can depend on the webhook handler to handle the user profiles.
+        # Update profile information if set_info was checked
+        profile = None
+        #  Still allow anonymous users to checkout
+        username = intent.metadata.username
+        if username != "AnonymousUser":
+            # If the username isn't "AnonymousUser" => they were authenticated.
+            # We could also use request.user here,
+            # since we added the request object in the init method above.
+
+            # Get the user's profile using their username.
+            profile = UserProfile.objects.get(user__username=username)
+            # If they've got the save info box checked (from the metadata we added).
+            if save_info:
+                # Update their profile by adding the shipping details
+                # as their default delivery information.
+                profile.default_phone_number = shipping_details.phone
+                profile.default_country = shipping_details.address.country
+                profile.default_postcode = billing_details.address.postal_code
+                profile.default_town_or_city = shipping_details.address.city
+                profile.default_street_address1 = (
+                    shipping_details.address.line1
+                )
+                profile.default_street_address2 = (
+                    shipping_details.address.line2
+                )
+                profile.default_county = shipping_details.address.state
+
+                profile.save()
+
         # Most of the time when a user checks out,
         # everything will go well and the form will be submitted
         # so the order should already be in our database when we receive this webhook.
@@ -99,21 +128,9 @@ class StripeWH_Handler:
             # Which was created with the exact same shopping bag.
             # And is associated with the same payment intent.
 
-            print(f"Full Name :  {shipping_details.name}")
-            print(f"Email:  {billing_details.email}")
-            print(f"Phone number :  {shipping_details.phone}")
-            print(f"Country :  {shipping_details.address.country}")
-            print(f"Eircode :  {billing_details.address.postal_code}")
-            print(f"Town/city :  {shipping_details.address.city}")
-            print(f"Street Address 1 :  {shipping_details.address.line1}")
-            print(f"Street Address 2 :  {shipping_details.address.line2}")
-            print(f"County :  {shipping_details.address.state}")
-            print(f"Grand Total :  {grand_total}")
             # To remove all doubt as to which order we're looking for, here in the webhook handler;
             # Add the shopping bag and the stripe pid
             # to the list of attributes we want to match on when finding the order
-            print(f"Original Bag :  {bag}")
-            print(f"Stripe PID :  {pid}")
             try:
                 # Get the order using all the information from the payment intent
                 order = Order.objects.get(
@@ -134,20 +151,17 @@ class StripeWH_Handler:
                     original_bag=bag,
                     stripe_pid=pid,
                 )
-                print("Yay! order exists in DB")
                 # If the order exists - set "order_exists" to True
                 order_exists = True
                 # If the order exists then break out of the loop
                 break
 
             except Order.DoesNotExist:
-                print("Exception Order.DoesNotExist")
                 attempts += 1
                 # Use python's time module to sleep for one second
                 time.sleep(1)
 
         if order_exists:
-            print("This order already exists")
             # STEP 3a
             # When we find the existing order
             # Return a 200 response
@@ -156,7 +170,6 @@ class StripeWH_Handler:
                 status=200,
             )
         else:
-            print("Order does not exist in the database")
             # STEP 3b
             # If there is no matching order on the database
             # Create an order with the details from the form
@@ -169,6 +182,12 @@ class StripeWH_Handler:
                 order = Order.objects.create(
                     full_name=shipping_details.name,
                     email=billing_details.email,
+                    # Set the user's profile, if they weren't logged in it will just be None.
+                    # Add their profile to their order when the webhook creates it.
+                    # In this way, the webhook handler can create orders
+                    # for both authenticated users by attaching their profile.
+                    # and for anonymous users by setting the user_profile field to None.
+                    user_profile=profile,
                     phone_number=shipping_details.phone,
                     country=shipping_details.address.country,
                     postcode=shipping_details.address.postal_code,
@@ -221,7 +240,6 @@ class StripeWH_Handler:
                 # If anything goes wrong - delete the order if it was created.
                 # And return a 500 server error response to stripe.
                 # This will cause stripe to automatically try the webhook again later.
-                print(f"Exception :  {ex}")
                 if order:
                     order.delete()
 
@@ -240,7 +258,6 @@ class StripeWH_Handler:
         """
         Handle the payment_intent.payment_failed webhook from Stripe
         """
-        print("handle_payment_intent_payment_failed() called")
         return HttpResponse(
             content=f'Webhook received: {event["type"]}', status=200
         )
