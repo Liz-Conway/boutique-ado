@@ -7,6 +7,7 @@ from django.db.models.query_utils import Q
 from products.models import Category
 from django.db.models.functions.text import Lower
 from products.forms import ProductForm
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # from django.template import context
 
@@ -134,7 +135,7 @@ class ProductDetail(TemplateView):
         return render(request, self.template_name, context)
 
 
-class AddProduct(TemplateView):
+class AddProduct(LoginRequiredMixin, TemplateView):
     """
     A view to allow Admin users to add a product to the store
     """
@@ -142,6 +143,10 @@ class AddProduct(TemplateView):
     template_name = "products/add-product.html"
 
     def get(self, request):
+        if not request.user.is_superuser:
+            messages.error(request, "Sorry, only store owners can do that")
+            redirect(reverse("home"))
+
         form = ProductForm()
         context = {"form": form}
 
@@ -171,7 +176,7 @@ class AddProduct(TemplateView):
             return render(request, self.template_name, context)
 
 
-class EditProduct(TemplateView):
+class EditProduct(LoginRequiredMixin, TemplateView):
     """
     A view to allow Admin users to update a product in the store
     """
@@ -180,6 +185,10 @@ class EditProduct(TemplateView):
     template_name = "products/edit-product.html"
 
     def get(self, request, product_id):
+        if not request.user.is_superuser:
+            messages.error(request, "Sorry, only store owners can do that")
+            redirect(reverse("home"))
+
         # Prefill the form with the product details
         product = get_object_or_404(Product, pk=product_id)
 
@@ -217,7 +226,7 @@ class EditProduct(TemplateView):
             return render(request, self.template_name, context)
 
 
-class DeleteProduct(TemplateView):
+class DeleteProduct(LoginRequiredMixin, TemplateView):
     """
     A view to allow Admin users to delete a product from the store
     Whenever someone makes a request to "products/delete/<some product id>"
@@ -228,6 +237,10 @@ class DeleteProduct(TemplateView):
     template_name = ""
 
     def get(self, request, product_id):
+        if not request.user.is_superuser:
+            messages.error(request, "Sorry, only store owners can do that")
+            redirect(reverse("home"))
+
         # Retrieve the product to be deleted
         product = get_object_or_404(Product, pk=product_id)
         product.delete()

@@ -5,9 +5,10 @@ from profiles.models import UserProfile
 from profiles.forms import UserProfileForm
 from django.contrib import messages
 from checkout.models import Order
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class ProfileView(TemplateView):
+class ProfileView(LoginRequiredMixin, TemplateView):
     """
     Display the user's profile
     """
@@ -59,7 +60,7 @@ class ProfileView(TemplateView):
         return render(request, template_name, context)
 
 
-class OrderHistory(TemplateView):
+class OrderHistory(LoginRequiredMixin, TemplateView):
     def get(self, request, order_number):
         # Get the order
         order = get_object_or_404(Order, order_number=order_number)
