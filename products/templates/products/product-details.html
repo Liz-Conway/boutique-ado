@@ -41,6 +41,13 @@
 					{% else %}
 						<small>No rating</small>
 					{% endif %}
+					{% if user.is_superuser %}
+						<small>
+							<a href="{% url 'editProduct' product.id %}">Edit</a> | 
+							<a href="{% url 'deleteProduct' product.id %}">Delete</a>
+						</small>
+					{% endif %}
+					
 				</div>
 				<div class="productDetailsDescription">{{ product.description }}</div>
 				<!-- action URL submits to the 'add_to_bag' URL, including the product id the user is adding. -->

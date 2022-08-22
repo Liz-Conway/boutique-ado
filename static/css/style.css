@@ -105,6 +105,10 @@ ul.errorlist > li {
   color: #E84610;
 }
 
+.productCardFooter small a:nth-of-type(2) {
+  color: #E84610;
+}
+
 /*===== END  Typography  ===== */
 /*~~~~~~~  Reset  ~~~~~~~ */
 /* Josh's Custom CSS Reset

@@ -153,9 +153,12 @@ class AddProduct(TemplateView):
         # the image of the product if one was submitted
         form = ProductForm(request.POST, request.FILES)
         if form.is_valid():
-            form.save()
+            product = form.save()
             messages.success(request, "Successfully added product!")
-            return redirect(reverse("addProduct"))
+            # Instead of redirecting to the addProduct page once the product is added,
+            # redirect to that product''s detail page like the edit view does.
+            # return redirect(reverse("addProduct"))
+            return redirect(reverse("productDetails", args=[product.id]))
         else:
             # Attach a generic error message telling the user to check their form
             # which will display the errors.
@@ -212,3 +215,23 @@ class EditProduct(TemplateView):
             context = {"form": form, "product": product}
 
             return render(request, self.template_name, context)
+
+
+class DeleteProduct(TemplateView):
+    """
+    A view to allow Admin users to delete a product from the store
+    Whenever someone makes a request to "products/delete/<some product id>"
+    that product will be deleted.
+    """
+
+    # No template to use.
+    template_name = ""
+
+    def get(self, request, product_id):
+        # Retrieve the product to be deleted
+        product = get_object_or_404(Product, pk=product_id)
+        product.delete()
+
+        messages.success(request, f"Product {product.name} deleted")
+
+        return redirect(reverse("products"))
