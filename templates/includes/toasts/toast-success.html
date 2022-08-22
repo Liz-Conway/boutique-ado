@@ -16,7 +16,11 @@
  		<div class="toastBagWrapper">
  			{% for item in bag_items %}
  			<div class="toastBag">
- 				<img class="toastBagImage" src="{{ item.product.image_url }}">
+ 				{% if item.product.image %}
+ 					<img class="toastBagImage" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+ 				{% else %}
+ 					<img class="toastBagImage" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
+ 				{% endif %}
  				<div class="toastBagDetails">
  					<p><strong>{{ item.product.name }}</strong></p>
  					<p>Size :  {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}{% endif %}</p>

@@ -100,6 +100,11 @@ body {
   color: #808080;
 }
 
+ul.errorlist > li {
+  list-style: none;
+  color: #E84610;
+}
+
 /*===== END  Typography  ===== */
 /*~~~~~~~  Reset  ~~~~~~~ */
 /* Josh's Custom CSS Reset
@@ -722,6 +727,11 @@ body {
 }
 .containerBag .bagItems p.small {
   font-size: 1.3rem;
+}
+.containerBag .bagImage {
+  max-width: 100%;
+  height: auto;
+  border-radius: 4px;
 }
 
 .editLinks {

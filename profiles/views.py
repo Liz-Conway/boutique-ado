@@ -40,6 +40,13 @@ class ProfileView(TemplateView):
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully")
+        else:
+            # Attach a generic error message telling the user to check their form
+            # which will display the errors.
+            messages.error(
+                request,
+                "Failed to add product.  Please ensure the form is valid.",
+            )
 
         # Will be rendering an order history on this page.
         # Use the profile and the related name on the order model

@@ -139,9 +139,30 @@ class AddProduct(TemplateView):
     A view to allow Admin users to add a product to the store
     """
 
+    template_name = "products/add-product.html"
+
     def get(self, request):
         form = ProductForm()
-        template_name = "products/add-product.html"
         context = {"form": form}
 
-        return render(request, template_name, context)
+        return render(request, self.template_name, context)
+
+    def post(self, request):
+        # Instantiate a new instance of the ProductForm from request.POST and
+        # include request .FILES also in order to make sure to capture
+        # the image of the product if one was submitted
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully added product!")
+            return redirect(reverse("addProduct"))
+        else:
+            # Attach a generic error message telling the user to check their form
+            # which will display the errors.
+            messages.error(
+                request,
+                "Failed to add product.  Please ensure the form is valid.",
+            )
+            context = {"form": form}
+
+            return render(request, self.template_name, context)

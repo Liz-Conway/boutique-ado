@@ -9,4 +9,6 @@ class HomePage(TemplateView):
     template_name = "home/index.html"
 
     def get(self, request):
+        print("In the get() for home page")
+
         return render(request, self.template_name)

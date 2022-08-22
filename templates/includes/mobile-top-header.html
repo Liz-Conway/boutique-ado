@@ -40,7 +40,7 @@
 				        {% if request.user.is_authenticated %}
 				            {% if request.user.is_superuser %}
 						    	<menuitem>
-					                <a href="{% url 'account_logout' %}">Product Management</a>
+					                <a href="{% url 'addProduct' %}">Product Management</a>
 					    		</menuitem>
 				            {% endif %}
 						    	<menuitem>
