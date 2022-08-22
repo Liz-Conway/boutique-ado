@@ -2383,5 +2383,33 @@ select:invalid, select option[value=""] {
 }
 
 /*===== END  Django AllAuth  ===== */
+.widgetImage {
+  width: 96px;
+  height: 96px;
+  border-radius: 0.4rem;
+  -webkit-box-shadow: 2px 4px rgba(0, 0, 0, 0.075);
+          box-shadow: 2px 4px rgba(0, 0, 0, 0.075);
+}
+.widgetCheckbox {
+  margin-top: 0.75rem;
+  position: relative;
+  min-height: 1rem;
+  padding-left: 1rem;
+}
+.widgetInput {
+  position: absolute;
+  left: 0;
+  width: 0.75rem;
+  height: 1rem;
+}
+.widgetLabel {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+  color: #E84610;
+}
+.widgetFilename {
+  color: #E84610;
+}
 
 /*# sourceMappingURL=style.css.map */
