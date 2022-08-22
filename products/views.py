@@ -52,7 +52,7 @@ class AllProducts(TemplateView):
                     sortkey = "lower_name"
 
                 if sortkey == "category":
-                    sortkey == "category__name"
+                    sortkey = "category__name"
 
                 if "direction" in request.GET:
                     direction = request.GET["direction"]
@@ -164,5 +164,51 @@ class AddProduct(TemplateView):
                 "Failed to add product.  Please ensure the form is valid.",
             )
             context = {"form": form}
+
+            return render(request, self.template_name, context)
+
+
+class EditProduct(TemplateView):
+    """
+    A view to allow Admin users to update a product in the store
+    """
+
+    # Tell the view which template to use.
+    template_name = "products/edit-product.html"
+
+    def get(self, request, product_id):
+        # Prefill the form with the product details
+        product = get_object_or_404(Product, pk=product_id)
+
+        # Instantiate a ProductForm using the product
+        form = ProductForm(instance=product)
+
+        # Add an info message letting the user know that they're editing a product
+        messages.info(request, f"You are editing {product.name}")
+
+        # Give a context so the form and the product will be in the template
+        context = {"form": form, "product": product}
+
+        return render(request, self.template_name, context)
+
+    def post(self, request, product_id):
+        # Retrieve the amended product details
+        product = get_object_or_404(Product, pk=product_id)
+
+        # Instantiate a form using request.POST and request.FILES
+        # Tell the form the specific instance we'd like to update is the product obtained above
+        form = ProductForm(request.POST, request.FILES, instance=product)
+
+        if form.is_valid():
+            form.save()
+            messages.success(request, "Successfully updated product!")
+            return redirect(reverse("productDetails", args=[product.id]))
+        else:
+            messages.error(
+                request,
+                "Failed to update the product. Please ensure the form is valid.",
+            )
+
+            context = {"form": form, "product": product}
 
             return render(request, self.template_name, context)

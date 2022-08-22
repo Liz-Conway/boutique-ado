@@ -22,7 +22,6 @@ import home.views
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("accounts/", include("allauth.urls")),
-    path("/", home.views.HomePage.as_view(), "homer"),
     path("", include("home.urls")),
     path("products/", include("products.urls")),
     path("bag/", include("bag.urls")),

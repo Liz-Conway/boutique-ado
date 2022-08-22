@@ -652,9 +652,11 @@ body {
 
 /*===== END  Products Page  ===== */
 /*~~~~~~~  Product Detail Page  ~~~~~~~ */
+.productWrapper {
+  margin-bottom: 2rem;
+}
 @media only screen and (min-width: 59.375em) {
   .productWrapper {
-    margin-top: 16rem;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
