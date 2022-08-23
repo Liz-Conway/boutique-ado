@@ -10,18 +10,47 @@
 		position: relative
 		min-height: 1rem
 		padding-left: 1rem
+		display: flex
+		flex-direction: row
+		align-items: center
 
 	&Input
 		position: absolute
 		left: 0
-		width: .75rem
-		height: 1rem
+		width: 1.5rem
+		height: 1.5rem
+
+		&:checked~.widgetLabel::before
+			background-color: $error
+			border-color: $error
+			border-radius: 0
 
 	&Label
 		position: relative
-		margin-bottom: 0
-		vertical-align: top
+		margin-left: 1rem
 		color: $error
 
-	&Filename
-		color: $error
+		&::before
+			border-radius: 0
+			border-color: $error
+
+#widgetFilename
+	color: $error
+
+.btnFile
+	position: relative
+	overflow: hidden
+	align-self: flex-start
+	margin-top: .75rem
+
+	input[type="file"]
+		/* Make sure that the entire input, which is clickable, */
+		/* lives inside this span that looks like a button. */
+		position: absolute
+		top: 0
+		right: 0
+		min-width: 100%
+		min-height: 100%
+		/* Then making it invisible so it appears you're clicking the button */
+		opacity: 0
+		cursor: pointer

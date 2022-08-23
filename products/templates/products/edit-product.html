@@ -21,8 +21,11 @@
 			<!-- Add the encoding type attribute on this form.
 			Since it will potentially be submitting an image file, 
 			and without this the image won't be uploaded properly -->
-			<form method="POST" action="{% url 'editProduct' product.id %}" enctype="multipart/form-data">
+			<form method="POST" action="{% url 'editProduct' product.id %}" 
+					class="addProductForm" enctype="multipart/form-data">
 				{% csrf_token %}
+				<!-- Instead of displaying all fields 
+				Select the fields to show -->
 				{{ form }}
 				<div class="addProductButtons">
 					<a class="btn btnShopping" href="{% url 'products' %}">Cancel</a>
@@ -34,3 +37,12 @@
 	
 {% endblock %}
 
+{% block postloadjs %}
+	{{ block.super }}
+	<script type="text/javascript">
+		$("#newImage").change(function() {
+			var file = $("#newImage")[0].files[0];
+			$("#filename").text(`Image will be set to :  $(file.name)`)
+		});
+	</script>
+{% endblock %}
