@@ -14,7 +14,7 @@ import os
 import dj_database_url
 
 from pathlib import Path
-from django.conf.global_settings import EMAIL_BACKEND
+from django.conf.global_settings import EMAIL_BACKEND, EMAIL_HOST_USER
 
 # if os.path.isfile('env.py'):
 #     import env  # noqa
@@ -151,12 +151,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
 MEDIA_URL = "/media/"
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
-# By default allauth will send confirmation emails to any new accounts.
-# We need to temporarily log those emails to the console
-# so we can get the confirmation links.
-EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 
-# account authentication method is what tells allauth that we want to allow
+# Account authentication method is what tells allauth that we want to allow
 # authentication using either usernames or emails.
 ACCOUNT_AUTHENTICATION_METHOD = "username_email"
 # ACCOUNT_AUTHENTICATION_METHOD = "username"
@@ -250,4 +246,17 @@ STRIPE_SECRET_KEY = env("STRIPE_SECRET_KEY")
 
 STRIPE_WH_SECRET = env("STRIPE_WH_SECRET")
 
-DEFAULT_FROM_EMAIL = "boutiqueado@example.com"
+if "DEVELOPMENT" in os.environ:
+    # By default allauth will send confirmation emails to any new accounts.
+    # We need to temporarily log those emails to the console
+    # so we can get the confirmation links.
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+    DEFAULT_FROM_EMAIL = "boutiqueado@example.com"
+else:
+    EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = "smtp.gmail.com"
+    EMAIL_HOST_USER = env("EMAIL_HOST_USER")
+    EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASS")
+    DEFAULT_FROM_EMAIL = env("EMAIL_HOST_USER")
