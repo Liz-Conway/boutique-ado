@@ -38,13 +38,16 @@
 				    </a>
 				    <menu aria-labelledby="user-options">
 				        {% if request.user.is_authenticated %}
+						    	<menuitem id="homeLink">
+						            <a href="{% url 'home' %}">Home</a>
+					    		</menuitem>
 				            {% if request.user.is_superuser %}
 						    	<menuitem>
 					                <a href="{% url 'addProduct' %}">Product Management</a>
 					    		</menuitem>
 				            {% endif %}
 						    	<menuitem>
-						            <a href="{% url 'home' %}">My Profile</a>
+						            <a href="{% url 'profile' %}">My Profile</a>
 					    		</menuitem>
 						    	<menuitem>
 						            <a href="{% url 'account_logout' %}">Logout</a>
@@ -60,7 +63,7 @@
 			    	</menu>
 			    </menuitem>
 		    </menu>
-		
+
 		</li>
 		<li>
 		    <a class="{% if grand_total %}grandTotal{% endif %} navLink mobileOnly" href="{% url 'bag' %}">

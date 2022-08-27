@@ -10,9 +10,19 @@
 			<!-- Site navbar -->
 			<ul class="navigationList">
 				<li class="navigationItem">
+					    <menu>
+					    <menuitem id="homeLink">
+						    <a class="navLink" href="{% url 'home' %}" 
+						    		aria-haspopup="true" aria-expanded="false">
+						        Home
+						    </a>
+					</menuitem>
+					    </menu>
+				</li>
+				<li class="navigationItem">
 				    <menu>
 					    <menuitem>
-						    <a class="navLink" href="{% url 'products' %}" id="allProductsLink" 
+						    <a class="navLink" href="{% url 'products' %}" id="allProductsLink"
 						    		aria-haspopup="true" aria-expanded="false">
 						        All Products
 						    </a>
@@ -28,17 +38,17 @@
 				<li class="navigationItem">
 				    <menu>
 					    <menuitem>
-						    <a class="navLink" href="#" id="clothingLink" 
+						    <a class="navLink" href="#" id="clothingLink"
 						    		aria-haspopup="true" aria-expanded="false">
 						        Clothing
 						    </a>
 						    <menu aria-labelledby="clothingLink">
 						    	<!-- Pass a category parameter to the products URL -->
-						    	<!-- These parameters will use the "name" field from the 
+						    	<!-- These parameters will use the "name" field from the
 						    	Category model so we have a programmatic way to access them
 						    	Of course we could also use the category id.
 								But this makes the URLs a little more semantic which is nice for the user -->
-								<!-- The products URL followed by a question mark 
+								<!-- The products URL followed by a question mark
 								to indicate we're about to pass the category parameter.
 								Followed by "activewear"" and "essentials" separated by a comma.
 								This syntax ensures we end up with a comma-separated string in the view. -->
@@ -68,7 +78,7 @@
 				<li class="navigationItem">
 				    <menu>
 					    <menuitem>
-						    <a class="navLink" href="#" id="specialOffersLink" 
+						    <a class="navLink" href="#" id="specialOffersLink"
 						    		aria-haspopup="true" aria-expanded="false">
 						        Special Offers
 						    </a>

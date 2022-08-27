@@ -19,7 +19,9 @@
 	z-index: 9999
 
 [class^="container"]
-	margin: 164px auto 1rem auto
+	margin: 1rem auto 1rem auto
+	@include respond(desktop)
+		margin: 164px auto 1rem auto
 	width: 80%
 	> hr
 		margin-top: 1.2rem

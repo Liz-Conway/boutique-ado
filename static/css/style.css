@@ -612,8 +612,13 @@ body {
 }
 
 [class^="container"] {
-  margin: 164px auto 1rem auto;
+  margin: 1rem auto 1rem auto;
   width: 80%;
+}
+@media only screen and (min-width: 59.375em) {
+  [class^="container"] {
+    margin: 164px auto 1rem auto;
+  }
 }
 [class^="container"] > hr {
   margin-top: 1.2rem;
@@ -1247,6 +1252,15 @@ body {
   margin-top: 1.4rem;
 }
 
+#homeLink {
+  min-width: 9rem;
+}
+@media only screen and (min-width: 59.375em) {
+  #homeLink {
+    display: none;
+  }
+}
+
 /*===== END  Links  ===== */
 /*~~~~~~~  Icons & Logos  ~~~~~~~ */
 /* from Bulma */
@@ -1291,6 +1305,11 @@ body {
   text-transform: uppercase;
   color: #000000;
   font-size: 2rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .logoFont {
+    font-size: 1.5rem;
+  }
 }
 
 .mainLogoLink {
@@ -1932,10 +1951,11 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 .updateForm {
   width: 20rem;
 }
-.updateForm .quantityBox {
+
+.quantityBox {
   width: 15rem;
-  font-size: 1rem;
-  height: calc(1.5em + 0.5rem + 2px);
+  font-size: 1.3rem;
+  height: calc(1.5em + 1.6rem);
   padding: 0.25rem 0.5rem;
   line-height: 1.5;
 }
@@ -2320,9 +2340,14 @@ select:invalid, select option[value=""] {
 
 /*~~~~~~~  Django AllAuth  ~~~~~~~ */
 .allauthWrapper {
-  width: 50%;
+  width: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+@media only screen and (min-width: 59.375em) {
+  .allauthWrapper {
+    width: 50%;
+  }
 }
 .allauthWrapper form.login p {
   margin-top: 0.75rem;
