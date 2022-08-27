@@ -48,7 +48,7 @@ SECRET_KEY = (
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["liz-ado.herokuapp.com", "127.0.0.1"]
 
 
 # Application definition
@@ -185,13 +185,19 @@ WSGI_APPLICATION = "boutique_ado.wsgi.application"
 
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+if "DATABASE_URL" in os.environ:
+    DATABASES = {
+        "default": dj_database_url.parse(
+            "postgres://oudurqnmtxccoj:a373e72938ed7349e7d5df707dfc5f2d2f0fc75d3a6d60c8f15b798e5003c0ca@ec2-99-80-170-190.eu-west-1.compute.amazonaws.com:5432/d4n9vrp6m6642i"
+        )
     }
-}
+else:
+    DATABASES = {
+        "default": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": BASE_DIR / "db.sqlite3",
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
