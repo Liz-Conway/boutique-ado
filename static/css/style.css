@@ -1914,14 +1914,8 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 /*~~~~~~~  Table  ~~~~~~~ */
 .tableRoundedResponsive {
   .border-radius: 0.5rem;
-  display: none;
   width: 100%;
   overflow-x: auto;
-}
-@media only screen and (min-width: 59.375em) {
-  .tableRoundedResponsive {
-    display: block;
-  }
 }
 .tableBag {
   width: 100%;
