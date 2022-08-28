@@ -5,7 +5,7 @@ from django.http.response import HttpResponse
 from products.models import Product
 from django.contrib import messages
 
-# Create your views here.
+
 class BagContents(TemplateView):
     """A class for rendering the bag contents page"""
 
@@ -87,7 +87,7 @@ class AddToBag(TemplateView):
                     bag[product_id]["products_by_size"][size] += quantity
                     messages.success(
                         request,
-                        f'Updated size {size.upper()} {product.name} quantity to {bag[product_id]["products_by_size"][size]}',
+                        f"Updated size {size.upper()} {product.name} quantity to {bag[product_id]['products_by_size'][size]}",
                     )
                 else:
                     # Product already exists, but this is a new size for it So set the 'product by size' to this order quantity
