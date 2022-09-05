@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="container headerContainer">
+        <div>
+        </div>
+    </div>
+    <div class="container">
+        <div>
+            <div class="errorTitle">
+                <h1>
+                    The page you are looking for isn't available
+                </h1>
+                <div>
+                    <h4>
+                        <a href="{% url 'products' %}" 
+                            class="shoppingButton">
+                                Return to shop
+                        </a>
+                    </h4>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
