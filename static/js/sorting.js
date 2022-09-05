@@ -1,7 +1,3 @@
-    $("#backToTopLink").click(function(event) {
-        window.scrollTo(0, 0);
-    });
-
     // Capture the change event from the sort selector
     $("#sortSelector").change(function() {
         var selector = $(this);
