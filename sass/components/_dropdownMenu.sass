@@ -1,19 +1,12 @@
 /*~~~~~~~  Dropdown Menu  ~~~~~~~*/
 
-/* HTML Nav Styles */
-/* HTML Nav Styles */
+li.navigationItem
+	min-width: fit-content
+
 /* HTML Nav Styles */
 menuitem
-	position: relative
-	display: block
-	opacity: 0
-	// width: 0
 	cursor: pointer
 	z-index: 4000
-
-	& > menu
-		position: absolute
-		pointer-events: none
 
 menu
 	display: flex
@@ -24,39 +17,63 @@ menu
 		& > menuitem > a
 			padding-left: 0
 
-	& > menuitem
-		pointer-events: all
-		opacity: 1
-
 	& menuitem a
 		white-space: nowrap
 		display: block
- 
-menuitem > menu > menuitem
-	/* Initially hide the submenu */
-	display: none
 
-menuitem:hover > menu
-	pointer-events: initial
+/*	this is the initial state of all subMenus.
+	we set it to max-height: 0, and hide the overflowed content.
+.subMenu
+	overflow: hidden
+	max-height: 0
+	transition: all 0.5s ease-out
+	background-color: $grey
+	@include respond(desktop)
+		position: absolute
+		margin-top: -3rem
+	& > menuitem > a
+		min-width: 50%
+		&:hover
+			background-color: $greyHelp
 
-	& > menuitem, menu:hover > menuitem
-		/* Show the submenu when its parent is hovered */
-		opacity: 1
-		display: block
+.mainMenu
+	/* Need a bottom margin otherwise the menu is written
+		on top of the rest of the page
+	//margin-bottom: 2.5rem
+	@include respond(desktop)
+		/*	Showing the submenu shoves the rest of the page down
+			So remove the bottom margin on the main menu to counter-act this
+		&:hover
+			margin-bottom: 0
+	& > menuitem > span
+		white-space: nowrap
 
-menu > menuitem menuitem menu
-	transform: translateX(100%)
-	top: 0
-	right: 0
-	color: #bada55
+.mainMenu > menuitem > span, .subMenu a
+	font-size: 2.5rem
+	@include respond(desktop)
+		font-size: $baseFontSize
 
-/* User Styles Below Not Required */
-/* User Styles Below Not Required */
-/* User Styles Below Not Required */
 
+/*	when hovering over a .mainMenu item,
+	display the subMenu inside it.
+	we're changing the subMenu's max-height from 0 to 200px;
+.mainMenu menuitem:hover .subMenu
+	/*	In the mobile view we want the "appearing" submenu to
+		shove the other main menu items down
+	display: block
+	max-height: 200px
+	transform: translateY(1.3rem)
+	/*	In the desktop view we want the "appearing" submenu to
+	overlap the existing page items and not shove anything down
+	@include respond(desktop)
+		position: absolute
+		margin-top: -3rem
+		transform: translateY(4rem)
+
+
+// User Styles Below Not Required
 
 menu a
-	background: $white
 	color: $black
 	min-width: 9rem
 	transition: background 0.5s, color 0.5s, transform 0.5s
@@ -67,75 +84,31 @@ menu a
 	padding-bottom: .5rem
 	padding-right: 1rem
 	border-radius: 3px
+
+.mainMenu > menuitem
 	position: relative
 
-
-menu a:hover:before
-	content:  ''
-	top: 0
-	left: 0
-	position: absolute
-	background: rgba(0, 0, 0, 0.2)
-	width: 100%
-	height: 100%
-
-
-menu > menuitem > a + menu:after
+/* Place an arrow underneath the mainMenu text */
+.mainMenu > menuitem::after
 	content:  ''
 	position: absolute
-	border: 10px solid transparent
-	border-top: 10px solid white
-	left: 12px
-	top: -27px
+	@include arrow(10px, 8.5px, $shadow, down)
+	left: 50%
+	top: 19px
 	@include respond(desktop)
-		top: -40px
+		top: 23px
 
-.navigationList menu > menuitem > a + menu:after
-	top: 6px
-	@include respond(desktop)
-		top: -40px
 
-menuitem > menu > menuitem > a + menu:after 
-	content:  ''
-	position: absolute
-	border: 10px solid transparent
-	border-left: 10px solid white
-	top:  20px
-	left: -180px
-	transition: opacity 0.6, transform 0s
 
-.navigationList menu > menuitem > menu
-	margin-top: -4rem
-	@include respond(desktop)
-		margin-top: 0
-
-menu > menuitem > menu > menuitem
-	transition: transform 0.6s, opacity 0.6s
-	transform: translateY(150%)
+/* For "search" & "My Account" dropdowns */
+.topMenu > menuitem > menu > menuitem
+	transition: opacity 0.6s
 	opacity: 0
 
-menu > menuitem:hover > menu > menuitem,
-menu > menuitem.hover > menu > menuitem
-	transform: translateY(0%)
+.topMenu > menuitem:hover > menu > menuitem,
+.topMenu > menuitem.hover > menu > menuitem
+	transition: opacity 0.6s
 	opacity:  1
 
-.navigationList menu > menuitem:hover > menu > menuitem,
-.navigationList menu > menuitem.hover > menu > menuitem
-	/*For a vertical menu (mobile) - move to the right of the menu list*/
-	transform: translateX(12.5rem)
-	@include respond(desktop)
-		/*Desktop is a horizontal menu - so do not shift to the right*/
-		transform: translateX(0%)
-
-
-menuitem > menu > menuitem > menu > menuitem
-	transition: transform 0.6s, opacity 0.6s
-	transform: translateX(195px) translateY(0%)
-	opacity: 0
- 
-menuitem > menu > menuitem:hover > menu > menuitem,  
-menuitem > menu > menuitem.hover > menu > menuitem  
-	transform: translateX(0) translateY(0%)
-	opacity: 1
 
 /*===== END Dropdown Menu   =====*/

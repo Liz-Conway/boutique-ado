@@ -20,13 +20,10 @@
 					    </menu>
 				</li>
 				<li class="navigationItem">
-				    <menu>
+				    <menu class="mainMenu">
 					    <menuitem>
-						    <a class="navLink" href="{% url 'products' %}" id="allProductsLink"
-						    		aria-haspopup="true" aria-expanded="false">
-						        All Products
-						    </a>
-						    <menu aria-labelledby="allProductsLink">
+						        <span id="allProductsLabel">All Products</span>
+						    <menu class="subMenu" aria-labelledby="allProductsLabel">
 						    	<menuitem><a href="{% url 'products' %}?sort=price&direction=asc">By Price</a></menuitem>
 						    	<menuitem><a href="{% url 'products' %}?sort=rating&direction=desc">By Rating</a></menuitem>
 						    	<menuitem><a href="{% url 'products' %}?sort=category&direction=asc">By Category</a></menuitem>
@@ -36,13 +33,10 @@
 				    </menu>
 				</li>
 				<li class="navigationItem">
-				    <menu>
+				    <menu class="mainMenu">
 					    <menuitem>
-						    <a class="navLink" href="#" id="clothingLink"
-						    		aria-haspopup="true" aria-expanded="false">
-						        Clothing
-						    </a>
-						    <menu aria-labelledby="clothingLink">
+						        <span id="clothingLabel">Clothing</span>
+						    <menu class="subMenu" aria-labelledby="clothingLabel">
 						    	<!-- Pass a category parameter to the products URL -->
 						    	<!-- These parameters will use the "name" field from the
 						    	Category model so we have a programmatic way to access them
@@ -61,13 +55,10 @@
 				    </menu>
 				</li>
 				<li class="navigationItem">
-				    <menu>
+				    <menu class="mainMenu">
 					    <menuitem>
-						    <a class="navLink" href="#" id="homewareLink"
-						    		aria-haspopup="true" aria-expanded="false">
-						        Homeware
-						    </a>
-						    <menu aria-labelledby="homewareLink">
+						        <span id="homewareLabel">Homeware</span>
+						    <menu class="subMenu" aria-labelledby="homewareLabel">
 						    	<menuitem><a href="{% url 'products'%}?category=bed_bath">Bed & Bath</a></menuitem>
 						    	<menuitem><a href="{% url 'products'%}?category=kitchen_dining">Kitchen & Dining</a></menuitem>
 						    	<menuitem><a href="{% url 'products'%}?category=bed_bath,kitchen_dining">All Homeware</a></menuitem>
@@ -76,13 +67,10 @@
 				    </menu>
 				</li>
 				<li class="navigationItem">
-				    <menu>
+				    <menu class="mainMenu">
 					    <menuitem>
-						    <a class="navLink" href="#" id="specialOffersLink"
-						    		aria-haspopup="true" aria-expanded="false">
-						        Special Offers
-						    </a>
-						    <menu aria-labelledby="specialOffersLink">
+						        <span id="specialOffersLabel">Special Offers</span>
+						    <menu class="subMenu" aria-labelledby="specialOffersLabel">
 						    	<menuitem><a href="{% url 'products'%}?category=new_arrivals">New Arrivals</a></menuitem>
 						    	<menuitem><a href="{% url 'products'%}?category=deals">Deals</a></menuitem>
 						    	<menuitem><a href="{% url 'products'%}?category=clearance">Clearance</a></menuitem>
