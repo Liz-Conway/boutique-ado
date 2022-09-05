@@ -411,7 +411,8 @@ body {
       -ms-flex-direction: row;
           flex-direction: row;
   margin-top: 10rem;
-  margin-right: 22rem;
+  margin-right: auto;
+  margin-left: auto;
   display: flex;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -731,18 +732,206 @@ body {
   margin-bottom: 2rem;
   font-size: 2.75rem;
 }
-.containerBag .bagItems p {
-  font-size: 1.25rem;
-  font-weight: 300;
-  margin-bottom: 4rem;
+.containerBag .bagItems {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagItems {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse;
+  }
 }
 .containerBag .bagItems p.small {
-  font-size: 1.3rem;
+  font-size: 1.6rem;
 }
 .containerBag .bagImage {
   max-width: 100%;
   height: auto;
   border-radius: 4px;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagTotals {
+    -ms-flex-item-align: end;
+        align-self: flex-end;
+  }
+}
+.containerBag .bagTotals p {
+  margin-bottom: 1rem;
+  font-size: 2rem;
+}
+.containerBag .bagTotals .bagGrandTotal {
+  font-weight: 700;
+  font-size: 3rem;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+.containerBag .bagButtons {
+  font-size: 1.3rem;
+}
+.containerBag .bagSummary {
+  color: #808080;
+  font-size: 1.8rem;
+  margin-top: 1rem;
+  margin-bottom: 5rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagSummary {
+    display: none;
+  }
+}
+.containerBag .bagProducts p {
+  font-size: 2rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProducts p {
+    font-size: 1.6rem;
+  }
+}
+.containerBag .bagProduct {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProduct {
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductDetail {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+  }
+}
+.containerBag .bagProductPrice {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+.containerBag .bagProductPrice p::before {
+  content: "Price Each :  ";
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductPrice p::before {
+    content: "";
+  }
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductPrice {
+    margin-top: 0;
+  }
+}
+.containerBag .bagProductSubtotal p {
+  font-weight: 700;
+}
+.containerBag .bagProductSubtotal p::before {
+  content: "Subtotal :  ";
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductSubtotal p::before {
+    content: "";
+  }
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductSubtotal {
+    -webkit-box-ordinal-group: 3;
+        -ms-flex-order: 2;
+            order: 2;
+  }
+}
+.containerBag .bagProductQuantity {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductQuantity {
+    margin: 0 1rem;
+  }
+}
+.containerBag .bagProductTitles {
+  display: none;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductTitles {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
+    font-weight: 700;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+  }
+}
+.containerBag .bagProductTitlesInfo {
+  width: 50%;
+}
+@media only screen and (min-width: 59.375em) {
+  .containerBag .bagProductTitlesPrice {
+    padding-left: calc(((100vw - 950px) * 6 / 113 * 10) + 20px);
+  }
+}
+@media only screen and (min-width: 66.4375em) {
+  .containerBag .bagProductTitlesPrice {
+    padding-left: calc((1175px - 100vw) * 6 / 113 * 10);
+  }
+}
+@media only screen and (min-width: 75em) {
+  .containerBag .bagProductTitlesPrice {
+    padding-left: 0;
+    margin-left: calc((1300px - 100vw) * -50 / 100);
+  }
+}
+@media only screen and (min-width: 81.25em) {
+  .containerBag .bagProductTitlesPrice {
+    margin-left: 0;
+  }
+}
+@media only screen and (min-width: 85.9375em) {
+  .containerBag .bagProductTitlesPrice {
+    margin-left: calc((100vw - 1375px) * 35 / 125);
+  }
+}
+@media only screen and (min-width: 93.75em) {
+  .containerBag .bagProductTitlesPrice {
+    margin-left: calc((1550px - 100vw) * 20 / 50);
+  }
+}
+@media only screen and (min-width: 96.875em) {
+  .containerBag .bagProductTitlesPrice {
+    margin-left: 0;
+  }
+}
+@media only screen and (min-width: 100em) {
+  .containerBag .bagProductTitlesPrice {
+    margin-left: calc((100vw - 1600px) * -170 / 400);
+  }
 }
 
 .editLinks {
@@ -752,9 +941,10 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
+  margin-top: 2rem;
 }
 .editLinks a {
-  font-size: 1.2rem;
+  font-size: 2rem;
   cursor: pointer;
 }
 
@@ -1492,6 +1682,8 @@ button[class$="crementQty"] {
   color: #FFFFFF;
   cursor: pointer;
   padding: 0.25rem 0.5rem;
+  height: 3.75rem;
+  width: 3.75rem;
 }
 button[class$="crementQty"]:disabled {
   background-color: #808080;
@@ -1556,19 +1748,16 @@ button[class$="crementQty"]:disabled {
 
 /*===== END  Search  ===== */
 /*~~~~~~~  Dropdown Menu  ~~~~~~~ */
-/* HTML Nav Styles */
-/* HTML Nav Styles */
+li.navigationItem {
+  min-width: -webkit-fit-content;
+  min-width: -moz-fit-content;
+  min-width: fit-content;
+}
+
 /* HTML Nav Styles */
 menuitem {
-  position: relative;
-  display: block;
-  opacity: 0;
   cursor: pointer;
   z-index: 4000;
-}
-menuitem > menu {
-  position: absolute;
-  pointer-events: none;
 }
 
 menu {
@@ -1589,42 +1778,81 @@ menu.topMenu {
 menu.topMenu > menuitem > a {
   padding-left: 0;
 }
-menu > menuitem {
-  pointer-events: all;
-  opacity: 1;
-}
 menu menuitem a {
   white-space: nowrap;
   display: block;
 }
 
-menuitem > menu > menuitem {
-  /* Initially hide the submenu */
-  display: none;
+/*	this is the initial state of all subMenus.
+ * we set it to max-height: 0, and hide the overflowed content. */
+.subMenu {
+  overflow: hidden;
+  max-height: 0;
+  -webkit-transition: all 0.5s ease-out;
+  transition: all 0.5s ease-out;
+  background-color: #999999;
+}
+@media only screen and (min-width: 59.375em) {
+  .subMenu {
+    position: absolute;
+    margin-top: -3rem;
+  }
+}
+.subMenu > menuitem > a {
+  min-width: 50%;
+}
+.subMenu > menuitem > a:hover {
+  background-color: #808080;
 }
 
-menuitem:hover > menu {
-  pointer-events: initial;
+.mainMenu {
+  /* Need a bottom margin otherwise the menu is written
+   * on top of the rest of the page */
 }
-menuitem:hover > menu > menuitem, menuitem:hover > menu menu:hover > menuitem {
-  /* Show the submenu when its parent is hovered */
-  opacity: 1;
+@media only screen and (min-width: 59.375em) {
+  .mainMenu {
+    /*	Showing the submenu shoves the rest of the page down
+     * So remove the bottom margin on the main menu to counter-act this */
+  }
+  .mainMenu:hover {
+    margin-bottom: 0;
+  }
+}
+.mainMenu > menuitem > span {
+  white-space: nowrap;
+}
+
+.mainMenu > menuitem > span, .subMenu a {
+  font-size: 2.5rem;
+}
+@media only screen and (min-width: 59.375em) {
+  .mainMenu > menuitem > span, .subMenu a {
+    font-size: 1.6rem;
+  }
+}
+
+/*	when hovering over a .mainMenu item,
+ * display the subMenu inside it.
+ * we're changing the subMenu's max-height from 0 to 200px; */
+.mainMenu menuitem:hover .subMenu {
+  /*	In the mobile view we want the "appearing" submenu to
+   * shove the other main menu items down */
   display: block;
+  max-height: 200px;
+  -webkit-transform: translateY(1.3rem);
+          transform: translateY(1.3rem);
+  /*	In the desktop view we want the "appearing" submenu to */
+}
+@media only screen and (min-width: 59.375em) {
+  .mainMenu menuitem:hover .subMenu {
+    position: absolute;
+    margin-top: -3rem;
+    -webkit-transform: translateY(4rem);
+            transform: translateY(4rem);
+  }
 }
 
-menu > menuitem menuitem menu {
-  -webkit-transform: translateX(100%);
-          transform: translateX(100%);
-  top: 0;
-  right: 0;
-  color: #bada55;
-}
-
-/* User Styles Below Not Required */
-/* User Styles Below Not Required */
-/* User Styles Below Not Required */
 menu a {
-  background: #FFFFFF;
   color: #000000;
   min-width: 9rem;
   -webkit-transition: background 0.5s, color 0.5s, -webkit-transform 0.5s;
@@ -1638,110 +1866,40 @@ menu a {
   padding-bottom: 0.5rem;
   padding-right: 1rem;
   border-radius: 3px;
+}
+
+.mainMenu > menuitem {
   position: relative;
 }
 
-menu a:hover:before {
-  content: "";
-  top: 0;
-  left: 0;
-  position: absolute;
-  background: rgba(0, 0, 0, 0.2);
-  width: 100%;
-  height: 100%;
-}
-
-menu > menuitem > a + menu:after {
+/* Place an arrow underneath the mainMenu text */
+.mainMenu > menuitem::after {
   content: "";
   position: absolute;
-  border: 10px solid transparent;
-  border-top: 10px solid white;
-  left: 12px;
-  top: -27px;
+  width: 0;
+  height: 0;
+  border: 8.5px solid transparent;
+  border-top: 10px solid #555;
+  left: 50%;
+  top: 19px;
 }
 @media only screen and (min-width: 59.375em) {
-  menu > menuitem > a + menu:after {
-    top: -40px;
+  .mainMenu > menuitem::after {
+    top: 23px;
   }
 }
 
-.navigationList menu > menuitem > a + menu:after {
-  top: 6px;
-}
-@media only screen and (min-width: 59.375em) {
-  .navigationList menu > menuitem > a + menu:after {
-    top: -40px;
-  }
-}
-
-menuitem > menu > menuitem > a + menu:after {
-  content: "";
-  position: absolute;
-  border: 10px solid transparent;
-  border-left: 10px solid white;
-  top: 20px;
-  left: -180px;
-  -webkit-transition: opacity 0.6, -webkit-transform 0s;
-  transition: opacity 0.6, -webkit-transform 0s;
-  transition: opacity 0.6, transform 0s;
-  transition: opacity 0.6, transform 0s, -webkit-transform 0s;
-}
-
-.navigationList menu > menuitem > menu {
-  margin-top: -4rem;
-}
-@media only screen and (min-width: 59.375em) {
-  .navigationList menu > menuitem > menu {
-    margin-top: 0;
-  }
-}
-
-menu > menuitem > menu > menuitem {
-  -webkit-transition: opacity 0.6s, -webkit-transform 0.6s;
-  transition: opacity 0.6s, -webkit-transform 0.6s;
-  transition: transform 0.6s, opacity 0.6s;
-  transition: transform 0.6s, opacity 0.6s, -webkit-transform 0.6s;
-  -webkit-transform: translateY(150%);
-          transform: translateY(150%);
+/* For "search" & "My Account" dropdowns */
+.topMenu > menuitem > menu > menuitem {
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
   opacity: 0;
 }
 
-menu > menuitem:hover > menu > menuitem,
-menu > menuitem.hover > menu > menuitem {
-  -webkit-transform: translateY(0%);
-          transform: translateY(0%);
-  opacity: 1;
-}
-
-.navigationList menu > menuitem:hover > menu > menuitem,
-.navigationList menu > menuitem.hover > menu > menuitem {
-  /*For a vertical menu (mobile) - move to the right of the menu list */
-  -webkit-transform: translateX(12.5rem);
-          transform: translateX(12.5rem);
-}
-@media only screen and (min-width: 59.375em) {
-  .navigationList menu > menuitem:hover > menu > menuitem,
-  .navigationList menu > menuitem.hover > menu > menuitem {
-    /*Desktop is a horizontal menu - so do not shift to the right */
-    -webkit-transform: translateX(0%);
-            transform: translateX(0%);
-  }
-}
-
-menuitem > menu > menuitem > menu > menuitem {
-  -webkit-transition: opacity 0.6s, -webkit-transform 0.6s;
-  transition: opacity 0.6s, -webkit-transform 0.6s;
-  transition: transform 0.6s, opacity 0.6s;
-  transition: transform 0.6s, opacity 0.6s, -webkit-transform 0.6s;
-  -webkit-transform: translateX(195px) translateY(0%);
-          transform: translateX(195px) translateY(0%);
-  opacity: 0;
-}
-
-menuitem > menu > menuitem:hover > menu > menuitem,
-menuitem > menu > menuitem.hover > menu > menuitem {
-  -webkit-transform: translateX(0) translateY(0%);
-          transform: translateX(0) translateY(0%);
+.topMenu > menuitem:hover > menu > menuitem,
+.topMenu > menuitem.hover > menu > menuitem {
+  -webkit-transition: opacity 0.6s;
+  transition: opacity 0.6s;
   opacity: 1;
 }
 
@@ -1942,16 +2100,23 @@ menuitem > menu > menuitem.hover > menu > menuitem {
 
 /*===== END  Table  ===== */
 /*~~~~~~~  Form  ~~~~~~~ */
-.updateForm {
-  width: 20rem;
+@media only screen and (min-width: 59.375em) {
+  .updateForm {
+    width: 20rem;
+  }
 }
 
 .quantityBox {
-  width: 15rem;
+  /* 7.5rem is twice the width of an increment/decrement button */
+  width: calc(100% - 7.5rem);
   font-size: 1.3rem;
-  height: calc(1.5em + 1.6rem);
+  height: 3.75rem;
   padding: 0.25rem 0.5rem;
   line-height: 1.5;
+  /*	The input box is rendered just above the buttons beside it
+   * so move it down the tiniest bit */
+  -webkit-transform: translateY(2px);
+          transform: translateY(2px);
 }
 
 #paymentForm fieldset {

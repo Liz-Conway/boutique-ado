@@ -1,2 +1,42 @@
 @function pixelToEm($value, $base:16)
 	@return ($value / $base) + em
+
+@function priceLeftPadding950()
+	// 1 rem = 10px - so multiply by 10 at the end to convert the rems to px
+	// 6rem is the maximum padding needed @ 1063px width (1063 - 950 = 113)
+	// 0rem is the minimum padding needed @ 950px width
+	$gap: calc(((100vw - 950px) * 6 / 113 * 10) + 20px)
+	@return $gap
+
+@function priceLeftPadding1063()
+	// 1 rem = 10px - so multiply by 10 at the end to convert the rems to px
+	$gap: calc((1175px - 100vw) * 6 / 113 * 10)
+	@return $gap
+
+@function priceLeftMargin1200()
+	// 1 rem = 10px - so multiply by 10 at the end to convert the rems to px
+	// -50px is the maximum margin needed @ 1200px width
+	// 0px is the margin needed @ 1300px width
+	$gap: calc((1300px - 100vw) * -50 / 100)
+	@return $gap
+
+@function priceLeftMargin1375()
+	// 1 rem = 10px - so multiply by 10 at the end to convert the rems to px
+	// 35px is the maximum margin needed @ 1500px width
+	// 0px is the margin needed @ 1375px width (1500 - 1375 = 125)
+	$gap: calc((100vw - 1375px) * 35 / 125)
+	@return $gap
+
+@function priceLeftMargin1500()
+	// 1 rem = 12px - so multiply by 10 at the end to convert the rems to px
+	// 20px is the maximum margin needed @ 1500px width
+	// 0px is the margin needed @ 1550 width (1550 - 1500 = 50)
+	$gap: calc((1550px - 100vw) * 20 / 50)
+	@return $gap
+
+@function priceLeftMargin1600()
+	// 1 rem = 12px - so multiply by 10 at the end to convert the rems to px
+	// -170px is the maximum margin needed @ 2000px width
+	// 0px is the margin needed @ 1600 width (2000 - 1600 = 400)
+	$gap: calc((100vw - 1600px) * -170 / 400)
+	@return $gap

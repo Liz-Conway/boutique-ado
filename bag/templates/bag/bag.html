@@ -22,34 +22,58 @@
 		<hr>
 		<div class="bagItems">
 			{% if bag_items %}
-				<div class="tableRoundedResponsive">
-					<table class="tableBag">
-						<thead>
-							<th scope="col">Product Info</th>
-							<th scope="col"></th>
-							<th scope="col">Price</th>
-							<th scope="col">Quantity</th>
-							<th scope="col">Subtotal</th>
-						</thead>
-						<tbody>
-							{% for item in bag_items %}
-								<tr>
-									<td>
-						 				{% if item.product.image %}
-						 					<img class="bagImage" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
-						 				{% else %}
-						 					<img class="bagImage" src="{{ MEDIA_URL }}noimage.png" alt="{{ item.product.name }}">
-						 				{% endif %}
-									</td>
-									<td>
-										<p><strong>{{ item.product.name }}</strong></p>
-										<p><strong>Size :  {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</strong></p>
-										<p class="small">SKU :  {{ item.product.sku|upper }}</p>
-									</td>
-									<td>
-										<p>€{{ item.product.price }}</p>
-									</td>
-									<td>
+				<div class="bagTotals">
+					<div class="totals">
+						<p><strong>Bag Total :  €{{ grand_total|floatformat:2 }}</strong></p>
+						<p>Delivery :  €{{ delivery|floatformat:2 }}</p>
+						<p class="bagGrandTotal">Grand Total :  €{{ grand_total|floatformat:2 }}</p>
+						{% if free_delivery_delta > 0 %}
+							<p>
+								You could get free delivery by spending just <strong>€{{ free_delivery_delta }}</strong> more!
+							</p>
+						{% endif %}
+					</div>
+					<div class="bagButtons">
+						<a href="{% url 'products' %}" class="btnShopping">
+							<span class="icon">
+								<i class="fas fa-chevron-left"></i>
+							</span>
+							Keep Shopping
+						</a>
+						<a href="{% url 'checkout' %}" class="btnShoppingInverse">
+							Secure Checkout
+							<span class="icon">
+								<i class="fas fa-lock"></i>
+							</span>
+						</a>
+					</div>
+				</div>
+				<div class="bagSummary">A summary of your bag contents is below</div>
+				<div class="bagProducts">
+						<div class="bagProductTitles">
+							<div class="bagProductTitlesInfo">Product Info</div>
+							<div class="bagProductTitlesPrice">Price</div>
+							<div class="bagProductTitlesQty">Quantity</div>
+							<div class="bagProductTitlesSubtotal">SubTotal</div>
+						</div>
+						{% for item in bag_items %}
+							<div class="bagProduct">
+								<div class="bagProductDetail">
+				 					<img class="bagProductImage" alt="{{ item.product.name }}" 
+				 						src="{% if item.product.image %}{{ item.product.image.url }}{% else %}{{ MEDIA_URL }}noimage.png{% endif %}" >
+				 					<div class="bagProductDescription">
+											<p><strong>{{ item.product.name }}</strong></p>
+											<p><strong>Size :  {% if item.product.has_sizes %}{{ item.size|upper }}{% else %}N/A{% endif %}</strong></p>
+											<p class="small">SKU :  {{ item.product.sku|upper }}</p>
+				 					</div>
+								</div>
+								<div class="bagProductPrice">
+									<p>€{{ item.product.price }}</p>
+								</div>
+								<div class="bagProductSubtotal">
+									<p>€{{ item.product.price | calculate_subtotal:item.quantity }}</p>
+								</div>
+								<div class="bagProductQuantity">
 										<form method="POST" action="{% url 'adjustBag' item.product_id %}" class="updateForm">
 											{% csrf_token %}
 												<div class="productQuantityInput">
@@ -85,42 +109,10 @@
 											if there are multiple sizes of this item in the bag -->
 											<a class="removeLink" id="remove{{item.product_id}}" data-productSize="{{ item.size }}"><small>Remove</small></a>
 										</div>
-									</td>
-									<td>
-										<p>€{{ item.product.price | calculate_subtotal:item.quantity }}</p>
-									</td>
-								</tr>
-							{% endfor %}
-							<tr class="tableBagTotals">
-								<td colspan="5">
-									<h5><strong>Bag Total :  €{{ grand_total|floatformat:2 }}</strong></h5>
-									<h6>Delivery :  €{{ delivery|floatformat:2 }}</h6>
-									<h4><strong>Grand Total :  €{{ grand_total|floatformat:2 }}</strong></h4>
-									{% if free_delivery_delta > 0 %}
-										<p>
-											You could get free delivery by spending just <strong>€{{ free_delivery_delta }}</strong> more!
-										</p>
-									{% endif %}
-								</td>
-							</tr>
-							<tr class="tableBagTotals">
-								<td colspan="5" >
-									<a href="{% url 'products' %}" class="btnShopping">
-										<span class="icon">
-											<i class="fas fa-chevron-left"></i>
-										</span>
-										Keep Shopping
-									</a>
-									<a href="{% url 'checkout' %}" class="btnShoppingInverse">
-										Secure Checkout
-										<span class="icon">
-											<i class="fas fa-lock"></i>
-										</span>
-									</a>
-								</td>
-							</tr>
-						</tbody>
-					</table>
+								</div>
+							</div>
+							<hr>
+						{% endfor %}
 				</div>
 			{% else %}
 				<p>Your bag is empty.</p>
@@ -133,10 +125,17 @@
 			{% endif %}
 		</div>
 	</div>
+	<div class="btnBackToTop">
+	<a id="backToTopLink">
+		<i class="fas fa-arrow-up"></i>
+	</a>
+</div>
+	
 {% endblock %}
 
 {% block postloadjs %}
 	{{ block.super }}
 	<script src="{% static 'js/quantity-input.js' %}"></script>
 	<script src="{% static 'js/edit-quantity.js' %}"></script>
+	<script src="{% static 'js/back-to-top.js' %}"></script>
 {% endblock %}

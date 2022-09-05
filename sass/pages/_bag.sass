@@ -17,24 +17,119 @@
 			font-size: 2.75rem
 
 		&Items
+			display: flex
+			flex-direction: column
+			@include respond(desktop)
+				flex-direction: column-reverse
 			p
-				font:
-					size: 1.25rem
-					weight: $thinWt
-				margin-bottom: 4rem
-
 				&.small
-					font-size: 1.3rem
+					font-size: $baseFontSize
 		&Image
 			max-width: 100%
 			height: auto
 			border-radius: 4px
 
+		&Totals
+			@include respond(desktop)
+				align-self: flex-end
+			p
+				margin-bottom: 1rem
+				font-size: 2rem
+
+			.bagGrandTotal
+				font:
+					weight: $boldWt
+					size: 3rem
+				margin-top: 3rem
+				margin-bottom: 3rem
+
+		&Buttons
+			font-size: 1.3rem
+
+		&Summary
+			color: $greyHelp
+			font-size: 1.8rem
+			margin-top: 1rem
+			margin-bottom: 5rem
+			@include respond(desktop)
+				display: none
+
+		&Products
+			p
+				font-size: 2rem
+				@include respond(desktop)
+					font-size: $baseFontSize
+
+		&Product
+			display: flex
+			flex-direction: column
+			width: 100%
+			@include respond(desktop)
+				flex-direction: row
+				justify-content: space-between
+			&Detail
+				@include respond(desktop)
+					display: flex
+					flex-direction: row
+			&Price
+				p::before
+					content: "Price Each :  "
+					@include respond(desktop)
+						content: ""
+				margin-top: 1rem
+				@include respond(desktop)
+					margin-top: 0
+					// margin-right: 3rem
+				margin-bottom: .5rem
+			&Subtotal
+				p
+					font-weight: $boldWt
+				p::before
+					content: "Subtotal :  "
+					@include respond(desktop)
+						content: ""
+				@include respond(desktop)
+					order: 2
+				// 	margin-right: 3rem
+			&Quantity
+				margin-top: 2rem
+				margin-bottom: 2rem
+				@include respond(desktop)
+					margin: 0 1rem
+			&Titles
+				display: none
+				@include respond(desktop)
+					display: flex
+					flex-direction: row
+					font-weight: $boldWt
+					justify-content: space-between
+				&Info
+					width: 50%
+				&Price
+					@include respond(desktop)
+						padding-left: priceLeftPadding950()
+					@include respond(1063)
+						padding-left: priceLeftPadding1063()
+					@include respond(XL)
+						padding-left: 0
+						margin-left: priceLeftMargin1200()
+					@include respond(1300)
+						margin-left: 0
+					@include respond(1375)
+						margin-left: priceLeftMargin1375()
+					@include respond(XXL)
+						margin-left: priceLeftMargin1500()
+					@include respond(1550)
+						margin-left: 0
+					@include respond(1600)
+						margin-left: priceLeftMargin1600()
+
 .editLinks
 	display: flex
 	justify-content: space-between
+	margin-top: 2rem
 	a
-		font-size: 1.2rem
+		font-size: 2rem
 		cursor: pointer
 
 .updateLink

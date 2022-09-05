@@ -1,12 +1,17 @@
 /*~~~~~~~  Form  ~~~~~~~*/
 .updateForm
-	width: 20rem
+	@include respond(desktop)
+		width: 20rem
 .quantityBox
-	width: 15rem
+	/* 7.5rem is twice the width of an increment/decrement button */
+	width: calc(100% - 7.5rem)
 	font-size: 1.3rem
-	height: calc(1.5em + 1.6rem)
+	height: 3.75rem
 	padding: 0.25rem 0.5rem
 	line-height: 1.5
+	/*	The input box is rendered just above the buttons beside it
+		so move it down the tiniest bit
+	transform: translateY(2px)
 
 // .productQuantityInput
 // 	min-width: 18rem
